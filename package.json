@@ -1,0 +1,20 @@
+{
+  "name": "com.hereticalsolutions.heresy-pools",
+  "version": "0.1.0",
+  "displayName": "Heresy Pools",
+  "description": "Various memory and object pools",
+  "unity": "2020.3",
+  "keywords": [
+    "memory",
+    "heretical-solutions"
+  ],
+  "author": {
+    "name": "BenevolentDrone",
+    "email": "benevolentdrone@gmail.com"
+  },
+  "gitDependencies": {
+    "com.hereticalsolutions.heresy-memory": "https://github.com/Heretical-Solutions/Heresy-memory.git",
+    "com.hereticalsolutions.heresy-messaging": "https://github.com/Heretical-Solutions/Heresy-Messaging.git",
+    "com.hereticalsolutions.heresy-databases-and-repositories": "https://github.com/Heretical-Solutions/Heresy-Databases-and-Repositories.git"
+  }
+}

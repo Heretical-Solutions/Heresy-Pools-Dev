@@ -1,0 +1,18 @@
+{
+    "name": "com.hereticalsolutions.heresy-pools",
+    "rootNamespace": "",
+    "references": [
+        "GUID:3147b8dc96dabeae8b0df818065c0986",
+        "GUID:52e1cf35f151c7d13a89b39349d027b1",
+        "GUID:01368d8dbbf81feb4bed56e483531acd"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
