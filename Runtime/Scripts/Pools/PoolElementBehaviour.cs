@@ -6,7 +6,7 @@ using HereticalSolutions.Pools.Messages;
 
 namespace HereticalSolutions.Pools
 {
-	public class PrefabPoolInstance : MonoBehaviour
+	public class PoolElementBehaviour : MonoBehaviour
 	{
 		[Inject(Id = "PoolBus")]
 		MessageBus poolBus;
@@ -15,11 +15,14 @@ namespace HereticalSolutions.Pools
 		private string poolID;
 		public string PoolID { get { return poolID; } }
 
+
 		private INonAllocPool<GameObject> pool;
 
 		private IPoolElement<GameObject> poolElement;
 
+
 		private bool Initialized { get => poolElement != null; }
+
 
 		public void Initialize(
 			INonAllocPool<GameObject> pool,
@@ -36,9 +39,9 @@ namespace HereticalSolutions.Pools
 		{
 			if (!Initialized)
 				poolBus
-					.PopMessage<ResolvePoolInstanceRequestMessage>(out var message)
-					.SendImmediately(
-						message.Write(this));
+					.PopMessage<ResolvePoolElementRequestMessage>(out var message)
+					.Write(message, this)
+					.SendImmediately(message);
 
 			if (pool != null)
 			{
