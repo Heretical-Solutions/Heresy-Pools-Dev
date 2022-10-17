@@ -13,7 +13,7 @@ namespace HereticalSolutions.Pools
 			this.pool = pool;
 		}
 
-		public override T Pop(params IPoolDecoratorArgument[] args)
+		public override T Pop(IPoolDecoratorArgument[] args)
 		{
 			return pool.Pop();
 		}

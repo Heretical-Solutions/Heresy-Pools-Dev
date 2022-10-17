@@ -16,7 +16,7 @@ namespace HereticalSolutions.Pools
 
 		#region Pop
 
-		public virtual IPoolElement<T> Pop(params IPoolDecoratorArgument[] args)
+		public virtual IPoolElement<T> Pop(IPoolDecoratorArgument[] args)
 		{
 			OnBeforePop(args);
 
@@ -27,13 +27,13 @@ namespace HereticalSolutions.Pools
 			return result;
 		}
 
-		protected virtual void OnBeforePop(params IPoolDecoratorArgument[] args)
+		protected virtual void OnBeforePop(IPoolDecoratorArgument[] args)
 		{
 		}
 
 		protected virtual void OnAfterPop(
 			IPoolElement<T> instance,
-			params IPoolDecoratorArgument[] args)
+			IPoolDecoratorArgument[] args)
 		{
 		}
 

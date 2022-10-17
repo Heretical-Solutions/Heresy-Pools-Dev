@@ -23,7 +23,6 @@ namespace HereticalSolutions.Pools
 
 		private bool Initialized { get => poolElement != null; }
 
-
 		public void Initialize(
 			INonAllocDecoratedPool<GameObject> pool,
 			IPoolElement<GameObject> poolElement)

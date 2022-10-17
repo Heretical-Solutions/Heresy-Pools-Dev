@@ -5,7 +5,7 @@ namespace HereticalSolutions.Pools
 {
 	public interface INonAllocDecoratedPool<T>
 	{
-		IPoolElement<T> Pop(params IPoolDecoratorArgument[] args);
+		IPoolElement<T> Pop(IPoolDecoratorArgument[] args);
 
 		void Push(IPoolElement<T> instance);
 	}

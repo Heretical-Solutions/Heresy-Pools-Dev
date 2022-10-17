@@ -17,7 +17,7 @@ namespace HereticalSolutions.Pools
 
 		protected override void OnAfterPop(
 			IPoolElement<GameObject> instance,
-			params IPoolDecoratorArgument[] args)
+			IPoolDecoratorArgument[] args)
 		{
 			var value = instance.Value;
 

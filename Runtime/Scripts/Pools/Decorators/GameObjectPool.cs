@@ -17,7 +17,7 @@ namespace HereticalSolutions.Pools
 
 		protected override void OnAfterPop(
 			GameObject instance,
-			params IPoolDecoratorArgument[] args)
+			IPoolDecoratorArgument[] args)
 		{
 			Transform newParentTransform = null;
 

@@ -18,7 +18,7 @@ namespace HereticalSolutions.Pools
 
 		#region Pop
 
-		public IPoolElement<T> Pop(params IPoolDecoratorArgument[] args)
+		public IPoolElement<T> Pop(IPoolDecoratorArgument[] args)
 		{
 			if (!args.TryGetArgument<VariantArgument>(out var arg))
 				throw new Exception("[PoolWithVariants] VARIANT ARGUMENT ABSENT");

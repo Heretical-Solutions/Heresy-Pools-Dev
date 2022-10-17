@@ -13,7 +13,7 @@ namespace HereticalSolutions.Pools
 			this.nonAllocPool = nonAllocPool;
 		}
 
-		public override IPoolElement<T> Pop(params IPoolDecoratorArgument[] args)
+		public override IPoolElement<T> Pop(IPoolDecoratorArgument[] args)
 		{
 			return nonAllocPool.Pop();
 		}
