@@ -1,4 +1,3 @@
-using HereticalSolutions.Collections;
 
 namespace HereticalSolutions.Pools
 {
@@ -7,7 +6,7 @@ namespace HereticalSolutions.Pools
 		public string ID { get; private set; }
 
 		public NonAllocPoolWithID(
-			INonAllocPool<T> innerPool,
+			INonAllocDecoratedPool<T> innerPool,
 			string id)
 			: base(innerPool)
 		{

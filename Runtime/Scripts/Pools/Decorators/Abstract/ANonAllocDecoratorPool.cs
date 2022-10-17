@@ -1,36 +1,39 @@
 using HereticalSolutions.Collections;
+using HereticalSolutions.Pools.Arguments;
 
 namespace HereticalSolutions.Pools
 {
 	public abstract class ANonAllocDecoratorPool<T>
-		: INonAllocPool<T>
+		: INonAllocDecoratedPool<T>
 	{
-		protected INonAllocPool<T> innerPool;
+		protected INonAllocDecoratedPool<T> innerPool;
 
 		public ANonAllocDecoratorPool(
-			INonAllocPool<T> innerPool)
+			INonAllocDecoratedPool<T> innerPool)
 		{
 			this.innerPool = innerPool;
 		}
 
 		#region Pop
 
-		public IPoolElement<T> Pop()
+		public virtual IPoolElement<T> Pop(params IPoolDecoratorArgument[] args)
 		{
-			OnBeforePop();
+			OnBeforePop(args);
 
-			IPoolElement<T> result = innerPool.Pop();
+			IPoolElement<T> result = innerPool.Pop(args);
 
-			OnAfterPop(result);
+			OnAfterPop(result, args);
 
 			return result;
 		}
 
-		protected virtual void OnBeforePop()
+		protected virtual void OnBeforePop(params IPoolDecoratorArgument[] args)
 		{
 		}
 
-		protected virtual void OnAfterPop(IPoolElement<T> instance)
+		protected virtual void OnAfterPop(
+			IPoolElement<T> instance,
+			params IPoolDecoratorArgument[] args)
 		{
 		}
 
@@ -38,7 +41,7 @@ namespace HereticalSolutions.Pools
 
 		#region Push
 
-		public void Push(IPoolElement<T> instance)
+		public virtual void Push(IPoolElement<T> instance)
 		{
 			OnBeforePush(instance);
 

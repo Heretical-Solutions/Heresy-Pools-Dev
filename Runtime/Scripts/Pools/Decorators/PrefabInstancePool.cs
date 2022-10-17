@@ -1,5 +1,4 @@
 using UnityEngine;
-using HereticalSolutions.Collections;
 
 namespace HereticalSolutions.Pools
 {
@@ -10,7 +9,7 @@ namespace HereticalSolutions.Pools
 		public GameObject Prefab { get => prefab; }
 
 		public PrefabInstancePool(
-			IPool<GameObject> innerPool,
+			IDecoratedPool<GameObject> innerPool,
 			GameObject prefab)
 			: base(innerPool)
 		{

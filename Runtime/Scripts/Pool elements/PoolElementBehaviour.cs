@@ -16,7 +16,7 @@ namespace HereticalSolutions.Pools
 		public string PoolID { get { return poolID; } }
 
 
-		private INonAllocPool<GameObject> pool;
+		private INonAllocDecoratedPool<GameObject> pool;
 
 		private IPoolElement<GameObject> poolElement;
 
@@ -25,7 +25,7 @@ namespace HereticalSolutions.Pools
 
 
 		public void Initialize(
-			INonAllocPool<GameObject> pool,
+			INonAllocDecoratedPool<GameObject> pool,
 			IPoolElement<GameObject> poolElement)
 		{
 			this.pool = pool;
@@ -48,7 +48,7 @@ namespace HereticalSolutions.Pools
 				pool.Push(poolElement);
 			}
 			else
-				Debug.LogError("[PrefabPoolInstance] INVALID POOL DEPENDENCY");
+				Debug.LogError("[PoolElementBehaviour] INVALID POOL DEPENDENCY");
 		}
 	}
 }

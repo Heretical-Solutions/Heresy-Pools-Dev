@@ -1,5 +1,3 @@
-using HereticalSolutions.Collections;
-
 namespace HereticalSolutions.Pools
 {
 	public class PoolWithID<T> : ADecoratorPool<T>
@@ -7,7 +5,7 @@ namespace HereticalSolutions.Pools
 		public string ID { get; private set; }
 
 		public PoolWithID(
-			IPool<T> innerPool,
+			IDecoratedPool<T> innerPool,
 			string id)
 			: base(innerPool)
 		{
