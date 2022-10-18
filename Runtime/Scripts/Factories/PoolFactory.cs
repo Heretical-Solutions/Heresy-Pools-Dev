@@ -11,7 +11,7 @@ namespace HereticalSolutions.Pools.Factories
 {
 	public static class PoolFactory
 	{
-		private static INonAllocPool<GameObject> BuildGameObjectNonAllocPool(
+		public static INonAllocPool<GameObject> BuildGameObjectNonAllocPool(
 			GameObject prefab,
 			AllocationCommandDescriptor initialAllocation,
 			AllocationCommandDescriptor additionalAllocation,
@@ -26,7 +26,7 @@ namespace HereticalSolutions.Pools.Factories
 				additionalAllocation);
 		}
 
-		private static INonAllocPool<GameObject> BuildGameObjectNonAllocPool(
+		public static INonAllocPool<GameObject> BuildGameObjectNonAllocPool(
 			GameObject prefab,
 			DiContainer container,
 			AllocationCommandDescriptor initialAllocation,
