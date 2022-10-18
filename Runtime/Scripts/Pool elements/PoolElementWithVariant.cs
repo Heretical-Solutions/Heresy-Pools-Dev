@@ -5,7 +5,7 @@ namespace HereticalSolutions.Pools
 {
 	public class PoolElementWithVariant<T>
 		: IPoolElement<T>,
-		IIndexable
+		  IIndexed
 	{
 		public int Index { get; set; }
 

@@ -19,7 +19,7 @@ namespace HereticalSolutions.Pools.Factories
 		{
 			Func<GameObject> valueAllocationDelegate = () => { return GameObject.Instantiate(prefab); };
 
-			return BuildNonAllocPool<GameObject>(
+			return CollectionFactory.BuildNonAllocPool<GameObject>(
 				valueAllocationDelegate,
 				containerAllocationDelegate,
 				initialAllocation,
@@ -35,32 +35,11 @@ namespace HereticalSolutions.Pools.Factories
 		{
 			Func<GameObject> valueAllocationDelegate = () => { return container.InstantiatePrefab(prefab); };
 
-			return BuildNonAllocPool<GameObject>(
+			return CollectionFactory.BuildNonAllocPool<GameObject>(
 				valueAllocationDelegate,
 				containerAllocationDelegate,
 				initialAllocation,
 				additionalAllocation);
-		}
-
-		public static INonAllocPool<T> BuildNonAllocPool<T>(
-			Func<T> valueAllocationDelegate,
-			Func<Func<T>, IPoolElement<T>> containerAllocationDelegate,
-			AllocationCommandDescriptor initialAllocation,
-			AllocationCommandDescriptor additionalAllocation)
-		{
-			INonAllocPool<T> packedArrayPool = CollectionFactory.BuildIndexedPackedArrayPool<T>(
-
-				CollectionFactory.BuildPoolElementAllocationCommand<T>(
-					initialAllocation,
-					valueAllocationDelegate,
-					containerAllocationDelegate),
-
-				CollectionFactory.BuildPoolElementAllocationCommand<T>(
-					additionalAllocation,
-					valueAllocationDelegate,
-					containerAllocationDelegate));
-
-			return packedArrayPool;
 		}
 
 		public static PoolElementWithVariant<T> BuildPoolElementWithVariant<T>(
