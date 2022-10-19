@@ -8,10 +8,10 @@ namespace HereticalSolutions.Pools
 	public class PoolWithVariants<T>
 		: INonAllocDecoratedPool<T>
 	{
-		private IRepository<int, INonAllocDecoratedPool<T>> poolsRepository;
+		private IRepository<int, VariantContainer<T>> poolsRepository;
 
 		public PoolWithVariants(
-			IRepository<int, INonAllocDecoratedPool<T>> poolsRepository)
+			IRepository<int, VariantContainer<T>> poolsRepository)
 		{
 			this.poolsRepository = poolsRepository;
 		}
@@ -26,7 +26,24 @@ namespace HereticalSolutions.Pools
 			if (!poolsRepository.TryGet(arg.Variant, out var pool))
 				throw new Exception($"[PoolWithVariants] INVALID VARIANT {{ {arg.Variant} }}");
 
-			var result = pool.Pop(args);
+			if (!poolsRepository.TryGet(0, out var currentVariant))
+				throw new Exception("[PoolWithVariants] NO VARIANTS PRESENT");
+
+			var hitDice = UnityEngine.Random.Range(0, 1f);
+
+			int index = 0;
+
+			while (currentVariant.Chance < hitDice)
+			{
+				hitDice -= currentVariant.Chance;
+
+				index++;
+
+				if (!poolsRepository.TryGet(index, out currentVariant))
+					throw new Exception("[PoolWithVariants] INVALID VARIANT CHANCES");
+			}
+
+			var result = currentVariant.Pool.Pop(args);
 
 			((PoolElementWithVariant<T>)result).Variant = arg.Variant;
 
@@ -44,10 +61,10 @@ namespace HereticalSolutions.Pools
 			if (elementWithVariant == null)
 				throw new Exception("[PoolWithVariants] INVALID INSTANCE");
 
-			if (!poolsRepository.TryGet(elementWithVariant.Variant, out var pool))
+			if (!poolsRepository.TryGet(elementWithVariant.Variant, out var variant))
 				throw new Exception($"[PoolWithVariants] INVALID VARIANT {{ {elementWithVariant.Variant} }}");
 
-			pool.Push(instance);
+			variant.Pool.Push(instance);
 		}
 		
 		#endregion
