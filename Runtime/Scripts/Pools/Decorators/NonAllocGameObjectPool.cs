@@ -21,6 +21,9 @@ namespace HereticalSolutions.Pools
 		{
 			var value = instance.Value;
 
+			if (value == null)
+				return;
+
 			Transform newParentTransform = null;
 
 			bool worldPositionStays = true;
