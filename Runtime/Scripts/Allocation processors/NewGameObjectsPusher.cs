@@ -14,6 +14,9 @@ namespace HereticalSolutions.Pools.AllocationProcessors
 			INonAllocDecoratedPool<GameObject> poolWrapper,
 			IPoolElement<GameObject> currentElement)
 		{
+			if (currentElement.Value == null)
+				return;
+
 			if (((IIndexed)currentElement).Index == -1)
 				poolWrapper.Push(
 					currentElement,

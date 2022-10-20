@@ -65,6 +65,9 @@ namespace HereticalSolutions.Pools
 		{
 			var value = instance.Value;
 
+			if (value == null)
+				return;
+
 			value.SetActive(false);
 
 			value.transform.SetParent(poolParentTransform);

@@ -37,8 +37,6 @@ namespace HereticalSolutions.Pools
 			this.pool = pool;
 
 			this.poolElement = poolElement;
-
-			poolElement.Value = gameObject;
 		}
 
 		void Start()
