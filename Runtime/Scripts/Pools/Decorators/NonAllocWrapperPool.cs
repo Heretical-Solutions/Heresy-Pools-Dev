@@ -1,7 +1,7 @@
 using System;
 using HereticalSolutions.Collections;
 using HereticalSolutions.Pools.Arguments;
-using HereticalSolutions.Allocations.Internal;
+using HereticalSolutions.Allocations;
 
 namespace HereticalSolutions.Pools
 {
@@ -22,7 +22,7 @@ namespace HereticalSolutions.Pools
 				var appendable = (IAppendable<IPoolElement<T>>)nonAllocPool;
 
 				if (appendable == null)
-					throw new Exception("[NonAllocWrapperPool] Pool is not appendable");
+					throw new Exception("[NonAllocWrapperPool] POOL IS NOT APPENDABLE");
 
 				var appendee = appendable.Append();
 
@@ -36,7 +36,7 @@ namespace HereticalSolutions.Pools
 				var topUppable = (ITopUppable<T>)nonAllocPool;
 
 				if (topUppable == null)
-					throw new Exception("[NonAllocWrapperPool] Pool element is empty");
+					throw new Exception("[NonAllocWrapperPool] POOL ELEMENT IS EMPTY");
 				
 				topUppable.TopUp(result);
 			}
