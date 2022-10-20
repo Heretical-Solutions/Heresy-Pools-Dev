@@ -23,16 +23,13 @@ namespace HereticalSolutions.Pools.Factories
 
 			Action<IPoolElement<GameObject>> notifyAllocationDelegate = null;
 
-			if (command.DryRunner != null)
-				notifyAllocationDelegate = command.DryRunner.OnAllocation;
-
 			if (command.CollectionType == typeof(PackedArrayPool<GameObject>))
 				return CollectionFactory.BuildPackedArrayPool<GameObject>(
 					valueAllocationDelegate,
 					command.ContainerAllocationDelegate,
 					command.InitialAllocation,
 					command.AdditionalAllocation,
-					notifyAllocationDelegate);
+					command.AllocationNotifiable);
 
 			if (command.CollectionType == typeof(SupplyAndMergePool<GameObject>))
 				return CollectionFactory.BuildSupplyAndMergePool<GameObject>(
@@ -40,7 +37,7 @@ namespace HereticalSolutions.Pools.Factories
 					command.ContainerAllocationDelegate,
 					command.InitialAllocation,
 					command.AdditionalAllocation,
-					notifyAllocationDelegate);
+					command.AllocationNotifiable);
 
 			throw new Exception($"[PoolFactory] INVALID COLLECTION TYPE: {{ {command.CollectionType.ToString()} }}");
 		}

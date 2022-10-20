@@ -14,6 +14,6 @@ namespace HereticalSolutions.Pools.Factories
 		public AllocationCommandDescriptor InitialAllocation;
 		public AllocationCommandDescriptor AdditionalAllocation;
 		public Func<Func<GameObject>, IPoolElement<GameObject>> ContainerAllocationDelegate;
-		public DryRunner<GameObject> DryRunner;
+		public IAllocationNotifiable<GameObject> AllocationNotifiable;
 	}
 }
