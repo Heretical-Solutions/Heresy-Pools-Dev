@@ -5,8 +5,17 @@ using HereticalSolutions.Collections.Managed;
 
 namespace HereticalSolutions.Pools.AllocationProcessors
 {
-	public class NewGameObjectsPusher : IAllocationProcessor
+	public class NameByStringAndIndex : IAllocationProcessor
 	{
+		private string name;
+
+		private int index = 0;
+
+		public NameByStringAndIndex(string name)
+		{
+			this.name = name;
+		}
+
 		public void Process(
 			INonAllocDecoratedPool<GameObject> poolWrapper,
 			IPoolElement<GameObject> currentElement)
@@ -15,9 +24,11 @@ namespace HereticalSolutions.Pools.AllocationProcessors
 				return;
 
 			if (((IIndexed)currentElement).Index == -1)
-				poolWrapper.Push(
-					currentElement,
-					true);
+			{
+				currentElement.Value.name = $"{name} {index.ToString()}";
+
+				index++;
+			}
 		}
 	}
 }

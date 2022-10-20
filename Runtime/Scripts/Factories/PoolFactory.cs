@@ -42,14 +42,6 @@ namespace HereticalSolutions.Pools.Factories
 
 		#region Pool elements
 
-		public static PoolElementWithVariant<T> BuildPoolElementWithVariant<T>(
-			Func<T> allocationDelegate)
-		{
-			PoolElementWithVariant<T> result = new PoolElementWithVariant<T>(allocationDelegate());
-
-			return result;
-		}
-
 		public static IPoolElement<T> BuildValueAssignedNotifyingPoolElement<T>(
 			Func<T> allocationDelegate,
 			IValueAssignedNotifiable<T> notifiable)
@@ -69,6 +61,36 @@ namespace HereticalSolutions.Pools.Factories
 				return BuildValueAssignedNotifyingPoolElement(
 					valueAllocationDelegate,
 					notifiable);
+			};
+		}
+
+		public static IPoolElement<T> BuildPoolElementWithAddressAndVariant<T>(
+			Func<T> allocationDelegate,
+			IValueAssignedNotifiable<T> notifiable,
+			string address,
+			int variant = -1)
+		{
+			PoolElementWithAddressAndVariant<T> result = new PoolElementWithAddressAndVariant<T>(
+				allocationDelegate(),
+				notifiable,
+				address,
+				variant);
+
+			return result;
+		}
+
+		public static Func<Func<T>, IPoolElement<T>> BuildPoolElementWithAddressAndVariantAllocationDelegate<T>(
+			IValueAssignedNotifiable<T> notifiable,
+			string address,
+			int variant = -1)
+		{
+			return (valueAllocationDelegate) =>
+			{
+				return BuildPoolElementWithAddressAndVariant(
+					valueAllocationDelegate,
+					notifiable,
+					address,
+					variant);
 			};
 		}
 

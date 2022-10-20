@@ -45,7 +45,7 @@ namespace HereticalSolutions.Pools
 
 			var result = currentVariant.Pool.Pop(args);
 
-			((PoolElementWithVariant<T>)result).Variant = arg.Variant;
+			//((PoolElementWithVariant<T>)result).Variant = arg.Variant;
 
 			return result;
 		}
@@ -58,7 +58,7 @@ namespace HereticalSolutions.Pools
 			IPoolElement<T> instance,
 			bool dryRun = false)
 		{
-			var elementWithVariant = (PoolElementWithVariant<T>)instance;
+			var elementWithVariant = (IVariantContainable)instance;
 
 			if (elementWithVariant == null)
 				throw new Exception("[PoolWithVariants] INVALID INSTANCE");

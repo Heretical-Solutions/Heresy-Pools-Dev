@@ -17,10 +17,10 @@ namespace HereticalSolutions.Pools
 		public string PoolID { get { return poolID; } }
 
 		[SerializeField]
-		private int MinResolveRequestTimeout = 0;
+		private int MinResolveRequestTimeout = 1;
 
 		[SerializeField]
-		private int MaxResolveRequestTimeout = 3;
+		private int MaxResolveRequestTimeout = 1;
 
 
 		private INonAllocDecoratedPool<GameObject> pool;
@@ -46,9 +46,11 @@ namespace HereticalSolutions.Pools
 
 		private IEnumerator TimeoutThenRequestResolveRoutine()
 		{
-			int timeout = UnityEngine.Random.Range(
-				MinResolveRequestTimeout,
-				MaxResolveRequestTimeout + 1);
+			int timeout = (MinResolveRequestTimeout == MaxResolveRequestTimeout)
+				? MaxResolveRequestTimeout
+				: UnityEngine.Random.Range(
+					MinResolveRequestTimeout,
+					MaxResolveRequestTimeout + 1);
 
 			for (int i = 0; i < timeout; i++)
 				yield return null;
