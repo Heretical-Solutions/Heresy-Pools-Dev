@@ -54,9 +54,7 @@ namespace HereticalSolutions.Pools.Services
 
 			var element = pool.Pop(argumentsCache);
 
-			behaviour.Initialize(
-				pool,
-				element);
+			element.Value = behaviour.gameObject;
 		}
 	}
 }

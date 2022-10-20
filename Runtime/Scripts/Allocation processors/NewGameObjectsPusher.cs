@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
+
 using HereticalSolutions.Collections;
+using HereticalSolutions.Collections.Managed;
+
 using HereticalSolutions.Allocations;
 
 namespace HereticalSolutions.Pools.AllocationProcessors
@@ -11,9 +14,10 @@ namespace HereticalSolutions.Pools.AllocationProcessors
 			INonAllocDecoratedPool<GameObject> poolWrapper,
 			IPoolElement<GameObject> currentElement)
 		{
-			poolWrapper.Push(
-				currentElement,
-				true);
+			if (((IIndexed)currentElement).Index == -1)
+				poolWrapper.Push(
+					currentElement,
+					true);
 		}
 	}
 }

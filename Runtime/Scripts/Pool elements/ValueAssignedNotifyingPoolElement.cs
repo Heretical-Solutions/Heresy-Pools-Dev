@@ -20,8 +20,7 @@ namespace HereticalSolutions.Pools
 			{
 				innerValue = value;
 
-				if (Index == -1)
-					notifiable.Notify(this);
+				notifiable.Notify(this);
 			}
 		}
 
