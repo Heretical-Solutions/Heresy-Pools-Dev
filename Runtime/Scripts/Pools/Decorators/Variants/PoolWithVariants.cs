@@ -54,7 +54,9 @@ namespace HereticalSolutions.Pools
 
 		#region Push
 
-		public void Push(IPoolElement<T> instance)
+		public void Push(
+			IPoolElement<T> instance,
+			bool dryRun = false)
 		{
 			var elementWithVariant = (PoolElementWithVariant<T>)instance;
 
@@ -64,7 +66,9 @@ namespace HereticalSolutions.Pools
 			if (!poolsRepository.TryGet(elementWithVariant.Variant, out var variant))
 				throw new Exception($"[PoolWithVariants] INVALID VARIANT {{ {elementWithVariant.Variant} }}");
 
-			variant.Pool.Push(instance);
+			variant.Pool.Push(
+				instance,
+				dryRun);
 		}
 		
 		#endregion

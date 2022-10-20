@@ -40,11 +40,15 @@ namespace HereticalSolutions.Pools
 
 		#region Push
 
-		public virtual void Push(T instance)
+		public virtual void Push(
+			T instance,
+			bool dryRun = false)
 		{
 			OnBeforePush(instance);
 
-			innerPool.Push(instance);
+			innerPool.Push(
+				instance,
+				dryRun);
 
 			OnAfterPush(instance);
 		}

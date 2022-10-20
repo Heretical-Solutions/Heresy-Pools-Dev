@@ -18,9 +18,12 @@ namespace HereticalSolutions.Pools
 			return pool.Pop();
 		}
 
-		public override void Push(T instance)
+		public override void Push(
+			T instance,
+			bool dryRun = false)
 		{
-			pool.Push(instance);
+			if (!dryRun)
+				pool.Push(instance);
 		}
 	}
 }

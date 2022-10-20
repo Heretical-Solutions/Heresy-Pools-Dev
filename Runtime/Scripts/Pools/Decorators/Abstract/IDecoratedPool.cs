@@ -6,6 +6,8 @@ namespace HereticalSolutions.Pools
 	{
 		T Pop(IPoolDecoratorArgument[] args);
 
-		void Push(T instance);
+		void Push(
+			T instance,
+			bool dryRun = false);
 	}
 }

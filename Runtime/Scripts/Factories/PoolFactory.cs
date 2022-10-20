@@ -3,6 +3,7 @@ using UnityEngine;
 using Zenject;
 
 using HereticalSolutions.Collections;
+using HereticalSolutions.Collections.Managed;
 using HereticalSolutions.Collections.Factories;
 
 using HereticalSolutions.Allocations;
@@ -11,72 +12,37 @@ namespace HereticalSolutions.Pools.Factories
 {
 	public static class PoolFactory
 	{
-		#region Packed array pool
+		#region Non alloc pool
 
 		public static INonAllocPool<GameObject> BuildGameObjectPackedArrayPool(
-			GameObject prefab,
-			AllocationCommandDescriptor initialAllocation,
-			AllocationCommandDescriptor additionalAllocation,
-			Func<Func<GameObject>, IPoolElement<GameObject>> containerAllocationDelegate)
+			BuildNonAllocGameObjectPoolCommand command)
 		{
-			Func<GameObject> valueAllocationDelegate = () => { return GameObject.Instantiate(prefab); };
+			Func<GameObject> valueAllocationDelegate = (command.Container != null)
+				? () => { return command.Container.InstantiatePrefab(command.Prefab); }
+				: () => { return GameObject.Instantiate(command.Prefab); };
 
-			return CollectionFactory.BuildPackedArrayPool<GameObject>(
-				valueAllocationDelegate,
-				containerAllocationDelegate,
-				initialAllocation,
-				additionalAllocation);
-		}
+			Action<IPoolElement<GameObject>> notifyAllocationDelegate = null;
 
-		public static INonAllocPool<GameObject> BuildGameObjectPackedArrayPool(
-			GameObject prefab,
-			DiContainer container,
-			AllocationCommandDescriptor initialAllocation,
-			AllocationCommandDescriptor additionalAllocation,
-			Func<Func<GameObject>, IPoolElement<GameObject>> containerAllocationDelegate)
-		{
-			Func<GameObject> valueAllocationDelegate = () => { return container.InstantiatePrefab(prefab); };
+			if (command.DryRunner != null)
+				notifyAllocationDelegate = command.DryRunner.OnAllocation;
 
-			return CollectionFactory.BuildPackedArrayPool<GameObject>(
-				valueAllocationDelegate,
-				containerAllocationDelegate,
-				initialAllocation,
-				additionalAllocation);
-		}
+			if (command.CollectionType == typeof(PackedArrayPool<GameObject>))
+				return CollectionFactory.BuildPackedArrayPool<GameObject>(
+					valueAllocationDelegate,
+					command.ContainerAllocationDelegate,
+					command.InitialAllocation,
+					command.AdditionalAllocation,
+					notifyAllocationDelegate);
 
-		#endregion
+			if (command.CollectionType == typeof(SupplyAndMergePool<GameObject>))
+				return CollectionFactory.BuildSupplyAndMergePool<GameObject>(
+					valueAllocationDelegate,
+					command.ContainerAllocationDelegate,
+					command.InitialAllocation,
+					command.AdditionalAllocation,
+					notifyAllocationDelegate);
 
-		#region Supply and merge pool
-
-		public static INonAllocPool<GameObject> BuildGameObjectSupplyAndMergePool(
-					GameObject prefab,
-					AllocationCommandDescriptor initialAllocation,
-					AllocationCommandDescriptor additionalAllocation,
-					Func<Func<GameObject>, IPoolElement<GameObject>> containerAllocationDelegate)
-		{
-			Func<GameObject> valueAllocationDelegate = () => { return GameObject.Instantiate(prefab); };
-
-			return CollectionFactory.BuildSupplyAndMergePool<GameObject>(
-				valueAllocationDelegate,
-				containerAllocationDelegate,
-				initialAllocation,
-				additionalAllocation);
-		}
-
-		public static INonAllocPool<GameObject> BuildGameObjectSupplyAndMergePool(
-			GameObject prefab,
-			DiContainer container,
-			AllocationCommandDescriptor initialAllocation,
-			AllocationCommandDescriptor additionalAllocation,
-			Func<Func<GameObject>, IPoolElement<GameObject>> containerAllocationDelegate)
-		{
-			Func<GameObject> valueAllocationDelegate = () => { return container.InstantiatePrefab(prefab); };
-
-			return CollectionFactory.BuildSupplyAndMergePool<GameObject>(
-				valueAllocationDelegate,
-				containerAllocationDelegate,
-				initialAllocation,
-				additionalAllocation);
+			throw new Exception($"[PoolFactory] INVALID COLLECTION TYPE: {{ {command.CollectionType.ToString()} }}");
 		}
 
 		#endregion

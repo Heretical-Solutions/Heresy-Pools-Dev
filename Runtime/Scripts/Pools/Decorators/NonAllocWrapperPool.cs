@@ -44,9 +44,12 @@ namespace HereticalSolutions.Pools
 			return result;
 		}
 
-		public override void Push(IPoolElement<T> instance)
+		public override void Push(
+			IPoolElement<T> instance,
+			bool dryRun = false)
 		{
-			nonAllocPool.Push(instance);
+			if (!dryRun)
+				nonAllocPool.Push(instance);
 		}
 	}
 }
