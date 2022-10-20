@@ -20,11 +20,15 @@ namespace HereticalSolutions.Pools
 
 		public IPoolElement<T> Pop(IPoolDecoratorArgument[] args)
 		{
-			if (!args.TryGetArgument<VariantArgument>(out var arg))
-				throw new Exception("[PoolWithVariants] VARIANT ARGUMENT ABSENT");
+			if (args.TryGetArgument<VariantArgument>(out var arg))
+			{
+				if (!poolsRepository.TryGet(arg.Variant, out var variant))
+					throw new Exception($"[PoolWithVariants] INVALID VARIANT {{ {arg.Variant} }}");
 
-			if (!poolsRepository.TryGet(arg.Variant, out var pool))
-				throw new Exception($"[PoolWithVariants] INVALID VARIANT {{ {arg.Variant} }}");
+				var concreteResult = variant.Pool.Pop(args);
+
+				return concreteResult;
+			}
 
 			if (!poolsRepository.TryGet(0, out var currentVariant))
 				throw new Exception("[PoolWithVariants] NO VARIANTS PRESENT");
