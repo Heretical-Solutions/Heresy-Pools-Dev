@@ -21,8 +21,6 @@ namespace HereticalSolutions.Pools.Factories
 				? () => { return command.Container.InstantiatePrefab(command.Prefab); }
 				: () => { return GameObject.Instantiate(command.Prefab); };
 
-			Action<IPoolElement<GameObject>> notifyAllocationDelegate = null;
-
 			if (command.CollectionType == typeof(PackedArrayPool<GameObject>))
 				return CollectionFactory.BuildPackedArrayPool<GameObject>(
 					valueAllocationDelegate,
