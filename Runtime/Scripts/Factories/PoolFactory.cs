@@ -14,7 +14,7 @@ namespace HereticalSolutions.Pools.Factories
 	{
 		#region Non alloc pool
 
-		public static INonAllocPool<GameObject> BuildGameObjectPackedArrayPool(
+		public static INonAllocPool<GameObject> BuildGameObjectPool(
 			BuildNonAllocGameObjectPoolCommand command)
 		{
 			Func<GameObject> valueAllocationDelegate = (command.Container != null)
