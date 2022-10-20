@@ -8,16 +8,16 @@ namespace HereticalSolutions.Pools
 	{
 		private Transform poolParentTransform;
 
-		private DryRunner<GameObject> dryRunner;
+		private NewGameObjectsPusher newGameObjectsPusher;
 
 		public NonAllocGameObjectPool(INonAllocDecoratedPool<GameObject> innerPool,
 			Transform parentTransform,
-			DryRunner<GameObject> dryRunner = null)
+			NewGameObjectsPusher newGameObjectsPusher = null)
 			: base(innerPool)
 		{
 			this.poolParentTransform = parentTransform;
 
-			this.dryRunner = dryRunner;
+			this.newGameObjectsPusher = newGameObjectsPusher;
 		}
 
 		protected override void OnAfterPop(
@@ -64,7 +64,7 @@ namespace HereticalSolutions.Pools
 
 			value.SetActive(true);
 
-			dryRunner?.DryRun(instance);
+			newGameObjectsPusher?.PerformDryRun(instance);
 		}
 
 		protected override void OnBeforePush(IPoolElement<GameObject> instance)
@@ -82,7 +82,7 @@ namespace HereticalSolutions.Pools
 
 		protected override void OnAfterPush(IPoolElement<GameObject> instance)
 		{
-			dryRunner?.DryRun(instance);
+			newGameObjectsPusher?.PerformDryRun();
 		}
 	}
 }
