@@ -1,6 +1,6 @@
 {
   "name": "com.hereticalsolutions.heresy-pools",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "displayName": "Heresy Pools",
   "description": "Various memory and object pools",
   "unity": "2020.3",
