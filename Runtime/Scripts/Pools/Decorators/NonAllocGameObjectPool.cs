@@ -1,7 +1,7 @@
 using UnityEngine;
 using HereticalSolutions.Collections;
 using HereticalSolutions.Pools.Arguments;
-using HereticalSolutions.Pools.Notifiables;
+using HereticalSolutions.Pools.AllocationProcessors;
 
 namespace HereticalSolutions.Pools
 {
@@ -9,16 +9,11 @@ namespace HereticalSolutions.Pools
 	{
 		private Transform poolParentTransform;
 
-		private CompositeGameObjectNotifiable gameObjectNotifiable;
-
 		public NonAllocGameObjectPool(INonAllocDecoratedPool<GameObject> innerPool,
-			Transform parentTransform,
-			CompositeGameObjectNotifiable gameObjectNotifiable = null)
+			Transform parentTransform)
 			: base(innerPool)
 		{
 			this.poolParentTransform = parentTransform;
-
-			this.gameObjectNotifiable = gameObjectNotifiable;
 		}
 
 		protected override void OnAfterPop(
@@ -64,8 +59,6 @@ namespace HereticalSolutions.Pools
 			}
 
 			value.SetActive(true);
-
-			gameObjectNotifiable?.Process(instance);
 		}
 
 		protected override void OnBeforePush(IPoolElement<GameObject> instance)
@@ -79,11 +72,6 @@ namespace HereticalSolutions.Pools
 			value.transform.localPosition = Vector3.zero;
 
 			value.transform.localRotation = Quaternion.identity;
-		}
-
-		protected override void OnAfterPush(IPoolElement<GameObject> instance)
-		{
-			gameObjectNotifiable?.Process();
 		}
 	}
 }

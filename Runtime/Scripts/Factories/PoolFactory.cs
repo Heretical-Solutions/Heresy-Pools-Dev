@@ -28,16 +28,14 @@ namespace HereticalSolutions.Pools.Factories
 					valueAllocationDelegate,
 					command.ContainerAllocationDelegate,
 					command.InitialAllocation,
-					command.AdditionalAllocation,
-					command.AllocationNotifiable);
+					command.AdditionalAllocation);
 
 			if (command.CollectionType == typeof(SupplyAndMergePool<GameObject>))
 				return CollectionFactory.BuildSupplyAndMergePool<GameObject>(
 					valueAllocationDelegate,
 					command.ContainerAllocationDelegate,
 					command.InitialAllocation,
-					command.AdditionalAllocation,
-					command.AllocationNotifiable);
+					command.AdditionalAllocation);
 
 			throw new Exception($"[PoolFactory] INVALID COLLECTION TYPE: {{ {command.CollectionType.ToString()} }}");
 		}
@@ -52,6 +50,28 @@ namespace HereticalSolutions.Pools.Factories
 			PoolElementWithVariant<T> result = new PoolElementWithVariant<T>(allocationDelegate());
 
 			return result;
+		}
+
+		public static IPoolElement<T> BuildValueAssignedNotifyingPoolElement<T>(
+			Func<T> allocationDelegate,
+			IValueAssignedNotifiable<T> notifiable)
+		{
+			ValueAssignedNotifyingPoolElement<T> result = new ValueAssignedNotifyingPoolElement<T>(
+				allocationDelegate(),
+				notifiable);
+
+			return result;
+		}
+
+		public static Func<Func<T>, IPoolElement<T>> BuildValueAssignedNotifyingPoolElementAllocationDelegate<T>(
+			IValueAssignedNotifiable<T> notifiable)
+		{
+			return (valueAllocationDelegate) =>
+			{
+				return BuildValueAssignedNotifyingPoolElement(
+					valueAllocationDelegate,
+					notifiable);
+			};
 		}
 
 		#endregion
