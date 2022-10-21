@@ -1,11 +1,14 @@
 using System;
 using UnityEngine;
 using HereticalSolutions.Collections;
+using HereticalSolutions.Pools;
 using HereticalSolutions.Pools.Arguments;
 
 namespace HereticalSolutions.Pools
 {
-	public class NonAllocPoolWithTimer : ANonAllocDecoratorPool<GameObject>
+	public class NonAllocPoolWithTimer
+		: ANonAllocDecoratorPool<GameObject>,
+		ITimerContainableTimerExpiredNotifiable
 	{
 		private INonAllocDecoratedPool<GameObject> poolWrapper;
 
@@ -19,7 +22,7 @@ namespace HereticalSolutions.Pools
 		{
 		}
 
-		private void TimerExpired(ITimerContainable timerContainable)
+		public void HandleTimerContainableTimerExpired(ITimerContainable timerContainable)
 		{
 			poolWrapper.Push((IPoolElement<GameObject>)timerContainable);
 		}
@@ -33,11 +36,7 @@ namespace HereticalSolutions.Pools
 			if (timerContainable == null)
 				throw new Exception($"[NonAllocPoolWithTimer] INVALID ELEMENT");
 
-			if (timerContainable.Timer.Callback == null)
-				timerContainable.Timer.Callback = () => 
-				{
-					TimerExpired(timerContainable);
-				};
+			timerContainable.Callback = this;
 
 			if (args.TryGetArgument<TimerArgument>(out var arg))
 			{

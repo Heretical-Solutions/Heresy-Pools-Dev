@@ -11,7 +11,7 @@ namespace HereticalSolutions.Timers
 
 		public float DefaultDuration { get; private set; }
 
-		public Action Callback { get; set; }
+		public ITimerExpiredNotifiable Callback { get; set; }
 
 		private PingerSubscription subscription;
 
@@ -65,7 +65,7 @@ namespace HereticalSolutions.Timers
 
 			subscriptionElement = null;
 
-			Callback?.Invoke();
+			Callback?.HandleTimerExpired(this);
 		}
 	}
 }
