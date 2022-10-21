@@ -36,9 +36,7 @@ namespace HereticalSolutions.Timers
 		{
 			Countdown = DefaultDuration;
 
-			subscriptionElement = pinger.Subscribe();
-
-			subscriptionElement.Value = subscription;
+			subscriptionElement = pinger.Subscribe(subscription);
 		}
 
 		public void Start(
@@ -46,9 +44,7 @@ namespace HereticalSolutions.Timers
 		{
 			Countdown = duration;
 
-			subscriptionElement = pinger.Subscribe();
-
-			subscriptionElement.Value = subscription;
+			subscriptionElement = pinger.Subscribe(subscription);
 		}
 
 		private void Ping()

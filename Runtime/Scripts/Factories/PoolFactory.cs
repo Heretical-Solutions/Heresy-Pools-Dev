@@ -112,7 +112,7 @@ namespace HereticalSolutions.Pools.Factories
 
 		public static Func<Func<T>, IPoolElement<T>> BuildPoolElementWithTimerAllocationDelegate<T>(
 			IValueAssignedNotifiable<T> notifiable,
-			Timer timer,
+			Func<Timer> timerAllocationDelegate,
 			string address,
 			int variant = -1)
 		{
@@ -121,7 +121,7 @@ namespace HereticalSolutions.Pools.Factories
 				return BuildPoolElementWithTimer(
 					valueAllocationDelegate,
 					notifiable,
-					timer,
+					timerAllocationDelegate(),
 					address,
 					variant);
 			};
