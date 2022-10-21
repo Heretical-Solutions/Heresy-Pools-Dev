@@ -4,8 +4,9 @@ using System.Collections;
 using HereticalSolutions.Messaging;
 using HereticalSolutions.Collections;
 using HereticalSolutions.Pools.Messages;
+using HereticalSolutions.Pools.DAO;
 
-namespace HereticalSolutions.Pools
+namespace HereticalSolutions.Pools.Behaviours
 {
 	public class PoolElementBehaviour : MonoBehaviour
 	{
@@ -13,8 +14,11 @@ namespace HereticalSolutions.Pools
 		MessageBus poolBus;
 
 		[SerializeField]
-		private string poolID;
-		public string PoolID { get { return poolID; } }
+		private PoolElementRegistration registration;
+		public PoolElementRegistration Registration { get { return registration; } }
+
+		[SerializeField]
+		private EResolutionBehaviour resolutionBehaviour;
 
 		[SerializeField]
 		private int MinResolveRequestTimeout = 1;
@@ -41,17 +45,28 @@ namespace HereticalSolutions.Pools
 
 		void Start()
 		{
-			StartCoroutine(TimeoutThenRequestResolveRoutine());
+			switch (resolutionBehaviour)
+			{
+				case EResolutionBehaviour.IMMEDIATELY:
+					RequestResolveIfNotInitialized();
+					break;
+				
+				case EResolutionBehaviour.RESOLVE_AFTER_TICKS:
+					StartCoroutine(TimeoutThenRequestResolveRoutine(MinResolveRequestTimeout));
+					break;
+
+				case EResolutionBehaviour.RESOLVE_AFTER_TICKS_IN_RANGE:
+					int timeout = UnityEngine.Random.Range(
+						MinResolveRequestTimeout,
+						MaxResolveRequestTimeout + 1);
+
+					StartCoroutine(TimeoutThenRequestResolveRoutine(timeout));
+					break;
+			}
 		}
 
-		private IEnumerator TimeoutThenRequestResolveRoutine()
+		private IEnumerator TimeoutThenRequestResolveRoutine(int timeout)
 		{
-			int timeout = (MinResolveRequestTimeout == MaxResolveRequestTimeout)
-				? MaxResolveRequestTimeout
-				: UnityEngine.Random.Range(
-					MinResolveRequestTimeout,
-					MaxResolveRequestTimeout + 1);
-
 			for (int i = 0; i < timeout; i++)
 				yield return null;
 

@@ -1,7 +1,6 @@
 using UnityEngine;
-using System.Collections.Generic;
 using HereticalSolutions.Collections;
-using HereticalSolutions.Allocations;
+using HereticalSolutions.Pools.Behaviours;
 
 namespace HereticalSolutions.Pools.AllocationProcessors
 {

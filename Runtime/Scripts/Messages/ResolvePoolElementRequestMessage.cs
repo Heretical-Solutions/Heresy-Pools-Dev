@@ -1,4 +1,5 @@
 using HereticalSolutions.Messaging;
+using HereticalSolutions.Pools.Behaviours;
 
 namespace HereticalSolutions.Pools.Messages
 {

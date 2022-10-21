@@ -1,12 +1,11 @@
 using System;
 using UnityEngine;
-using Zenject;
 
 using HereticalSolutions.Collections;
 using HereticalSolutions.Collections.Managed;
 using HereticalSolutions.Collections.Factories;
 
-using HereticalSolutions.Allocations;
+using HereticalSolutions.Timers;
 
 namespace HereticalSolutions.Pools.Factories
 {
@@ -89,6 +88,41 @@ namespace HereticalSolutions.Pools.Factories
 				return BuildPoolElementWithAddressAndVariant(
 					valueAllocationDelegate,
 					notifiable,
+					address,
+					variant);
+			};
+		}
+
+		public static IPoolElement<T> BuildPoolElementWithTimer<T>(
+			Func<T> allocationDelegate,
+			IValueAssignedNotifiable<T> notifiable,
+			Timer timer,
+			string address,
+			int variant = -1)
+		{
+			PoolElementWithTimer<T> result = new PoolElementWithTimer<T>(
+				allocationDelegate(),
+				notifiable,
+				timer,
+				address,
+				variant);
+
+			return result;
+		}
+
+		public static Func<Func<T>, IPoolElement<T>> BuildBuildPoolElementWithTimer<T>(
+			IValueAssignedNotifiable<T> notifiable,
+			float defaultDuration,
+			Timer timer,
+			string address,
+			int variant = -1)
+		{
+			return (valueAllocationDelegate) =>
+			{
+				return BuildPoolElementWithTimer(
+					valueAllocationDelegate,
+					notifiable,
+					timer,
 					address,
 					variant);
 			};
