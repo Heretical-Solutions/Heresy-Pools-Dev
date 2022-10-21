@@ -110,9 +110,8 @@ namespace HereticalSolutions.Pools.Factories
 			return result;
 		}
 
-		public static Func<Func<T>, IPoolElement<T>> BuildBuildPoolElementWithTimer<T>(
+		public static Func<Func<T>, IPoolElement<T>> BuildPoolElementWithTimerAllocationDelegate<T>(
 			IValueAssignedNotifiable<T> notifiable,
-			float defaultDuration,
 			Timer timer,
 			string address,
 			int variant = -1)
