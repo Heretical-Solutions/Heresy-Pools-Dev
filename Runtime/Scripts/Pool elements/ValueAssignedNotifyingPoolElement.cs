@@ -20,7 +20,7 @@ namespace HereticalSolutions.Pools
 			{
 				innerValue = value;
 
-				notifiable.Notify(this);
+				notifiable?.Notify(this);
 			}
 		}
 
@@ -28,10 +28,11 @@ namespace HereticalSolutions.Pools
 			T initialValue,
 			IValueAssignedNotifiable<T> notifiable)
 		{
-			this.notifiable = notifiable;
-
 			Index = -1;
 
+			this.notifiable = notifiable;
+
+			//For obvious reasons, this call should be done last
 			Value = initialValue;
 		}
 	}
