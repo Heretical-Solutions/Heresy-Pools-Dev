@@ -10,5 +10,16 @@ namespace HereticalSolutions.Pools.Factories
 
 			return this;
 		}
+
+		public NonAllocDecoratedPoolBuilder<T> Add(
+			INonAllocDecoratedPool<T> newWrapper,
+			out INonAllocDecoratedPool<T> wrapperOut)
+		{
+			CurrentWrapper = newWrapper;
+
+			wrapperOut = newWrapper;
+
+			return this;
+		}
 	}
 }

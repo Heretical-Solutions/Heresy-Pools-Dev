@@ -1,13 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
 using HereticalSolutions.Collections;
-using HereticalSolutions.Allocations;
 using HereticalSolutions.Pools;
 
 namespace HereticalSolutions.Pools.AllocationProcessors
 {
 	public class CompositeGameObjectAllocationProcessor
-		: IValueAssignedNotifiable<GameObject>
+		: IValueAssignedNotifiable<GameObject>,
+		  IPoolProvidable<GameObject>
 	{
 		protected INonAllocDecoratedPool<GameObject> poolWrapper = null;
 
@@ -39,9 +39,9 @@ namespace HereticalSolutions.Pools.AllocationProcessors
 			processingQueue.Push(element);
 		}
 
-		public void SetWrapper(INonAllocDecoratedPool<GameObject> poolWrapper)
+		public void SetPool(INonAllocDecoratedPool<GameObject> pool)
 		{
-			this.poolWrapper = poolWrapper;
+			poolWrapper = pool;
 
 			if (processingQueue.Count == 0)
 				return;

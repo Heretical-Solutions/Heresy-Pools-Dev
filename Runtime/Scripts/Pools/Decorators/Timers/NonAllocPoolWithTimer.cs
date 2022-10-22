@@ -8,13 +8,14 @@ namespace HereticalSolutions.Pools
 {
 	public class NonAllocPoolWithTimer
 		: ANonAllocDecoratorPool<GameObject>,
-		ITimerContainableTimerExpiredNotifiable
+		ITimerContainableTimerExpiredNotifiable,
+		IPoolProvidable<GameObject>
 	{
 		private INonAllocDecoratedPool<GameObject> poolWrapper;
 
-		public void SetWrapper(INonAllocDecoratedPool<GameObject> poolWrapper)
+		public void SetPool(INonAllocDecoratedPool<GameObject> pool)
 		{
-			this.poolWrapper = poolWrapper;
+			poolWrapper = pool;
 		}
 
 		public NonAllocPoolWithTimer(INonAllocDecoratedPool<GameObject> innerPool)
