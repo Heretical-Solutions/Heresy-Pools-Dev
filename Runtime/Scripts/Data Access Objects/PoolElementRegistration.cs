@@ -5,7 +5,7 @@ namespace HereticalSolutions.Pools.DAO
 	{
 		public string PoolID;
 
-		public string[] Address;
+		public string Address;
 
 		public int Variant = -1;
 	}

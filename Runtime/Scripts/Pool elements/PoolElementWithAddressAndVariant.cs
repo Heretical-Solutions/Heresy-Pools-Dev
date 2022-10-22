@@ -5,20 +5,20 @@ namespace HereticalSolutions.Pools
 		IAddressContainable,
 		IVariantContainable
 	{
-		public string Address { get; private set; }
+		public int[] AddressHashes { get; private set; }
 
 		public int Variant { get; private set; }
 
 		public PoolElementWithAddressAndVariant(
 			T initialValue,
 			IValueAssignedNotifiable<T> notifiable,
-			string address,
+			int[] addressHashes,
 			int variant = -1)
 			: base (
 				initialValue,
 				notifiable)
 		{
-			Address = address;
+			AddressHashes = addressHashes;
 
 			Variant = variant;
 		}

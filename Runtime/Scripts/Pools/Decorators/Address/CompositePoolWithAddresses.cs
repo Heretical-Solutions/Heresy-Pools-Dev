@@ -10,10 +10,10 @@ namespace HereticalSolutions.Pools
 	{
 		private int level;
 
-		private IRepository<string, INonAllocDecoratedPool<T>> poolsRepository;
+		private IRepository<int, INonAllocDecoratedPool<T>> poolsRepository;
 
 		public CompositePoolWithAddresses(
-			IRepository<string, INonAllocDecoratedPool<T>> poolsRepository,
+			IRepository<int, INonAllocDecoratedPool<T>> poolsRepository,
 			int level)
 		{
 			this.poolsRepository = poolsRepository;
@@ -28,13 +28,13 @@ namespace HereticalSolutions.Pools
 			if (!args.TryGetArgument<AddressArgument>(out var arg))
 				throw new Exception("[CompositePoolWithAddresses] ADDRESS ARGUMENT ABSENT");
 
-			if (arg.Address.Length <= level)
-				throw new Exception($"[CompositePoolWithAddresses] INVALID ADDRESS DEPTH. LEVEL: {{ {level} }} ADDRESS LENGTH: {{ {arg.Address.Length} }}");
+			if (arg.AddressHashes.Length <= level)
+				throw new Exception($"[CompositePoolWithAddresses] INVALID ADDRESS DEPTH. LEVEL: {{ {level} }} ADDRESS LENGTH: {{ {arg.AddressHashes.Length} }}");
 
-			string currentAddress = arg.Address[level];
+			int currentAddressHash = arg.AddressHashes[level];
 
-			if (!poolsRepository.TryGet(currentAddress, out var pool))
-				throw new Exception($"[CompositePoolWithAddresses] INVALID ADDRESS {{ {currentAddress} }}");
+			if (!poolsRepository.TryGet(currentAddressHash, out var pool))
+				throw new Exception($"[CompositePoolWithAddresses] INVALID ADDRESS {{ {currentAddressHash} }}");
 
 			var result = pool.Pop(args);
 
@@ -54,8 +54,10 @@ namespace HereticalSolutions.Pools
 			if (elementWithAddress == null)
 				throw new Exception("[CompositePoolWithAddresses] INVALID INSTANCE");
 
-			if (!poolsRepository.TryGet(elementWithAddress.Address, out var pool))
-				throw new Exception($"[CompositePoolWithAddresses] INVALID ADDRESS {{ {elementWithAddress.Address} }}");
+			int currentAddressHash = elementWithAddress.AddressHashes[level];
+
+			if (!poolsRepository.TryGet(currentAddressHash, out var pool))
+				throw new Exception($"[CompositePoolWithAddresses] INVALID ADDRESS {{ {currentAddressHash} }}");
 
 			pool.Push(
 				instance,

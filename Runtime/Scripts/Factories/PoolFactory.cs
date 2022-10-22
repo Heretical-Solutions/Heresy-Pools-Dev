@@ -66,13 +66,13 @@ namespace HereticalSolutions.Pools.Factories
 		public static IPoolElement<T> BuildPoolElementWithAddressAndVariant<T>(
 			Func<T> allocationDelegate,
 			IValueAssignedNotifiable<T> notifiable,
-			string address,
+			int[] addressHashes,
 			int variant = -1)
 		{
 			PoolElementWithAddressAndVariant<T> result = new PoolElementWithAddressAndVariant<T>(
 				allocationDelegate(),
 				notifiable,
-				address,
+				addressHashes,
 				variant);
 
 			return result;
@@ -80,7 +80,7 @@ namespace HereticalSolutions.Pools.Factories
 
 		public static Func<Func<T>, IPoolElement<T>> BuildPoolElementWithAddressAndVariantAllocationDelegate<T>(
 			IValueAssignedNotifiable<T> notifiable,
-			string address,
+			int[] addressHashes,
 			int variant = -1)
 		{
 			return (valueAllocationDelegate) =>
@@ -88,7 +88,7 @@ namespace HereticalSolutions.Pools.Factories
 				return BuildPoolElementWithAddressAndVariant(
 					valueAllocationDelegate,
 					notifiable,
-					address,
+					addressHashes,
 					variant);
 			};
 		}
@@ -97,14 +97,14 @@ namespace HereticalSolutions.Pools.Factories
 			Func<T> allocationDelegate,
 			IValueAssignedNotifiable<T> notifiable,
 			Timer timer,
-			string address,
+			int[] addressHashes,
 			int variant = -1)
 		{
 			PoolElementWithTimer<T> result = new PoolElementWithTimer<T>(
 				allocationDelegate(),
 				notifiable,
 				timer,
-				address,
+				addressHashes,
 				variant);
 
 			return result;
@@ -113,7 +113,7 @@ namespace HereticalSolutions.Pools.Factories
 		public static Func<Func<T>, IPoolElement<T>> BuildPoolElementWithTimerAllocationDelegate<T>(
 			IValueAssignedNotifiable<T> notifiable,
 			Func<Timer> timerAllocationDelegate,
-			string address,
+			int[] addressHashes,
 			int variant = -1)
 		{
 			return (valueAllocationDelegate) =>
@@ -122,7 +122,7 @@ namespace HereticalSolutions.Pools.Factories
 					valueAllocationDelegate,
 					notifiable,
 					timerAllocationDelegate(),
-					address,
+					addressHashes,
 					variant);
 			};
 		}

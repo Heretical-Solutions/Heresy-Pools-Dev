@@ -19,12 +19,12 @@ namespace HereticalSolutions.Pools
 			T initialValue,
 			IValueAssignedNotifiable<T> notifiable,
 			Timer timer,
-			string address,
+			int[] addressHashes,
 			int variant)
 			: base(
 				initialValue,
 				notifiable,
-				address,
+				addressHashes,
 				variant)
 		{
 			Timer = timer;

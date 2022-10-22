@@ -2,6 +2,6 @@ namespace HereticalSolutions.Pools
 {
 	public interface IAddressContainable
 	{
-		string Address { get; }
+		int[] AddressHashes { get; }
 	}
 }

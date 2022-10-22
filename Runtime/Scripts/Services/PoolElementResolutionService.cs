@@ -5,6 +5,7 @@ using UnityEngine;
 using HereticalSolutions.Messaging;
 using HereticalSolutions.Repositories;
 
+using HereticalSolutions.Pools;
 using HereticalSolutions.Pools.Arguments;
 using HereticalSolutions.Pools.Messages;
 using HereticalSolutions.Pools.Behaviours;
@@ -58,7 +59,7 @@ namespace HereticalSolutions.Pools.Services
 			if (behaviour.Registration.Address != null
 				&& behaviour.Registration.Address.Length > 0)
 			{
-				addressArgument.Address = behaviour.Registration.Address;
+				addressArgument.AddressHashes = behaviour.Registration.Address.AddressToHashes();
 
 				builder.Add(addressArgument);
 			}
