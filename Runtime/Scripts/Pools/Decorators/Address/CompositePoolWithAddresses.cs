@@ -66,9 +66,23 @@ namespace HereticalSolutions.Pools
 			if (elementWithAddress == null)
 				throw new Exception("[CompositePoolWithAddresses] INVALID INSTANCE");
 
+			INonAllocDecoratedPool<T> pool = null;
+
+			if (elementWithAddress.AddressHashes.Length == level)
+			{
+				if (!poolsRepository.TryGet(0, out pool))
+					throw new Exception($"[CompositePoolWithAddresses] NO POOL DETECTED AT ADDRESS MAX. DEPTH. LEVEL: {{ {level} }}");
+
+				pool.Push(
+					instance,
+					dryRun);
+
+				return;
+			}
+
 			int currentAddressHash = elementWithAddress.AddressHashes[level];
 
-			if (!poolsRepository.TryGet(currentAddressHash, out var pool))
+			if (!poolsRepository.TryGet(currentAddressHash, out pool))
 				throw new Exception($"[CompositePoolWithAddresses] INVALID ADDRESS {{ {currentAddressHash} }}");
 
 			pool.Push(
