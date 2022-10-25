@@ -17,8 +17,8 @@ namespace HereticalSolutions.Pools.Factories
 			BuildNonAllocGameObjectPoolCommand command)
 		{
 			Func<GameObject> valueAllocationDelegate = (command.Container != null)
-				? () => { return command.Container.InstantiatePrefab(command.Prefab); }
-				: () => { return GameObject.Instantiate(command.Prefab); };
+				? (Func<GameObject>)(() => { return command.Container.InstantiatePrefab(command.Prefab); })
+				: (Func<GameObject>)(() => { return GameObject.Instantiate(command.Prefab); });
 
 			if (command.CollectionType == typeof(PackedArrayPool<GameObject>))
 				return CollectionFactory.BuildPackedArrayPool<GameObject>(
