@@ -1,8 +1,10 @@
+using System;
 using Zenject;
 using UnityEngine;
 using System.Collections;
 using HereticalSolutions.Messaging;
 using HereticalSolutions.Collections;
+using HereticalSolutions.Collections.Managed;
 using HereticalSolutions.Pools.Messages;
 using HereticalSolutions.Pools.DAO;
 
@@ -34,6 +36,15 @@ namespace HereticalSolutions.Pools.Behaviours
 
 		public bool Initialized { get => poolElement != null; }
 
+		public bool Popped
+		{
+			get
+			{
+				return Initialized
+					&& (((IIndexed)poolElement).Index != -1);
+			}
+		}
+
 		public void Initialize(
 			INonAllocDecoratedPool<GameObject> pool,
 			IPoolElement<GameObject> poolElement)
@@ -50,7 +61,7 @@ namespace HereticalSolutions.Pools.Behaviours
 				case EResolutionBehaviour.IMMEDIATELY:
 					RequestResolveIfNotInitialized();
 					break;
-				
+
 				case EResolutionBehaviour.RESOLVE_AFTER_TICKS:
 					StartCoroutine(TimeoutThenRequestResolveRoutine(MinResolveRequestTimeout));
 					break;
@@ -88,6 +99,9 @@ namespace HereticalSolutions.Pools.Behaviours
 
 			if (pool != null)
 			{
+				if (Popped)
+					throw new Exception("[PoolElementBehaviour] ATTEMPT TO PUSH ELEMENT THAT IS ALREADY PUSHED");
+
 				pool.Push(poolElement);
 			}
 			else

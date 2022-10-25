@@ -28,12 +28,24 @@ namespace HereticalSolutions.Pools
 			if (!args.TryGetArgument<AddressArgument>(out var arg))
 				throw new Exception("[CompositePoolWithAddresses] ADDRESS ARGUMENT ABSENT");
 
-			if (arg.AddressHashes.Length <= level)
+			if (arg.AddressHashes.Length < level)
 				throw new Exception($"[CompositePoolWithAddresses] INVALID ADDRESS DEPTH. LEVEL: {{ {level} }} ADDRESS LENGTH: {{ {arg.AddressHashes.Length} }}");
+
+			INonAllocDecoratedPool<T> pool = null;
+
+			if (arg.AddressHashes.Length == level)
+			{
+				if (!poolsRepository.TryGet(0, out pool))
+					throw new Exception($"[CompositePoolWithAddresses] NO POOL DETECTED AT ADDRESS MAX. DEPTH. LEVEL: {{ {level} }}");
+
+				var maxDepthResult = pool.Pop(args);
+
+				return maxDepthResult;
+			}
 
 			int currentAddressHash = arg.AddressHashes[level];
 
-			if (!poolsRepository.TryGet(currentAddressHash, out var pool))
+			if (!poolsRepository.TryGet(currentAddressHash, out pool))
 				throw new Exception($"[CompositePoolWithAddresses] INVALID ADDRESS {{ {currentAddressHash} }}");
 
 			var result = pool.Pop(args);
