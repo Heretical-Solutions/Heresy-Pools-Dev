@@ -44,12 +44,12 @@ namespace HereticalSolutions.Pools
 
 			if (args.TryGetArgument<LocalPositionArgument>(out var arg4))
 			{
-				instance.transform.localPosition = arg2.Position;
+				instance.transform.localPosition = arg4.Position;
 			}
 
 			if (args.TryGetArgument<LocalRotationArgument>(out var arg5))
 			{
-				instance.transform.localRotation = arg3.Rotation;
+				instance.transform.localRotation = arg5.Rotation;
 			}
 
 			instance.SetActive(true);
