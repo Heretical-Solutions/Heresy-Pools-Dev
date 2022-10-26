@@ -29,9 +29,9 @@ namespace HereticalSolutions.Pools.Behaviours
 		private int MaxResolveRequestTimeout = 1;
 
 
-		private INonAllocDecoratedPool<GameObject> pool;
+		private INonAllocDecoratedPool<GameObject> pool = null;
 
-		private IPoolElement<GameObject> poolElement;
+		private IPoolElement<GameObject> poolElement = null;
 
 
 		public bool Initialized { get => poolElement != null; }
@@ -99,7 +99,7 @@ namespace HereticalSolutions.Pools.Behaviours
 
 			if (pool != null)
 			{
-				if (Popped)
+				if (!Popped)
 					throw new Exception("[PoolElementBehaviour] ATTEMPT TO PUSH ELEMENT THAT IS ALREADY PUSHED");
 
 				pool.Push(poolElement);
