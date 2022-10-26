@@ -6,6 +6,6 @@ namespace HereticalSolutions.Pools.Arguments
 	{
 		public Transform Parent;
 
-		public bool WorldPositionStays;
+		public bool WorldPositionStays = true;
 	}
 }
