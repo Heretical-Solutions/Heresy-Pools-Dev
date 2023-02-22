@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeresyPools", "HeresyPools\HeresyPools.csproj", "{68C853CA-22C5-4D75-B499-E1CD70156CBB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeresyMemory", "Dependencies\HeresyMemory\HeresyMemory\HeresyMemory.csproj", "{73E334CD-873E-4A4B-ABA7-A986FC16D861}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{68C853CA-22C5-4D75-B499-E1CD70156CBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68C853CA-22C5-4D75-B499-E1CD70156CBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68C853CA-22C5-4D75-B499-E1CD70156CBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73E334CD-873E-4A4B-ABA7-A986FC16D861}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73E334CD-873E-4A4B-ABA7-A986FC16D861}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73E334CD-873E-4A4B-ABA7-A986FC16D861}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73E334CD-873E-4A4B-ABA7-A986FC16D861}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
