@@ -1,3 +1,4 @@
+/*
 using HereticalSolutions.Messaging;
 
 namespace HereticalSolutions.Timers.Factories
@@ -14,3 +15,4 @@ namespace HereticalSolutions.Timers.Factories
 		}
 	}
 }
+*/

@@ -2,9 +2,9 @@ using HereticalSolutions.Timers;
 
 namespace HereticalSolutions.Pools
 {
-	public interface ITimerContainable
+	public interface IContainsTimer
 	{
-		Timer Timer { get; }
+		ITimer Timer { get; }
 
 		ITimerExpiredNotifier Callback { get; set; }
 	}

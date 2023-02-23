@@ -3,7 +3,7 @@ namespace HereticalSolutions.Pools.AllocationCallbacks
 	public interface IAllocationCallback<T>
 	{
 		void OnAllocated(
-			INonAllocDecoratedPool<T> poolWrapper,
+			INonAllocDecoratedPool<T> rootPoolDecorator,
 			IPoolElement<T> currentElement);
 	}
 }

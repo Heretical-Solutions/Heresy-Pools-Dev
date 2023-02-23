@@ -1,10 +1,11 @@
+/*
 using System;
 using HereticalSolutions.Messaging;
 using HereticalSolutions.Collections;
 
 namespace HereticalSolutions.Timers
 {
-	public class Timer
+	public class Timer : ITimer
 	{
 		public float Countdown { get; private set; }
 
@@ -74,3 +75,4 @@ namespace HereticalSolutions.Timers
 		}
 	}
 }
+*/
