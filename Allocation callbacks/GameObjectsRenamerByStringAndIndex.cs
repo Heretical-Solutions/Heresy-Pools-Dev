@@ -3,20 +3,20 @@ using UnityEngine;
 using HereticalSolutions.Collections;
 using HereticalSolutions.Collections.Managed;
 
-namespace HereticalSolutions.Pools.AllocationProcessors
+namespace HereticalSolutions.Pools.AllocationCallbacks
 {
-	public class NameByStringAndIndex : IAllocationProcessor
+	public class GameObjectsRenamerByStringAndIndex : IAllocationCallback<GameObject>
 	{
 		private string name;
 
 		private int index = 0;
 
-		public NameByStringAndIndex(string name)
+		public GameObjectsRenamerByStringAndIndex(string name)
 		{
 			this.name = name;
 		}
 
-		public void Process(
+		public void OnAllocated(
 			INonAllocDecoratedPool<GameObject> poolWrapper,
 			IPoolElement<GameObject> currentElement)
 		{
