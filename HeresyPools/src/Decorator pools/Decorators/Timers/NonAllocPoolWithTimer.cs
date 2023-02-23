@@ -1,5 +1,4 @@
 using System;
-using HereticalSolutions.Collections;
 using HereticalSolutions.Pools.Arguments;
 
 namespace HereticalSolutions.Pools
@@ -7,11 +6,11 @@ namespace HereticalSolutions.Pools
 	public class NonAllocPoolWithTimer<T>
 		: ANonAllocDecoratorPool<T>,
 		ITimerExpiredNotifier,
-		IPoolProvidable<T>
+		IContainsRootPool<T>
 	{
 		private INonAllocDecoratedPool<T> innerPool;
 
-		public void SetPool(INonAllocDecoratedPool<T> pool)
+		public void SetRootPool(INonAllocDecoratedPool<T> pool)
 		{
 			innerPool = pool;
 		}
@@ -21,28 +20,28 @@ namespace HereticalSolutions.Pools
 		{
 		}
 
-		public void NotifyTimerExpired(ITimerContainable timerContainable)
+		public void NotifyTimerExpired(IContainsTimer containsTimer)
 		{
-			innerPool.Push((IPoolElement<T>)timerContainable);
+			innerPool.Push((IPoolElement<T>)containsTimer);
 		}
 
 		protected override void OnAfterPop(
 			IPoolElement<T> instance,
 			IPoolDecoratorArgument[] args)
 		{
-			ITimerContainable timerContainable = (ITimerContainable)instance;
+			IContainsTimer containsTimer = (IContainsTimer)instance;
 
-			if (timerContainable == null)
+			if (containsTimer == null)
 				throw new Exception($"[NonAllocPoolWithTimer] INVALID ELEMENT");
 
-			timerContainable.Callback = this;
+			containsTimer.Callback = this;
 
 			if (args.TryGetArgument<TimerArgument>(out var arg))
 			{
-				timerContainable.Timer.Start(arg.Duration);
+				containsTimer.Timer.Start(arg.Duration);
 			}
 			else
-				timerContainable.Timer.Start();
+				containsTimer.Timer.Start();
 		}
 	}
 }

@@ -6,6 +6,7 @@ namespace HereticalSolutions.Pools.Factories
 {
 	public static partial class PoolFactory
 	{
+		/*
 		#region Pool elements
 
 		public static IPoolElement<T> BuildValueAssignedNotifyingPoolElement<T>(
@@ -95,5 +96,6 @@ namespace HereticalSolutions.Pools.Factories
 		}
 
 		#endregion
+		*/
 	}
 }

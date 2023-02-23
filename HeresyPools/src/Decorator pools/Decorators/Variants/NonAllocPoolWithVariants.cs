@@ -1,7 +1,7 @@
 using System;
-using HereticalSolutions.Collections;
 using HereticalSolutions.Repositories;
 using HereticalSolutions.Pools.Arguments;
+using HereticalSolutions.Random;
 
 namespace HereticalSolutions.Pools
 {
@@ -10,10 +10,15 @@ namespace HereticalSolutions.Pools
 	{
 		private IRepository<int, VariantContainer<T>> innerPoolsRepository;
 
+		private IRandomGenerator randomGenerator;
+
 		public NonAllocPoolWithVariants(
-			IRepository<int, VariantContainer<T>> innerPoolsRepository)
+			IRepository<int, VariantContainer<T>> innerPoolsRepository,
+			IRandomGenerator randomGenerator)
 		{
 			this.innerPoolsRepository = innerPoolsRepository;
+
+			this.randomGenerator = randomGenerator;
 		}
 
 		#region Pop
@@ -33,7 +38,7 @@ namespace HereticalSolutions.Pools
 			if (!innerPoolsRepository.TryGet(0, out var currentVariant))
 				throw new Exception("[PoolWithVariants] NO VARIANTS PRESENT");
 
-			var hitDice = UnityEngine.Random.Range(0, 1f);
+			var hitDice = randomGenerator.Random(0, 1f);
 
 			int index = 0;
 

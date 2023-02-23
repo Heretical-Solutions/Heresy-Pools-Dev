@@ -4,52 +4,52 @@ namespace HereticalSolutions.Pools.AllocationCallbacks
 {
 	public class CompositeProcessor<T>
 		: INotifiable<T>,
-		  IPoolProvidable<T>
+		  IContainsRootPool<T>
 	{
-		protected INonAllocDecoratedPool<T> poolWrapper = null;
+		protected INonAllocDecoratedPool<T> rootPool = null;
 
-		protected Stack<IPoolElement<T>> processingQueue;
+		protected Stack<IPoolElement<T>> elementsToProcess;
 
-		protected IAllocationCallback<T>[] processors;
+		protected IAllocationCallback<T>[] callbacks;
 
 		public CompositeProcessor(
-			Stack<IPoolElement<T>> processingQueue,
-			IAllocationCallback<T>[] processors)
+			Stack<IPoolElement<T>> elementsToProcess,
+			IAllocationCallback<T>[] callbacks)
 		{
-			this.processingQueue = processingQueue;
+			this.elementsToProcess = elementsToProcess;
 
-			this.processors = processors;
+			this.callbacks = callbacks;
 		}
 
 		public void Notify(IPoolElement<T> element)
 		{
-			if (poolWrapper != null)
+			if (rootPool != null)
 			{
-				foreach (var processor in processors)
+				foreach (var processor in callbacks)
 					processor.OnAllocated(
-						poolWrapper,
+						rootPool,
 						element);
 
 				return;
 			}
 
-			processingQueue.Push(element);
+			elementsToProcess.Push(element);
 		}
 
-		public void SetPool(INonAllocDecoratedPool<T> pool)
+		public void SetRootPool(INonAllocDecoratedPool<T> pool)
 		{
-			poolWrapper = pool;
+			rootPool = pool;
 
-			if (processingQueue.Count == 0)
+			if (elementsToProcess.Count == 0)
 				return;
 
-			while (processingQueue.Count != 0)
+			while (elementsToProcess.Count != 0)
 			{
-				var element = processingQueue.Pop();
+				var element = elementsToProcess.Pop();
 
-				foreach (var processor in processors)
+				foreach (var processor in callbacks)
 					processor.OnAllocated(
-						poolWrapper,
+						rootPool,
 						element);
 			}
 		}
