@@ -10,13 +10,13 @@ namespace HereticalSolutions.Pools
 	{
 		private int level;
 
-		private IRepository<int, INonAllocDecoratedPool<T>> poolsRepository;
+		private IRepository<int, INonAllocDecoratedPool<T>> innerPoolsRepository;
 
 		public NonAllocPoolWithAddress(
-			IRepository<int, INonAllocDecoratedPool<T>> poolsRepository,
+			IRepository<int, INonAllocDecoratedPool<T>> innerPoolsRepository,
 			int level)
 		{
-			this.poolsRepository = poolsRepository;
+			this.innerPoolsRepository = innerPoolsRepository;
 
 			this.level = level;
 		}
@@ -26,17 +26,17 @@ namespace HereticalSolutions.Pools
 		public IPoolElement<T> Pop(IPoolDecoratorArgument[] args)
 		{
 			if (!args.TryGetArgument<AddressArgument>(out var arg))
-				throw new Exception("[CompositePoolWithAddresses] ADDRESS ARGUMENT ABSENT");
+				throw new Exception("[NonAllocPoolWithAddress] ADDRESS ARGUMENT ABSENT");
 
 			if (arg.AddressHashes.Length < level)
-				throw new Exception($"[CompositePoolWithAddresses] INVALID ADDRESS DEPTH. LEVEL: {{ {level} }} ADDRESS LENGTH: {{ {arg.AddressHashes.Length} }}");
+				throw new Exception($"[NonAllocPoolWithAddress] INVALID ADDRESS DEPTH. LEVEL: {{ {level} }} ADDRESS LENGTH: {{ {arg.AddressHashes.Length} }}");
 
 			INonAllocDecoratedPool<T> pool = null;
 
 			if (arg.AddressHashes.Length == level)
 			{
-				if (!poolsRepository.TryGet(0, out pool))
-					throw new Exception($"[CompositePoolWithAddresses] NO POOL DETECTED AT ADDRESS MAX. DEPTH. LEVEL: {{ {level} }}");
+				if (!innerPoolsRepository.TryGet(0, out pool))
+					throw new Exception($"[NonAllocPoolWithAddress] NO POOL DETECTED AT ADDRESS MAX. DEPTH. LEVEL: {{ {level} }}");
 
 				var maxDepthResult = pool.Pop(args);
 
@@ -45,8 +45,8 @@ namespace HereticalSolutions.Pools
 
 			int currentAddressHash = arg.AddressHashes[level];
 
-			if (!poolsRepository.TryGet(currentAddressHash, out pool))
-				throw new Exception($"[CompositePoolWithAddresses] INVALID ADDRESS {{ {currentAddressHash} }}");
+			if (!innerPoolsRepository.TryGet(currentAddressHash, out pool))
+				throw new Exception($"[NonAllocPoolWithAddress] INVALID ADDRESS {{ {currentAddressHash} }}");
 
 			var result = pool.Pop(args);
 
@@ -64,14 +64,14 @@ namespace HereticalSolutions.Pools
 			var elementWithAddress = (IContainsAddress)instance;
 
 			if (elementWithAddress == null)
-				throw new Exception("[CompositePoolWithAddresses] INVALID INSTANCE");
+				throw new Exception("[NonAllocPoolWithAddress] INVALID INSTANCE");
 
 			INonAllocDecoratedPool<T> pool = null;
 
 			if (elementWithAddress.AddressHashes.Length == level)
 			{
-				if (!poolsRepository.TryGet(0, out pool))
-					throw new Exception($"[CompositePoolWithAddresses] NO POOL DETECTED AT ADDRESS MAX. DEPTH. LEVEL: {{ {level} }}");
+				if (!innerPoolsRepository.TryGet(0, out pool))
+					throw new Exception($"[NonAllocPoolWithAddress] NO POOL DETECTED AT ADDRESS MAX. DEPTH. LEVEL: {{ {level} }}");
 
 				pool.Push(
 					instance,
@@ -82,8 +82,8 @@ namespace HereticalSolutions.Pools
 
 			int currentAddressHash = elementWithAddress.AddressHashes[level];
 
-			if (!poolsRepository.TryGet(currentAddressHash, out pool))
-				throw new Exception($"[CompositePoolWithAddresses] INVALID ADDRESS {{ {currentAddressHash} }}");
+			if (!innerPoolsRepository.TryGet(currentAddressHash, out pool))
+				throw new Exception($"[NonAllocPoolWithAddress] INVALID ADDRESS {{ {currentAddressHash} }}");
 
 			pool.Push(
 				instance,

@@ -1,4 +1,3 @@
-
 namespace HereticalSolutions.Pools
 {
 	public class NonAllocPoolWithID<T> : ANonAllocDecoratorPool<T>

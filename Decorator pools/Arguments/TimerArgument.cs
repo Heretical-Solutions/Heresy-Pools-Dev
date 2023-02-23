@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace HereticalSolutions.Pools.Arguments
 {
 	public class TimerArgument : IPoolDecoratorArgument

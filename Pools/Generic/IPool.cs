@@ -1,4 +1,4 @@
-namespace HereticalSolutions.Collections
+namespace HereticalSolutions.Pools
 {
 	public interface IPool<T>
 	{

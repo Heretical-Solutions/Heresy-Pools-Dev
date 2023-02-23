@@ -1,4 +1,3 @@
-using HereticalSolutions.Collections;
 using HereticalSolutions.Pools.Arguments;
 
 namespace HereticalSolutions.Pools

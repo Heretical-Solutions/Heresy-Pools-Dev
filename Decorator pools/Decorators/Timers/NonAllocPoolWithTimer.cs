@@ -1,35 +1,33 @@
 using System;
-using UnityEngine;
 using HereticalSolutions.Collections;
-using HereticalSolutions.Pools;
 using HereticalSolutions.Pools.Arguments;
 
 namespace HereticalSolutions.Pools
 {
-	public class NonAllocPoolWithTimer
-		: ANonAllocDecoratorPool<GameObject>,
-		ITimerContainableTimerExpiredNotifiable,
-		IPoolProvidable<GameObject>
+	public class NonAllocPoolWithTimer<T>
+		: ANonAllocDecoratorPool<T>,
+		ITimerExpiredNotifier,
+		IPoolProvidable<T>
 	{
-		private INonAllocDecoratedPool<GameObject> poolWrapper;
+		private INonAllocDecoratedPool<T> innerPool;
 
-		public void SetPool(INonAllocDecoratedPool<GameObject> pool)
+		public void SetPool(INonAllocDecoratedPool<T> pool)
 		{
-			poolWrapper = pool;
+			innerPool = pool;
 		}
 
-		public NonAllocPoolWithTimer(INonAllocDecoratedPool<GameObject> innerPool)
+		public NonAllocPoolWithTimer(INonAllocDecoratedPool<T> innerPool)
 			: base(innerPool)
 		{
 		}
 
-		public void HandleTimerContainableTimerExpired(ITimerContainable timerContainable)
+		public void NotifyTimerExpired(ITimerContainable timerContainable)
 		{
-			poolWrapper.Push((IPoolElement<GameObject>)timerContainable);
+			innerPool.Push((IPoolElement<T>)timerContainable);
 		}
 
 		protected override void OnAfterPop(
-			IPoolElement<GameObject> instance,
+			IPoolElement<T> instance,
 			IPoolDecoratorArgument[] args)
 		{
 			ITimerContainable timerContainable = (ITimerContainable)instance;

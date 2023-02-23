@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
-
+using HereticalSolutions.Collections;
 using HereticalSolutions.Collections.Allocations;
-using HereticalSolutions.Collections.Managed;
+using HereticalSolutions.Pools.Generic;
 
-namespace HereticalSolutions.Collections.Factories
+namespace HereticalSolutions.Pools.Factories
 {
-	public static partial class CollectionsFactory
+	public static partial class PoolsFactory
 	{
 		#region Stack pool
 

@@ -1,4 +1,6 @@
-namespace HereticalSolutions.Collections.Managed
+using HereticalSolutions.Collections;
+
+namespace HereticalSolutions.Pools
 {
 	public class IndexedContainer<T> 
 		: IPoolElement<T>,

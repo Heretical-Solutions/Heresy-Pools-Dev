@@ -1,5 +1,4 @@
 using HereticalSolutions.Timers;
-using HereticalSolutions.Pools;
 
 namespace HereticalSolutions.Pools
 {
@@ -7,6 +6,6 @@ namespace HereticalSolutions.Pools
 	{
 		Timer Timer { get; }
 
-		ITimerContainableTimerExpiredNotifiable Callback { get; set; }
+		ITimerExpiredNotifier Callback { get; set; }
 	}
 }
