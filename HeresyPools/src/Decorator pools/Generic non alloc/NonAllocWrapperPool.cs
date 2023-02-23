@@ -1,7 +1,6 @@
 using System;
 using HereticalSolutions.Collections;
 using HereticalSolutions.Pools.Arguments;
-using HereticalSolutions.Collections.Allocations;
 
 namespace HereticalSolutions.Pools
 {

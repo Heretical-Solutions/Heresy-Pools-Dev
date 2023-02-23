@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using HereticalSolutions.Collections;
 using HereticalSolutions.Collections.Allocations;
 
-namespace HereticalSolutions.Collections.Managed
+namespace HereticalSolutions.Pools.Generic
 {
 	public class StackPool<T> 
 		: IPool<T>,

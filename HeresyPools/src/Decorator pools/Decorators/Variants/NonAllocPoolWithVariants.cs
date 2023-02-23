@@ -5,15 +5,15 @@ using HereticalSolutions.Pools.Arguments;
 
 namespace HereticalSolutions.Pools
 {
-	public class PoolWithVariants<T>
+	public class NonAllocPoolWithVariants<T>
 		: INonAllocDecoratedPool<T>
 	{
-		private IRepository<int, VariantContainer<T>> poolsRepository;
+		private IRepository<int, VariantContainer<T>> innerPoolsRepository;
 
-		public PoolWithVariants(
-			IRepository<int, VariantContainer<T>> poolsRepository)
+		public NonAllocPoolWithVariants(
+			IRepository<int, VariantContainer<T>> innerPoolsRepository)
 		{
-			this.poolsRepository = poolsRepository;
+			this.innerPoolsRepository = innerPoolsRepository;
 		}
 
 		#region Pop
@@ -22,7 +22,7 @@ namespace HereticalSolutions.Pools
 		{
 			if (args.TryGetArgument<VariantArgument>(out var arg))
 			{
-				if (!poolsRepository.TryGet(arg.Variant, out var variant))
+				if (!innerPoolsRepository.TryGet(arg.Variant, out var variant))
 					throw new Exception($"[PoolWithVariants] INVALID VARIANT {{ {arg.Variant} }}");
 
 				var concreteResult = variant.Pool.Pop(args);
@@ -30,7 +30,7 @@ namespace HereticalSolutions.Pools
 				return concreteResult;
 			}
 
-			if (!poolsRepository.TryGet(0, out var currentVariant))
+			if (!innerPoolsRepository.TryGet(0, out var currentVariant))
 				throw new Exception("[PoolWithVariants] NO VARIANTS PRESENT");
 
 			var hitDice = UnityEngine.Random.Range(0, 1f);
@@ -43,13 +43,11 @@ namespace HereticalSolutions.Pools
 
 				index++;
 
-				if (!poolsRepository.TryGet(index, out currentVariant))
+				if (!innerPoolsRepository.TryGet(index, out currentVariant))
 					throw new Exception("[PoolWithVariants] INVALID VARIANT CHANCES");
 			}
 
 			var result = currentVariant.Pool.Pop(args);
-
-			//((PoolElementWithVariant<T>)result).Variant = arg.Variant;
 
 			return result;
 		}
@@ -67,7 +65,7 @@ namespace HereticalSolutions.Pools
 			if (elementWithVariant == null)
 				throw new Exception("[PoolWithVariants] INVALID INSTANCE");
 
-			if (!poolsRepository.TryGet(elementWithVariant.Variant, out var variant))
+			if (!innerPoolsRepository.TryGet(elementWithVariant.Variant, out var variant))
 				throw new Exception($"[PoolWithVariants] INVALID VARIANT {{ {elementWithVariant.Variant} }}");
 
 			variant.Pool.Push(

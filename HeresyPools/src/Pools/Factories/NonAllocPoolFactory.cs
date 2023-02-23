@@ -2,9 +2,9 @@ using System;
 
 using HereticalSolutions.Collections.Allocations;
 
-namespace HereticalSolutions.Collections.Factories
+namespace HereticalSolutions.Pools.Factories
 {
-	public static partial class CollectionsFactory
+	public static partial class PoolsFactory
 	{
 		#region Non alloc pools
 

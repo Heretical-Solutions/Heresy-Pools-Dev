@@ -1,9 +1,5 @@
 using System;
 
-using HereticalSolutions.Collections;
-using HereticalSolutions.Collections.Managed;
-using HereticalSolutions.Collections.Factories;
-
 using HereticalSolutions.Timers;
 
 namespace HereticalSolutions.Pools.Factories

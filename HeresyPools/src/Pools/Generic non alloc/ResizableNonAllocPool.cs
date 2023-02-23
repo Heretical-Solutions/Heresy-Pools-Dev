@@ -1,8 +1,8 @@
 using System;
-
+using HereticalSolutions.Collections;
 using HereticalSolutions.Collections.Allocations;
 
-namespace HereticalSolutions.Collections.Managed
+namespace HereticalSolutions.Pools.GenricNonAlloc
 {
 	public class ResizableNonAllocPool<T>
 		: INonAllocPool<T>,

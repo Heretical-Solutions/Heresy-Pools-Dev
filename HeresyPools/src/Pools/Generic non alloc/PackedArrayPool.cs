@@ -1,6 +1,7 @@
 using System;
+using HereticalSolutions.Collections;
 
-namespace HereticalSolutions.Collections.Managed
+namespace HereticalSolutions.Pools.GenericNonAlloc
 {
     /// <summary>
     /// The container that combines the functions of a memory pool and a list with an increased performance

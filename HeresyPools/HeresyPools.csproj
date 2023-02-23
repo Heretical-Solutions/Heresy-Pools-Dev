@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="../Dependencies/HeresyMemory/HeresyMemory/HeresyMemory.csproj" />
+    <ProjectReference Include="../Dependencies/HeresyRepositories/HeresyDatabasesAndRepositories/HeresyDatabasesAndRepositories.csproj" />
   </ItemGroup>
   
 </Project>

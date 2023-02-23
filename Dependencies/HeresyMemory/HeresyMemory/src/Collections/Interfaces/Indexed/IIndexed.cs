@@ -1,4 +1,4 @@
-namespace HereticalSolutions.Collections.Managed
+namespace HereticalSolutions.Collections
 {
 	public interface IIndexed
 	{

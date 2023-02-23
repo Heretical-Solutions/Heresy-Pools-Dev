@@ -1,16 +1,10 @@
 using HereticalSolutions.Collections.Allocations;
 
-using HereticalSolutions.Collections.Managed;
-using HereticalSolutions.Collections.Unmanaged;
-
 using System;
-using System.Collections.Generic;
 
-using System.Runtime.InteropServices;
-
-namespace HereticalSolutions.Collections.Factories
+namespace HereticalSolutions.Pools.Factories
 {
-	public static partial class CollectionsFactory
+	public static partial class PoolsFactory
 	{
 		#region Pool element allocation command
 
