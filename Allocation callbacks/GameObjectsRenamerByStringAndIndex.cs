@@ -17,7 +17,7 @@ namespace HereticalSolutions.Pools.AllocationCallbacks
 		}
 
 		public void OnAllocated(
-			INonAllocDecoratedPool<GameObject> poolWrapper,
+			INonAllocDecoratedPool<GameObject> rootPoolDecorator,
 			IPoolElement<GameObject> currentElement)
 		{
 			if (currentElement.Value == null)
