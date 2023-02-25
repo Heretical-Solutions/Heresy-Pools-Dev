@@ -4,7 +4,7 @@ using HereticalSolutions.Timers;
 
 namespace HereticalSolutions.Pools.Factories
 {
-	public static partial class PoolFactory
+	public static partial class PoolsFactory
 	{
 		/*
 		#region Pool elements

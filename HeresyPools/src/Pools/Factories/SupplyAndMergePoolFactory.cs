@@ -9,6 +9,31 @@ namespace HereticalSolutions.Pools.Factories
 	{
 		#region Supply and merge pool
 
+		public static INonAllocPool<T> BuildSupplyAndMergePool<T>(
+			Func<T> valueAllocationDelegate,
+			Func<Func<T>, IPoolElement<T>> containerAllocationDelegate,
+			AllocationCommandDescriptor initialAllocation,
+			AllocationCommandDescriptor additionalAllocation)
+		{
+			Func<T> nullAllocation = NullAllocationDelegate<T>;
+
+			INonAllocPool<T> supplyAndMergePool = BuildSupplyAndMergePool<T>(
+
+				BuildPoolElementAllocationCommand<T>(
+					initialAllocation,
+					valueAllocationDelegate,
+					containerAllocationDelegate),
+
+				BuildPoolElementAllocationCommand<T>(
+					additionalAllocation,
+					nullAllocation,
+					containerAllocationDelegate),
+
+				valueAllocationDelegate);
+
+			return supplyAndMergePool;
+		}
+		
 		public static SupplyAndMergePool<T> BuildSupplyAndMergePool<T>(
 			AllocationCommand<IPoolElement<T>> initialAllocationCommand,
 			AllocationCommand<IPoolElement<T>> appendAllocationCommand,
@@ -22,11 +47,10 @@ namespace HereticalSolutions.Pools.Factories
 				basePool,
 				supplyPool,
 				appendAllocationCommand,
-				//MergeIndexedPackedArrays,
 				MergePools,
 				topUpAllocationDelegate);
 		}
-		
+
 		public static void MergePools<T>(
 			INonAllocPool<T> receiverArray,
 			INonAllocPool<T> donorArray,

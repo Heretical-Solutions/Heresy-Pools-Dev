@@ -8,7 +8,7 @@ namespace HereticalSolutions.Pools.Factories
 {
 	public static partial class PoolsFactory
 	{
-		#region Packed array pool
+		#region Resizable non alloc pool
 
 		public static ResizableNonAllocPool<T> BuildResizableNonAllocPool<T>(
 			AllocationCommand<IPoolElement<T>> initialAllocationCommand,
@@ -28,7 +28,6 @@ namespace HereticalSolutions.Pools.Factories
 			ResizableNonAllocPool<T> pool)
 		{
 			ResizePackedArrayPool(
-				//((IModifiable<IndexedPackedArray<T>>)pool).Contents,
 				(PackedArrayPool<T>)pool.Contents,
 				pool.ResizeAllocationCommand);
 		}
