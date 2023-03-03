@@ -98,8 +98,8 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
         {
             var result = contents[count];
 
-            ((IIndexed)result).Index = count;
-
+            result.Metadata.Get<IIndexed>().Index = count;
+            
             count++;
 
             return result;
@@ -117,9 +117,14 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
 
 			if (index != lastFreeItemIndex)
 			{
-				((IIndexed)contents[lastFreeItemIndex]).Index = -1;
+				IIndexed lastFreeItemAsIndexed = contents[lastFreeItemIndex].Metadata.Get<IIndexed>();
+				
+				IIndexed itemAtIndexAsIndexed = contents[index].Metadata.Get<IIndexed>();
+				
+				
+				lastFreeItemAsIndexed.Index = -1;
 
-				((IIndexed)contents[index]).Index = index;
+				itemAtIndexAsIndexed.Index = index;
 
 
 				var swap = contents[index];
@@ -130,7 +135,7 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
 			}
 			else
 			{
-				((IIndexed)contents[index]).Index = index;
+				contents[index].Metadata.Get<IIndexed>().Index = index;
 			}
 
 
@@ -143,27 +148,28 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
 
         public void Push(IPoolElement<T> item)
         {
-            Push(((IIndexed)item).Index);
+            Push(item.Metadata.Get<IIndexed>().Index);
         }
 
         public void Push(int index)
         {
             if (index >= count)
             {
-                #if DEBUG_LOG
-                Debug.Log("ATTEMPT TO DOUBLE PUSH ITEM");
-                #endif
-
-                return;
+	            return;
             }
 
             int lastItemIndex = count - 1;
 
             if (index != lastItemIndex)
             {
-                ((IIndexed)contents[lastItemIndex]).Index = index;
+	            IIndexed lastItemAsIndexed = contents[lastItemIndex].Metadata.Get<IIndexed>();
+				
+	            IIndexed itemAtIndexAsIndexed = contents[index].Metadata.Get<IIndexed>();
+	            
+	            
+	            lastItemAsIndexed.Index = index;
 
-                ((IIndexed)contents[index]).Index = -1;
+	            itemAtIndexAsIndexed.Index = -1;
 
 
                 var swap = contents[index];
@@ -174,7 +180,7 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
             }
             else
             {
-				((IIndexed)contents[index]).Index = -1;
+				contents[index].Metadata.Get<IIndexed>().Index = -1;
             }
 
             count--;
