@@ -1,6 +1,8 @@
 using System;
+
 using HereticalSolutions.Collections;
 using HereticalSolutions.Collections.Allocations;
+
 using HereticalSolutions.Pools.Behaviours;
 
 namespace HereticalSolutions.Pools.GenericNonAlloc

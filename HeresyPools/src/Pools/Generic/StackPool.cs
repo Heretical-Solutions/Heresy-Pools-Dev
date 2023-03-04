@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+
 using HereticalSolutions.Collections;
 using HereticalSolutions.Collections.Allocations;
 
@@ -8,7 +9,8 @@ namespace HereticalSolutions.Pools.Generic
 	public class StackPool<T> 
 		: IPool<T>,
 		  IResizable<T>,
-		  IModifiable<Stack<T>>
+		  IModifiable<Stack<T>>,
+		  ICountUpdateable
 	{
 		private Stack<T> pool;
 

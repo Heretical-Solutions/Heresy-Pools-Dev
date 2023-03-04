@@ -1,9 +1,11 @@
+using System;
+
 using HereticalSolutions.Collections.Allocations;
 
-using System;
 using HereticalSolutions.Pools.Allocations;
 using HereticalSolutions.Pools.Elements;
 using HereticalSolutions.Pools.Metadata;
+
 using HereticalSolutions.Repositories;
 using HereticalSolutions.Repositories.Factories;
 

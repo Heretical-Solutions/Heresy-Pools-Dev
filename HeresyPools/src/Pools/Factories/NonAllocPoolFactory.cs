@@ -1,6 +1,7 @@
 using System;
 
 using HereticalSolutions.Collections.Allocations;
+
 using HereticalSolutions.Pools.Allocations;
 
 namespace HereticalSolutions.Pools.Factories

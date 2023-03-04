@@ -1,6 +1,9 @@
 using System;
+
 using HereticalSolutions.Repositories;
+
 using HereticalSolutions.Pools.Arguments;
+using HereticalSolutions.Pools.Behaviours;
 
 namespace HereticalSolutions.Pools.Decorators
 {
@@ -11,6 +14,8 @@ namespace HereticalSolutions.Pools.Decorators
 
 		private readonly IRepository<int, INonAllocDecoratedPool<T>> innerPoolsRepository;
 
+		private readonly IPushBehaviourHandler<T> pushBehaviourHandler;
+		
 		public NonAllocPoolWithAddress(
 			IRepository<int, INonAllocDecoratedPool<T>> innerPoolsRepository,
 			int level)
@@ -18,6 +23,8 @@ namespace HereticalSolutions.Pools.Decorators
 			this.innerPoolsRepository = innerPoolsRepository;
 
 			this.level = level;
+
+			pushBehaviourHandler = new PushToDecoratedPoolBehaviour<T>(this);
 		}
 
 		#region Pop
@@ -45,6 +52,13 @@ namespace HereticalSolutions.Pools.Decorators
 
 				var endOfAddressResult = poolByAddress.Pop(args);
 
+				
+				//Update element data
+				var endOfAddressElementAsPushable = (IPushable<T>)endOfAddressResult; 
+            
+				endOfAddressElementAsPushable.UpdatePushBehaviour(pushBehaviourHandler);
+				
+				
 				return endOfAddressResult;
 			}
 			
@@ -59,6 +73,13 @@ namespace HereticalSolutions.Pools.Decorators
 
 			var result = poolByAddress.Pop(args);
 
+			
+			//Update element data
+			var elementAsPushable = (IPushable<T>)result; 
+            
+			elementAsPushable.UpdatePushBehaviour(pushBehaviourHandler);
+			
+			
 			return result;
 			
 			#endregion

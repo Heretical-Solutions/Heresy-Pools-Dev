@@ -1,6 +1,8 @@
 using System;
+
 using HereticalSolutions.Collections;
 using HereticalSolutions.Collections.Allocations;
+
 using HereticalSolutions.Pools.Behaviours;
 
 namespace HereticalSolutions.Pools.GenricNonAlloc
@@ -9,27 +11,24 @@ namespace HereticalSolutions.Pools.GenricNonAlloc
 		: INonAllocPool<T>,
 		  IResizable<IPoolElement<T>>,
 		  IModifiable<INonAllocPool<T>>,
-		  ITopUppable<IPoolElement<T>>
+		  ITopUppable<IPoolElement<T>>,
+		  ICountUpdateable
 	{
 		private INonAllocPool<T> contents;
-		private readonly IModifiable<IPoolElement<T>[]> contentsAsModifiable;
-		private readonly IFixedSizeCollection<IPoolElement<T>> contentsAsFixedSizeCollection;
+		private readonly ICountUpdateable contentsAsCountUpdateable;
 
 		private readonly IPushBehaviourHandler<T> pushBehaviourHandler;
 		
 		public ResizableNonAllocPool(
 			INonAllocPool<T> contents,
-			IModifiable<IPoolElement<T>[]> contentsAsModifiable,
-			IFixedSizeCollection<IPoolElement<T>> contentsAsFixedSizeCollection,
+			ICountUpdateable contentsAsCountUpdateable,
 			Action<ResizableNonAllocPool<T>> resizeDelegate,
 			AllocationCommand<IPoolElement<T>> resizeAllocationCommand,
 			Func<T> topUpAllocationDelegate)
 		{
 			this.contents = contents;
 			
-			this.contentsAsModifiable = contentsAsModifiable;
-			
-			this.contentsAsFixedSizeCollection = contentsAsFixedSizeCollection;
+			this.contentsAsCountUpdateable = contentsAsCountUpdateable;
 			
 			this.resizeDelegate = resizeDelegate;
 
@@ -51,7 +50,7 @@ namespace HereticalSolutions.Pools.GenricNonAlloc
 		
 		public void UpdateCount(int newCount)
 		{
-			contentsAsModifiable.UpdateCount(newCount);
+			contentsAsCountUpdateable.UpdateCount(newCount);
 		}
 
 		#endregion
@@ -86,11 +85,7 @@ namespace HereticalSolutions.Pools.GenricNonAlloc
 		{
 			if (!contents.HasFreeSpace)
 			{
-				int previousCapacity = contentsAsFixedSizeCollection.Capacity;
-
 				resizeDelegate(this);
-
-				int newCapacity = contentsAsFixedSizeCollection.Capacity;
 			}
 
 			IPoolElement<T> result = contents.Pop();

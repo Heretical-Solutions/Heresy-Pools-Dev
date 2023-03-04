@@ -1,4 +1,5 @@
 using System;
+
 using HereticalSolutions.Collections;
 using HereticalSolutions.Pools.Behaviours;
 
@@ -16,7 +17,8 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
         : IFixedSizeCollection<IPoolElement<T>>,
 	      INonAllocPool<T>,
           IIndexable<IPoolElement<T>>,
-          IModifiable<IPoolElement<T>[]>
+          IModifiable<IPoolElement<T>[]>,
+	      ICountUpdateable
     {
         private IPoolElement<T>[] contents;
         

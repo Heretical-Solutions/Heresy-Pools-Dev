@@ -1,6 +1,8 @@
 using System;
+
 using HereticalSolutions.Collections;
 using HereticalSolutions.Collections.Allocations;
+
 using HereticalSolutions.Pools.GenericNonAlloc;
 
 namespace HereticalSolutions.Pools.Factories
@@ -159,6 +161,7 @@ namespace HereticalSolutions.Pools.Factories
 
 			AppendOldDonorContents(receiverArrayPool, donorArrayPool, oldDonorContents, newReceiverContents);
 
+			
 			if (receiverArrayPool.Capacity == receiverArrayPool.Count)
 			{
 				UpdateIndexesOnElementsFromDonorArray(receiverArrayPool, donorArrayPool, newReceiverContents);
@@ -168,9 +171,10 @@ namespace HereticalSolutions.Pools.Factories
 				PackElementsFromDonorArray(receiverArrayPool, donorArrayPool, newReceiverContents);
 			}
 
+			
 			((IModifiable<IPoolElement<T>[]>)receiverArrayPool).UpdateContents(newReceiverContents);
 
-			((IModifiable<IPoolElement<T>[]>)receiverArrayPool).UpdateCount(receiverArrayPool.Count + donorArrayPool.Count);
+			((ICountUpdateable)receiverArrayPool).UpdateCount(receiverArrayPool.Count + donorArrayPool.Count);
 		}
 
 		private static void CopyOldReceiverContents<T>(
@@ -220,6 +224,7 @@ namespace HereticalSolutions.Pools.Factories
 			{
 				int newIndex = i + receiverArrayPool.Capacity;
 
+				
 				((IIndexed)newReceiverContents[lastReceiverFreeItemIndex]).Index = -1;
 
 				((IIndexed)newReceiverContents[newIndex]).Index = lastReceiverFreeItemIndex;
@@ -260,14 +265,16 @@ namespace HereticalSolutions.Pools.Factories
 					throw new Exception($"[PoolsFactory] INVALID DONOR ALLOCATION COMMAND RULE: {donorAllocationCommand.Descriptor.Rule.ToString()}");
 			}
 
+			
 			IPoolElement<T>[] newDonorContents = new IPoolElement<T>[newDonorCapacity];
 
 			for (int i = 0; i < newDonorCapacity; i++)
 				newDonorContents[i] = donorAllocationCommand.AllocationDelegate();
 
+			
 			((IModifiable<IPoolElement<T>[]>)donorArrayPool).UpdateContents(newDonorContents);
 
-			((IModifiable<IPoolElement<T>[]>)donorArrayPool).UpdateCount(0);
+			((ICountUpdateable)donorArrayPool).UpdateCount(0);
 		}
 
 		#endregion

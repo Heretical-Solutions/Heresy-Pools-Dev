@@ -1,4 +1,5 @@
 using System;
+
 using HereticalSolutions.Repositories;
 
 namespace HereticalSolutions.Pools.Metadata

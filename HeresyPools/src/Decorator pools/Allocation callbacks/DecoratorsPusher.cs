@@ -11,7 +11,7 @@ namespace HereticalSolutions.Pools.AllocationCallbacks
 			if (currentElement.Value == null)
 				return;
 
-			if (((IIndexed)currentElement).Index == -1)
+			if (currentElement.Metadata.Get<IIndexed>().Index == -1)
 				rootPoolDecorator.Push(
 					currentElement,
 					true);

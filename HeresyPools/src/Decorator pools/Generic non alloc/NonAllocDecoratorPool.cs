@@ -1,16 +1,21 @@
 using System;
 using HereticalSolutions.Collections;
 using HereticalSolutions.Pools.Arguments;
+using HereticalSolutions.Pools.Behaviours;
 
 namespace HereticalSolutions.Pools.Decorators
 {
 	public class NonAllocDecoratorPool<T> : INonAllocDecoratedPool<T>
 	{
 		private readonly INonAllocPool<T> innerPool;
+		
+		private readonly IPushBehaviourHandler<T> pushBehaviourHandler;
 
 		public NonAllocDecoratorPool(INonAllocPool<T> innerPool)
 		{
 			this.innerPool = innerPool;
+
+			pushBehaviourHandler = new PushToDecoratedPoolBehaviour<T>(this);
 		}
 
 		public IPoolElement<T> Pop(IPoolDecoratorArgument[] args)
@@ -25,6 +30,13 @@ namespace HereticalSolutions.Pools.Decorators
 					throw new Exception("[NonAllocDecoratorPool] POOL IS NOT APPENDABLE");
 
 				var appendee = appendable.Append();
+				
+				
+				//Update element data
+				var appendeeElementAsPushable = (IPushable<T>)appendee; 
+            
+				appendeeElementAsPushable.UpdatePushBehaviour(pushBehaviourHandler);
+				
 
 				return appendee;
 			}
@@ -32,6 +44,13 @@ namespace HereticalSolutions.Pools.Decorators
 			#endregion
 
 			var result = innerPool.Pop();
+			
+			
+			//Update element data
+			var elementAsPushable = (IPushable<T>)result; 
+            
+			elementAsPushable.UpdatePushBehaviour(pushBehaviourHandler);
+			
 
 			#region Top Up from argument
 

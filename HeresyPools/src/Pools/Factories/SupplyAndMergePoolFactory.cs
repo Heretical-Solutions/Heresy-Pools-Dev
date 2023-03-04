@@ -1,5 +1,7 @@
 using System;
+
 using HereticalSolutions.Collections.Allocations;
+
 using HereticalSolutions.Pools.Allocations;
 using HereticalSolutions.Pools.GenericNonAlloc;
 

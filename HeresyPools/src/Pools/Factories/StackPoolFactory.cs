@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+
 using HereticalSolutions.Collections;
 using HereticalSolutions.Collections.Allocations;
+
 using HereticalSolutions.Pools.Generic;
 
 namespace HereticalSolutions.Pools.Factories

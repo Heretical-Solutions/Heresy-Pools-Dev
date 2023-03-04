@@ -1,6 +1,10 @@
 using System;
+
 using HereticalSolutions.Repositories;
+
 using HereticalSolutions.Pools.Arguments;
+using HereticalSolutions.Pools.Behaviours;
+
 using HereticalSolutions.Random;
 
 namespace HereticalSolutions.Pools.Decorators
@@ -11,6 +15,8 @@ namespace HereticalSolutions.Pools.Decorators
 		private readonly IRepository<int, VariantContainer<T>> innerPoolsRepository;
 
 		private readonly IRandomGenerator randomGenerator;
+		
+		private readonly IPushBehaviourHandler<T> pushBehaviourHandler;
 
 		public NonAllocPoolWithVariants(
 			IRepository<int, VariantContainer<T>> innerPoolsRepository,
@@ -19,6 +25,8 @@ namespace HereticalSolutions.Pools.Decorators
 			this.innerPoolsRepository = innerPoolsRepository;
 
 			this.randomGenerator = randomGenerator;
+
+			pushBehaviourHandler = new PushToDecoratedPoolBehaviour<T>(this);
 		}
 
 		#region Pop
@@ -34,6 +42,13 @@ namespace HereticalSolutions.Pools.Decorators
 
 				var concreteResult = variant.Pool.Pop(args);
 
+				
+				//Update element data
+				var variantElementAsPushable = (IPushable<T>)concreteResult; 
+            
+				variantElementAsPushable.UpdatePushBehaviour(pushBehaviourHandler);
+				
+				
 				return concreteResult;
 			}
 
@@ -64,6 +79,13 @@ namespace HereticalSolutions.Pools.Decorators
 
 			var result = currentVariant.Pool.Pop(args);
 
+			
+			//Update element data
+			var elementAsPushable = (IPushable<T>)result; 
+            
+			elementAsPushable.UpdatePushBehaviour(pushBehaviourHandler);
+			
+			
 			return result;
 			
 			#endregion

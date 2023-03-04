@@ -1,4 +1,5 @@
 using HereticalSolutions.Pools.Arguments;
+using HereticalSolutions.Pools.Behaviours;
 
 namespace HereticalSolutions.Pools
 {
@@ -6,11 +7,15 @@ namespace HereticalSolutions.Pools
 		: INonAllocDecoratedPool<T>
 	{
 		protected INonAllocDecoratedPool<T> innerPool;
+		
+		private readonly IPushBehaviourHandler<T> pushBehaviourHandler;
 
 		public ANonAllocDecoratorPool(
 			INonAllocDecoratedPool<T> innerPool)
 		{
 			this.innerPool = innerPool;
+
+			pushBehaviourHandler = new PushToDecoratedPoolBehaviour<T>(this);
 		}
 
 		#region Pop
@@ -21,6 +26,13 @@ namespace HereticalSolutions.Pools
 
 			IPoolElement<T> result = innerPool.Pop(args);
 
+			
+			//Update element data
+			var elementAsPushable = (IPushable<T>)result; 
+            
+			elementAsPushable.UpdatePushBehaviour(pushBehaviourHandler);
+			
+			
 			OnAfterPop(result, args);
 
 			return result;

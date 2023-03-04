@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using HereticalSolutions.Pools.Factories;
 
 namespace HereticalSolutions.Pools.Arguments

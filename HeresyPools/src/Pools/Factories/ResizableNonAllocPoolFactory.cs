@@ -1,6 +1,7 @@
 using System;
 
 using HereticalSolutions.Collections.Allocations;
+
 using HereticalSolutions.Pools.GenericNonAlloc;
 using HereticalSolutions.Pools.GenricNonAlloc;
 
@@ -18,7 +19,6 @@ namespace HereticalSolutions.Pools.Factories
 			var pool = BuildPackedArrayPool<T>(initialAllocationCommand);
 
 			return new ResizableNonAllocPool<T>(
-				pool,
 				pool,
 				pool,
 				ResizeNonAllocPool,
