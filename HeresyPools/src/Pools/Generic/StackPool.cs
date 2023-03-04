@@ -10,7 +10,7 @@ namespace HereticalSolutions.Pools.Generic
 		  IResizable<T>,
 		  IModifiable<Stack<T>>
 	{
-		protected Stack<T> pool;
+		private Stack<T> pool;
 
 		public StackPool(
 			Stack<T> pool,
@@ -44,7 +44,7 @@ namespace HereticalSolutions.Pools.Generic
 
 		public AllocationCommand<T> ResizeAllocationCommand { get; private set; }
 
-		protected Action<StackPool<T>> resizeDelegate;
+		private readonly Action<StackPool<T>> resizeDelegate;
 
 		public void Resize()
 		{
@@ -69,6 +69,7 @@ namespace HereticalSolutions.Pools.Generic
 
 				result = pool.Pop();
 			}
+			
 			return result;
 		}
 

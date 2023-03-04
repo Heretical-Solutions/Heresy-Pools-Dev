@@ -1,6 +1,7 @@
 using System;
 using HereticalSolutions.Collections;
 using HereticalSolutions.Collections.Allocations;
+using HereticalSolutions.Pools.Behaviours;
 
 namespace HereticalSolutions.Pools.GenericNonAlloc
 {
@@ -9,15 +10,19 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
 		  IAppendable<IPoolElement<T>>,
 		  ITopUppable<IPoolElement<T>>
 	{
-		protected INonAllocPool<T> basePool;
+		private readonly INonAllocPool<T> basePool;
 
-		protected INonAllocPool<T> supplyPool;
-		protected IIndexable<IPoolElement<T>> supplyPoolAsIndexable;
-		protected IFixedSizeCollection<IPoolElement<T>> supplyPoolAsFixedSizeCollection;
+		private readonly INonAllocPool<T> supplyPool;
+		private readonly IIndexable<IPoolElement<T>> supplyPoolAsIndexable;
+		private readonly IFixedSizeCollection<IPoolElement<T>> supplyPoolAsFixedSizeCollection;
+		
+		private readonly IPushBehaviourHandler<T> pushBehaviourHandler;
 
 		public SupplyAndMergePool(
 			INonAllocPool<T> basePool,
 			INonAllocPool<T> supplyPool,
+			IIndexable<IPoolElement<T>> supplyPoolAsIndexable,
+			IFixedSizeCollection<IPoolElement<T>> supplyPoolAsFixedSizeCollection,
 			AllocationCommand<IPoolElement<T>> appendAllocationCommand,
 			Action<INonAllocPool<T>, INonAllocPool<T>, AllocationCommand<IPoolElement<T>>> mergeDelegate,
 			Func<T> topUpAllocationDelegate)
@@ -25,13 +30,16 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
 			this.basePool = basePool;
 
 			this.supplyPool = supplyPool;
-			supplyPoolAsIndexable = (IIndexable<IPoolElement<T>>)supplyPool;
-
+			this.supplyPoolAsIndexable = supplyPoolAsIndexable;
+			this.supplyPoolAsFixedSizeCollection = supplyPoolAsFixedSizeCollection;
+			
 			this.mergeDelegate = mergeDelegate;
 
 			this.topUpAllocationDelegate = topUpAllocationDelegate;
 
 			AppendAllocationCommand = appendAllocationCommand;
+
+			pushBehaviourHandler = new PushToINonAllocPoolBehaviour<T>(this);
 		}
 
 		#region IAppendable
@@ -49,26 +57,12 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
 
 			return result;
 		}
-		
-		/*
-		public IPoolElement<T> Append()
-		{
-			if (!supplyArray.HasFreeSpace)
-			{
-				MergeSupplyIntoBase();
-			}
-
-			IPoolElement<T> result = supplyArray.Pop();
-
-			return result;
-		}
-		*/
 
 		#endregion
 
 		#region ITopUppable
 
-		private Func<T> topUpAllocationDelegate;
+		private readonly Func<T> topUpAllocationDelegate;
 
 		public void TopUp(IPoolElement<T> element)
 		{
@@ -79,14 +73,14 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
 
 		#region Merge
 
-		protected Action<INonAllocPool<T>, INonAllocPool<T>, AllocationCommand<IPoolElement<T>>> mergeDelegate;
+		private readonly Action<INonAllocPool<T>, INonAllocPool<T>, AllocationCommand<IPoolElement<T>>> mergeDelegate;
 
-		protected void MergeSupplyIntoBase()
+		private void MergeSupplyIntoBase()
 		{
 			mergeDelegate.Invoke(basePool, supplyPool, AppendAllocationCommand);
 		}
 
-		public void TopUpAndMerge()
+		private void TopUpAndMerge()
 		{
 			for (int i = supplyPoolAsIndexable.Count; i < supplyPoolAsFixedSizeCollection.Capacity; i++)
 				TopUp(supplyPoolAsFixedSizeCollection.ElementAt(i));
@@ -107,12 +101,19 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
 
 			IPoolElement<T> result = basePool.Pop();
 
+			
+			//Update element data
+			var elementAsPushable = (IPushable<T>)result; 
+            
+			elementAsPushable.UpdatePushBehaviour(pushBehaviourHandler);
+			
+			
 			return result;
 		}
 
 		public void Push(IPoolElement<T> instance)
 		{
-			var instanceIndex = ((IIndexed)instance).Index;
+			var instanceIndex = instance.Metadata.Get<IIndexed>().Index;
 
 			if (instanceIndex > -1
 			    && instanceIndex < supplyPoolAsIndexable.Count

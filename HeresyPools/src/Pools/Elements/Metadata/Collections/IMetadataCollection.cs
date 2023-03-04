@@ -1,6 +1,6 @@
 namespace HereticalSolutions.Pools
 {
-    public interface IMetadata
+    public interface IMetadataCollection
     {
         bool Has<TValue>();
 

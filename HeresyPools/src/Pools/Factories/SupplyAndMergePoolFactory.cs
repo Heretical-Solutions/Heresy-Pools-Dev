@@ -1,5 +1,5 @@
 using System;
-
+using HereticalSolutions.Collections;
 using HereticalSolutions.Collections.Allocations;
 using HereticalSolutions.Pools.GenericNonAlloc;
 
@@ -45,6 +45,8 @@ namespace HereticalSolutions.Pools.Factories
 
 			return new SupplyAndMergePool<T>(
 				basePool,
+				supplyPool,
+				supplyPool,
 				supplyPool,
 				appendAllocationCommand,
 				MergePools,

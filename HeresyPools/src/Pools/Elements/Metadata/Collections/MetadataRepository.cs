@@ -3,9 +3,9 @@ using HereticalSolutions.Repositories;
 
 namespace HereticalSolutions.Pools.Metadata
 {
-    public class MetadataRepository : IMetadata
+    public class MetadataRepository : IMetadataCollection
     {
-        private IReadOnlyRepository<Type, object> repository;
+        private readonly IReadOnlyRepository<Type, object> repository;
 
         public MetadataRepository(IReadOnlyRepository<Type, object> repository)
         {

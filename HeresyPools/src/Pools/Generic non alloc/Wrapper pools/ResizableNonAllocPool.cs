@@ -1,48 +1,57 @@
 using System;
 using HereticalSolutions.Collections;
 using HereticalSolutions.Collections.Allocations;
+using HereticalSolutions.Pools.Behaviours;
 
 namespace HereticalSolutions.Pools.GenricNonAlloc
 {
 	public class ResizableNonAllocPool<T>
 		: INonAllocPool<T>,
-		  IResizable<IPoolElement<T>>, //used by CollectionFactory to resize
-		  IModifiable<INonAllocPool<T>>, //used by CollectionFactory to resize
+		  IResizable<IPoolElement<T>>,
+		  IModifiable<INonAllocPool<T>>,
 		  ITopUppable<IPoolElement<T>>
 	{
-		protected INonAllocPool<T> nonAllocPool;
-		protected IModifiable<IPoolElement<T>[]> poolAsModifiable;
-		protected IFixedSizeCollection<IPoolElement<T>> poolAsFixedSizeCollection;
+		private INonAllocPool<T> contents;
+		private readonly IModifiable<IPoolElement<T>[]> contentsAsModifiable;
+		private readonly IFixedSizeCollection<IPoolElement<T>> contentsAsFixedSizeCollection;
 
+		private readonly IPushBehaviourHandler<T> pushBehaviourHandler;
+		
 		public ResizableNonAllocPool(
-			INonAllocPool<T> nonAllocPool,
+			INonAllocPool<T> contents,
+			IModifiable<IPoolElement<T>[]> contentsAsModifiable,
+			IFixedSizeCollection<IPoolElement<T>> contentsAsFixedSizeCollection,
 			Action<ResizableNonAllocPool<T>> resizeDelegate,
 			AllocationCommand<IPoolElement<T>> resizeAllocationCommand,
 			Func<T> topUpAllocationDelegate)
 		{
-			this.nonAllocPool = nonAllocPool;
-			poolAsModifiable = (IModifiable<IPoolElement<T>[]>)nonAllocPool;
-			poolAsFixedSizeCollection = (IFixedSizeCollection<IPoolElement<T>>)nonAllocPool;
-
+			this.contents = contents;
+			
+			this.contentsAsModifiable = contentsAsModifiable;
+			
+			this.contentsAsFixedSizeCollection = contentsAsFixedSizeCollection;
+			
 			this.resizeDelegate = resizeDelegate;
 
 			this.topUpAllocationDelegate = topUpAllocationDelegate;
 
 			ResizeAllocationCommand = resizeAllocationCommand;
+
+			pushBehaviourHandler = new PushToINonAllocPoolBehaviour<T>(this);
 		}
 		
 		#region IModifiable
 
-		public INonAllocPool<T> Contents { get => nonAllocPool; }
+		public INonAllocPool<T> Contents { get => contents; }
 		
 		public void UpdateContents(INonAllocPool<T> newContents)
 		{
-			nonAllocPool = newContents;
+			contents = newContents;
 		}
 		
 		public void UpdateCount(int newCount)
 		{
-			poolAsModifiable.UpdateCount(newCount);
+			contentsAsModifiable.UpdateCount(newCount);
 		}
 
 		#endregion
@@ -62,7 +71,7 @@ namespace HereticalSolutions.Pools.GenricNonAlloc
 
 		#region ITopUppable
 
-		private Func<T> topUpAllocationDelegate;
+		private readonly Func<T> topUpAllocationDelegate;
 
 		public void TopUp(IPoolElement<T> element)
 		{
@@ -73,46 +82,35 @@ namespace HereticalSolutions.Pools.GenricNonAlloc
 
 		#region INonAllocPool
 
-		/*
 		public IPoolElement<T> Pop()
 		{
-			if (!packedArray.HasFreeSpace)
+			if (!contents.HasFreeSpace)
 			{
-				int previousCapacity = packedArray.Capacity;
+				int previousCapacity = contentsAsFixedSizeCollection.Capacity;
 
 				resizeDelegate(this);
 
-				int newCapacity = packedArray.Capacity;
+				int newCapacity = contentsAsFixedSizeCollection.Capacity;
 			}
 
-			IPoolElement<T> result = packedArray.Pop();
+			IPoolElement<T> result = contents.Pop();
 
-			return result;
-		}
-		*/
-				
-		public IPoolElement<T> Pop()
-		{
-			if (!nonAllocPool.HasFreeSpace)
-			{
-				int previousCapacity = poolAsFixedSizeCollection.Capacity;
-
-				resizeDelegate(this);
-
-				int newCapacity = poolAsFixedSizeCollection.Capacity;
-			}
-
-			IPoolElement<T> result = nonAllocPool.Pop();
-
+			
+			//Update element data
+			var elementAsPushable = (IPushable<T>)result; 
+            
+			elementAsPushable.UpdatePushBehaviour(pushBehaviourHandler);
+			
+			
 			return result;
 		}
 
 		public void Push(IPoolElement<T> instance)
 		{
-			nonAllocPool.Push(instance);
+			contents.Push(instance);
 		}
 		
-		public bool HasFreeSpace { get { return nonAllocPool.HasFreeSpace; } }
+		public bool HasFreeSpace { get { return contents.HasFreeSpace; } }
 
 		#endregion
 	}

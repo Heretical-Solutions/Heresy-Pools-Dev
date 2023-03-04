@@ -19,6 +19,8 @@ namespace HereticalSolutions.Pools.Factories
 
 			return new ResizableNonAllocPool<T>(
 				pool,
+				pool,
+				pool,
 				ResizeNonAllocPool,
 				resizeAllocationCommand,
 				topUpAllocationDelegate);

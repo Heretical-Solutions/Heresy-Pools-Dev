@@ -1,5 +1,6 @@
 using System;
 using HereticalSolutions.Collections;
+using HereticalSolutions.Pools.Behaviours;
 
 namespace HereticalSolutions.Pools.GenericNonAlloc
 {
@@ -21,11 +22,15 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
         
         private int count;
 
+        private readonly IPushBehaviourHandler<T> pushBehaviourHandler;
+
         public PackedArrayPool(IPoolElement<T>[] contents)
         {
             this.contents = contents;
             
             count = 0;
+
+            pushBehaviourHandler = new PushToINonAllocPoolBehaviour<T>(this);
         }
         
         #region IFixedSizeCollection
@@ -98,10 +103,23 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
         {
             var result = contents[count];
 
-            result.Metadata.Get<IIndexed>().Index = count;
             
+            //Update index
+            result.Metadata.Get<IIndexed>().Index = count;
+
+            
+            //Update element data
+            var elementAsPushable = (IPushable<T>)result; 
+            
+            elementAsPushable.Status = EPoolElementStatus.POPPED;
+            
+            elementAsPushable.UpdatePushBehaviour(pushBehaviourHandler);
+            
+            
+            //Increase popped elements count
             count++;
 
+            
             return result;
         }
 
@@ -127,6 +145,7 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
 				itemAtIndexAsIndexed.Index = index;
 
 
+				//Rider offers 'swap via deconstruction' here. I dunno, this three liner is more familiar and readable to me somehow
 				var swap = contents[index];
 
 				contents[index] = contents[lastFreeItemIndex];
@@ -141,6 +160,19 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
 
 			var result = contents[lastFreeItemIndex];
 
+			
+			//Update index
+			result.Metadata.Get<IIndexed>().Index = count;
+
+            
+			//Update element data
+			var elementAsPushable = (IPushable<T>)result; 
+            
+			elementAsPushable.Status = EPoolElementStatus.POPPED;
+            
+			elementAsPushable.UpdatePushBehaviour(pushBehaviourHandler);
+			
+			
 			count++;
 
 			return result;
@@ -160,6 +192,8 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
 
             int lastItemIndex = count - 1;
 
+            int resultIndex = index;
+
             if (index != lastItemIndex)
             {
 	            IIndexed lastItemAsIndexed = contents[lastItemIndex].Metadata.Get<IIndexed>();
@@ -172,16 +206,29 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
 	            itemAtIndexAsIndexed.Index = -1;
 
 
+	            //Rider offers 'swap via deconstruction' here. I dunno, this three liner is more familiar and readable to me somehow
                 var swap = contents[index];
 
                 contents[index] = contents[lastItemIndex];
 
                 contents[lastItemIndex] = swap;
+
+
+                resultIndex = lastItemIndex;
             }
             else
             {
 				contents[index].Metadata.Get<IIndexed>().Index = -1;
             }
+            
+            
+            //Update element data
+            var elementAsPushable = (IPushable<T>)contents[resultIndex]; 
+            
+            elementAsPushable.Status = EPoolElementStatus.PUSHED;
+            
+            elementAsPushable.UpdatePushBehaviour(null);
+            
 
             count--;
         }
