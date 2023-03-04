@@ -1,6 +1,6 @@
 using System;
-using HereticalSolutions.Collections;
 using HereticalSolutions.Collections.Allocations;
+using HereticalSolutions.Pools.Allocations;
 using HereticalSolutions.Pools.GenericNonAlloc;
 
 namespace HereticalSolutions.Pools.Factories
@@ -11,7 +11,7 @@ namespace HereticalSolutions.Pools.Factories
 
 		public static INonAllocPool<T> BuildSupplyAndMergePool<T>(
 			Func<T> valueAllocationDelegate,
-			Func<Func<T>, IPoolElement<T>> containerAllocationDelegate,
+			MetadataAllocationDescriptor[] metadataDescriptors,
 			AllocationCommandDescriptor initialAllocation,
 			AllocationCommandDescriptor additionalAllocation)
 		{
@@ -22,12 +22,12 @@ namespace HereticalSolutions.Pools.Factories
 				BuildPoolElementAllocationCommand<T>(
 					initialAllocation,
 					valueAllocationDelegate,
-					containerAllocationDelegate),
+					metadataDescriptors),
 
 				BuildPoolElementAllocationCommand<T>(
 					additionalAllocation,
 					nullAllocation,
-					containerAllocationDelegate),
+					metadataDescriptors),
 
 				valueAllocationDelegate);
 

@@ -1,6 +1,11 @@
 using HereticalSolutions.Collections.Allocations;
 
 using System;
+using HereticalSolutions.Pools.Allocations;
+using HereticalSolutions.Pools.Elements;
+using HereticalSolutions.Pools.Metadata;
+using HereticalSolutions.Repositories;
+using HereticalSolutions.Repositories.Factories;
 
 namespace HereticalSolutions.Pools.Factories
 {
@@ -11,10 +16,10 @@ namespace HereticalSolutions.Pools.Factories
 		public static AllocationCommand<IPoolElement<T>> BuildPoolElementAllocationCommand<T>(
 			AllocationCommandDescriptor descriptor,
 			Func<T> valueAllocationDelegate,
-			Func<Func<T>, IPoolElement<T>> containerAllocationDelegate)
+			MetadataAllocationDescriptor[] metadataDescriptors)
 		{
 			Func<IPoolElement<T>> poolElementAllocationDelegate = () =>
-				containerAllocationDelegate(valueAllocationDelegate);
+				BuildPoolElement(valueAllocationDelegate, metadataDescriptors);
 
 			var poolElementAllocationCommand = new AllocationCommand<IPoolElement<T>>
 			{
@@ -28,6 +33,44 @@ namespace HereticalSolutions.Pools.Factories
 
 		#endregion
 
+		#region Pool element
+
+		public static IPoolElement<T> BuildPoolElement<T>(
+			Func<T> allocationDelegate,
+			MetadataAllocationDescriptor[] metadataDescriptors)
+		{
+			var metadata = BuildMetadataRepository(null);
+			
+			return new PoolElement<T>(
+				FuncAllocationDelegate(allocationDelegate),
+				metadata);
+		}
+
+		#endregion
+		
+		#region Metadata
+
+		public static IMetadataCollection BuildMetadataRepository(MetadataAllocationDescriptor[] metadataDescriptors)
+		{
+			IRepository<Type, object> repository = RepositoriesFactory.BuildDictionaryRepository<Type, object>();
+
+			foreach (var descriptor in metadataDescriptors)
+			{
+				repository.Add(
+					descriptor.BindingType,
+					ActivatorAllocationDelegate(descriptor.ConcreteType));
+			}
+
+			return new MetadataRepository((IReadOnlyRepository<Type, object>)repository);
+		}
+
+		public static IndexedMetadata BuildIndexedMetadata()
+		{
+			return new IndexedMetadata();
+		}
+
+		#endregion
+		
 		#region Default allocation delegates
 
 		public static T NullAllocationDelegate<T>()
@@ -35,18 +78,21 @@ namespace HereticalSolutions.Pools.Factories
 			return default(T);
 		}
 
-		#endregion
-		
-		#region Indexed container
-
-		public static IndexedContainer<T> BuildIndexedContainer<T>(
-			Func<T> allocationDelegate)
+		public static T FuncAllocationDelegate<T>(Func<T> allocationDelegate)
 		{
-			IndexedContainer<T> result = new IndexedContainer<T>((allocationDelegate != null)
+			return (allocationDelegate != null)
 				? allocationDelegate.Invoke()
-				: default(T));
+				: default(T);
+		}
 
-			return result;
+		public static T ActivatorAllocationDelegate<T>()
+		{
+			return (T)Activator.CreateInstance(typeof(T));
+		}
+		
+		public static object ActivatorAllocationDelegate(Type valueType)
+		{
+			return Activator.CreateInstance(valueType);
 		}
 
 		#endregion
