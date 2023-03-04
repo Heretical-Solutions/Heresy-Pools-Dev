@@ -5,7 +5,7 @@ using HereticalSolutions.Collections.Allocations;
 
 using HereticalSolutions.Pools.Behaviours;
 
-namespace HereticalSolutions.Pools.GenricNonAlloc
+namespace HereticalSolutions.Pools.GenericNonAlloc
 {
 	public class ResizableNonAllocPool<T>
 		: INonAllocPool<T>,

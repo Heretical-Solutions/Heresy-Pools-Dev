@@ -209,7 +209,7 @@ namespace HereticalSolutions.Pools.Factories
 			{
 				int newIndex = i + receiverArrayPool.Capacity;
 
-				((IIndexed)newReceiverContents[newIndex]).Index = newIndex;
+				newReceiverContents[newIndex].Metadata.Get<IIndexed>().Index = newIndex;
 			}
 		}
 
@@ -225,9 +225,9 @@ namespace HereticalSolutions.Pools.Factories
 				int newIndex = i + receiverArrayPool.Capacity;
 
 				
-				((IIndexed)newReceiverContents[lastReceiverFreeItemIndex]).Index = -1;
+				newReceiverContents[lastReceiverFreeItemIndex].Metadata.Get<IIndexed>().Index = -1;
 
-				((IIndexed)newReceiverContents[newIndex]).Index = lastReceiverFreeItemIndex;
+				newReceiverContents[newIndex].Metadata.Get<IIndexed>().Index = lastReceiverFreeItemIndex;
 
 
 				var swap = newReceiverContents[newIndex];

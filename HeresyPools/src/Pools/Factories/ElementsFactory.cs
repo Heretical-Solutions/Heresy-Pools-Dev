@@ -1,7 +1,6 @@
 using System;
 
 using HereticalSolutions.Collections.Allocations;
-
 using HereticalSolutions.Pools.Allocations;
 using HereticalSolutions.Pools.Elements;
 using HereticalSolutions.Pools.Metadata;
@@ -15,13 +14,37 @@ namespace HereticalSolutions.Pools.Factories
 	{
 		#region Pool element allocation command
 
+		public static AllocationCommand<IPoolElement<T>> BuildPoolElementAllocationCommandWithCallback<T>(
+			AllocationCommandDescriptor descriptor,
+			Func<T> valueAllocationDelegate,
+			MetadataAllocationDescriptor[] metadataDescriptors,
+			IAllocationCallback<T> callback)
+		{
+			Func<IPoolElement<T>> poolElementAllocationDelegate = () =>
+				BuildPoolElementWithAllocationCallback(
+					valueAllocationDelegate,
+					metadataDescriptors,
+					callback);
+
+			var poolElementAllocationCommand = new AllocationCommand<IPoolElement<T>>
+			{
+				Descriptor = descriptor,
+
+				AllocationDelegate = poolElementAllocationDelegate
+			};
+
+			return poolElementAllocationCommand;
+		}
+		
 		public static AllocationCommand<IPoolElement<T>> BuildPoolElementAllocationCommand<T>(
 			AllocationCommandDescriptor descriptor,
 			Func<T> valueAllocationDelegate,
 			MetadataAllocationDescriptor[] metadataDescriptors)
 		{
 			Func<IPoolElement<T>> poolElementAllocationDelegate = () =>
-				BuildPoolElement(valueAllocationDelegate, metadataDescriptors);
+				BuildPoolElement(
+					valueAllocationDelegate,
+					metadataDescriptors);
 
 			var poolElementAllocationCommand = new AllocationCommand<IPoolElement<T>>
 			{
@@ -37,6 +60,22 @@ namespace HereticalSolutions.Pools.Factories
 
 		#region Pool element
 
+		public static IPoolElement<T> BuildPoolElementWithAllocationCallback<T>(
+			Func<T> allocationDelegate,
+			MetadataAllocationDescriptor[] metadataDescriptors,
+			IAllocationCallback<T> callback)
+		{
+			var metadata = BuildMetadataRepository(null);
+			
+			var result = new PoolElement<T>(
+				FuncAllocationDelegate(allocationDelegate),
+				metadata);
+
+			callback.OnAllocated(result);
+			
+			return result;
+		}
+		
 		public static IPoolElement<T> BuildPoolElement<T>(
 			Func<T> allocationDelegate,
 			MetadataAllocationDescriptor[] metadataDescriptors)

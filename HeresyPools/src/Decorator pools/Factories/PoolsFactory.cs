@@ -1,97 +1,55 @@
+using HereticalSolutions.Pools.Decorators;
+using HereticalSolutions.Random;
+using HereticalSolutions.Repositories;
+
 namespace HereticalSolutions.Pools.Factories
 {
 	public static partial class PoolsFactory
 	{
-		/*
-		#region Pool elements
+		#region Decorator pools
 
-		public static IPoolElement<T> BuildValueAssignedNotifyingPoolElement<T>(
-			Func<T> allocationDelegate,
-			INotifiable<T> notifiable)
+		public static DecoratorPool<T> BuildDecoratorPool<T>(IPool<T> innerPool)
 		{
-			ValueAssignedNotifyingPoolElement<T> result = new ValueAssignedNotifyingPoolElement<T>(
-				allocationDelegate(),
-				notifiable);
-
-			return result;
+			return new DecoratorPool<T>(innerPool);
 		}
 
-		public static Func<Func<T>, IPoolElement<T>> BuildValueAssignedNotifyingPoolElementAllocationDelegate<T>(
-			INotifiable<T> notifiable)
+		public static PoolWithID<T> BuildPoolWithID<T>(
+			IDecoratedPool<T> innerPool,
+			string id)
 		{
-			return (valueAllocationDelegate) =>
-			{
-				return BuildValueAssignedNotifyingPoolElement(
-					valueAllocationDelegate,
-					notifiable);
-			};
-		}
-
-		public static IPoolElement<T> BuildPoolElementWithAddressAndVariant<T>(
-			Func<T> allocationDelegate,
-			INotifiable<T> notifiable,
-			int[] addressHashes,
-			int variant = -1)
-		{
-			PoolElementWithContainsAddressAndContainsVariant<T> result = new PoolElementWithContainsAddressAndContainsVariant<T>(
-				allocationDelegate(),
-				notifiable,
-				addressHashes,
-				variant);
-
-			return result;
-		}
-
-		public static Func<Func<T>, IPoolElement<T>> BuildPoolElementWithAddressAndVariantAllocationDelegate<T>(
-			INotifiable<T> notifiable,
-			int[] addressHashes,
-			int variant = -1)
-		{
-			return (valueAllocationDelegate) =>
-			{
-				return BuildPoolElementWithAddressAndVariant(
-					valueAllocationDelegate,
-					notifiable,
-					addressHashes,
-					variant);
-			};
-		}
-
-		public static IPoolElement<T> BuildPoolElementWithTimer<T>(
-			Func<T> allocationDelegate,
-			INotifiable<T> notifiable,
-			Timer timer,
-			int[] addressHashes,
-			int variant = -1)
-		{
-			PoolElementWithTimer<T> result = new PoolElementWithTimer<T>(
-				allocationDelegate(),
-				notifiable,
-				timer,
-				addressHashes,
-				variant);
-
-			return result;
-		}
-
-		public static Func<Func<T>, IPoolElement<T>> BuildPoolElementWithTimerAllocationDelegate<T>(
-			INotifiable<T> notifiable,
-			Func<Timer> timerAllocationDelegate,
-			int[] addressHashes,
-			int variant = -1)
-		{
-			return (valueAllocationDelegate) =>
-			{
-				return BuildPoolElementWithTimer(
-					valueAllocationDelegate,
-					notifiable,
-					timerAllocationDelegate(),
-					addressHashes,
-					variant);
-			};
+			return new PoolWithID<T>(innerPool, id);
 		}
 
 		#endregion
-		*/
+
+		#region Non alloc decorator pools
+
+		public static NonAllocDecoratorPool<T> BuildNonAllocDecoratorPool<T>(INonAllocPool<T> innerPool)
+		{
+			return new NonAllocDecoratorPool<T>(innerPool);
+		}
+
+		public static NonAllocPoolWithID<T> BuildNonAllocPoolWithID<T>(
+			INonAllocDecoratedPool<T> innerPool,
+			string id)
+		{
+			return new NonAllocPoolWithID<T>(innerPool, id);
+		}
+		
+		public static NonAllocPoolWithAddress<T> BuildNonAllocPoolWithIdAddress<T>(
+			IRepository<int, INonAllocDecoratedPool<T>> repository,
+			int level)
+		{
+			return new NonAllocPoolWithAddress<T>(repository, level);
+		}
+		
+		public static NonAllocPoolWithVariants<T> BuildNonAllocPoolWithIdVariants<T>(
+			IRepository<int, VariantContainer<T>> repository,
+			IRandomGenerator generator)
+		{
+			return new NonAllocPoolWithVariants<T>(repository, generator);
+		}
+
+		#endregion
 	}
 }

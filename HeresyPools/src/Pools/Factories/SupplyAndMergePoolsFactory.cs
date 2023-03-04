@@ -1,7 +1,6 @@
 using System;
 
 using HereticalSolutions.Collections.Allocations;
-
 using HereticalSolutions.Pools.Allocations;
 using HereticalSolutions.Pools.GenericNonAlloc;
 
@@ -11,6 +10,34 @@ namespace HereticalSolutions.Pools.Factories
 	{
 		#region Supply and merge pool
 
+		public static INonAllocPool<T> BuildSupplyAndMergePoolWithCallback<T>(
+			Func<T> valueAllocationDelegate,
+			MetadataAllocationDescriptor[] metadataDescriptors,
+			AllocationCommandDescriptor initialAllocation,
+			AllocationCommandDescriptor additionalAllocation,
+			IAllocationCallback<T> callback)
+		{
+			Func<T> nullAllocation = NullAllocationDelegate<T>;
+
+			INonAllocPool<T> supplyAndMergePool = BuildSupplyAndMergePool<T>(
+
+				BuildPoolElementAllocationCommandWithCallback<T>(
+					initialAllocation,
+					valueAllocationDelegate,
+					metadataDescriptors,
+					callback),
+
+				BuildPoolElementAllocationCommandWithCallback<T>(
+					additionalAllocation,
+					nullAllocation,
+					metadataDescriptors,
+					callback),
+
+				valueAllocationDelegate);
+
+			return supplyAndMergePool;
+		}
+		
 		public static INonAllocPool<T> BuildSupplyAndMergePool<T>(
 			Func<T> valueAllocationDelegate,
 			MetadataAllocationDescriptor[] metadataDescriptors,
