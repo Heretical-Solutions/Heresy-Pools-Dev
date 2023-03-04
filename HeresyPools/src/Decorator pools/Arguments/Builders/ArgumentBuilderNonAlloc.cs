@@ -2,7 +2,7 @@ namespace HereticalSolutions.Pools.Arguments
 {
 	public class ArgumentBuilderNonAlloc
 	{
-		private IPoolDecoratorArgument[] argumentChain;
+		private readonly IPoolDecoratorArgument[] argumentChain;
 
 		private int count;
 

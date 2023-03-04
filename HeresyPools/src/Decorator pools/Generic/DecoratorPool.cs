@@ -2,11 +2,11 @@ using HereticalSolutions.Pools.Arguments;
 
 namespace HereticalSolutions.Pools
 {
-	public class WrapperPool<T> : ADecoratorPool<T>
+	public class DecoratorPool<T> : ADecoratorPool<T>
 	{
 		private IPool<T> pool;
 
-		public WrapperPool(IPool<T> pool)
+		public DecoratorPool(IPool<T> pool)
 			: base(null)
 		{
 			this.pool = pool;
@@ -19,9 +19,9 @@ namespace HereticalSolutions.Pools
 
 		public override void Push(
 			T instance,
-			bool dryRun = false)
+			bool decoratorsOnly = false)
 		{
-			if (!dryRun)
+			if (!decoratorsOnly)
 				pool.Push(instance);
 		}
 	}

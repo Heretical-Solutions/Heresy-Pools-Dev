@@ -2,7 +2,7 @@ using HereticalSolutions.Collections;
 
 namespace HereticalSolutions.Pools.AllocationCallbacks
 {
-	public class NewGameObjectsPusher<T> : IAllocationCallback<T>
+	public class DecoratorsPusher<T> : IAllocationCallback<T>
 	{
 		public void OnAllocated(
 			INonAllocDecoratedPool<T> rootPoolDecorator,

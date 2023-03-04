@@ -1,3 +1,4 @@
+/*
 namespace HereticalSolutions.Pools
 {
 	public interface ITimerExpiredNotifier
@@ -5,3 +6,4 @@ namespace HereticalSolutions.Pools
 		void NotifyTimerExpired(IContainsTimer containsTimer);
 	}
 }
+*/

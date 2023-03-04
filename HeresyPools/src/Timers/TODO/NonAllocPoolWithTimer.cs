@@ -1,3 +1,4 @@
+/*
 using System;
 using HereticalSolutions.Pools.Arguments;
 
@@ -45,3 +46,4 @@ namespace HereticalSolutions.Pools
 		}
 	}
 }
+*/

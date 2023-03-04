@@ -42,7 +42,7 @@ namespace HereticalSolutions.Pools.Factories
 					break;
 
 				default:
-					throw new Exception($"[CollectionFactory] INVALID ALLOCATION COMMAND RULE: {allocationCommand.Descriptor.Rule.ToString()}");
+					throw new Exception($"[PoolsFactory] INVALID ALLOCATION COMMAND RULE: {allocationCommand.Descriptor.Rule.ToString()}");
 			}
 
 			return initialAmount;
@@ -97,7 +97,7 @@ namespace HereticalSolutions.Pools.Factories
 					break;
 
 				default:
-					throw new Exception($"[CollectionFactory] INVALID ALLOCATION COMMAND RULE FOR INDEXED PACKED ARRAY: {allocationCommand.Descriptor.Rule.ToString()}");
+					throw new Exception($"[PoolsFactory] INVALID ALLOCATION COMMAND RULE FOR INDEXED PACKED ARRAY: {allocationCommand.Descriptor.Rule.ToString()}");
 			}
 
 			return newCapacity;
@@ -257,7 +257,7 @@ namespace HereticalSolutions.Pools.Factories
 					break;
 
 				default:
-					throw new Exception($"[CollectionFactory] INVALID DONOR ALLOCATION COMMAND RULE: {donorAllocationCommand.Descriptor.Rule.ToString()}");
+					throw new Exception($"[PoolsFactory] INVALID DONOR ALLOCATION COMMAND RULE: {donorAllocationCommand.Descriptor.Rule.ToString()}");
 			}
 
 			IPoolElement<T>[] newDonorContents = new IPoolElement<T>[newDonorCapacity];

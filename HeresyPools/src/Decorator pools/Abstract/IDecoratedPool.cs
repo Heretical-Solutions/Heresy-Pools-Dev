@@ -8,6 +8,6 @@ namespace HereticalSolutions.Pools
 
 		void Push(
 			T instance,
-			bool dryRun = false);
+			bool decoratorsOnly = false);
 	}
 }

@@ -1,15 +1,15 @@
-using System;
 using System.Collections.Generic;
+using HereticalSolutions.Pools.Factories;
 
 namespace HereticalSolutions.Pools.Arguments
 {
 	public class ArgumentBuilder
 	{
-		private List<IPoolDecoratorArgument> argumentChain = new List<IPoolDecoratorArgument>();
+		private readonly List<IPoolDecoratorArgument> argumentChain = new List<IPoolDecoratorArgument>();
 
 		public ArgumentBuilder Add<TArgument>(out TArgument instance) where TArgument : IPoolDecoratorArgument
 		{
-			instance = (TArgument)Activator.CreateInstance(typeof(TArgument));
+			instance = PoolsFactory.ActivatorAllocationDelegate<TArgument>();
 
 			argumentChain.Add(instance);
 

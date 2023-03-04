@@ -71,7 +71,7 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
                 if (index >= count || index < 0)
 					throw new Exception(
                         string.Format(
-							"[IndexedPackedArray<{0}>] INVALID INDEX: {1} COUNT:{2} CAPACITY:{3}",
+							"[PackedArrayPool<{0}>] INVALID INDEX: {1} COUNT:{2} CAPACITY:{3}",
                             typeof(T).ToString(),
                             index,
                             Count,
@@ -86,7 +86,7 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
 			if (index >= count || index < 0)
 				throw new Exception(
 					string.Format(
-						"[IndexedPackedArray<{0}>] INVALID INDEX: {1} COUNT:{2} CAPACITY:{3}",
+						"[PackedArrayPool<{0}>] INVALID INDEX: {1} COUNT:{2} CAPACITY:{3}",
 						typeof(T).ToString(),
 						index,
 						Count,
@@ -127,7 +127,7 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
 		{
             if (index < count)
             {
-                throw new Exception($"[IndexedPackedArray] ELEMENT AT INDEX {index} IS ALREADY POPPED");
+                throw new Exception($"[PackedArrayPool] ELEMENT AT INDEX {index} IS ALREADY POPPED");
 			}
 
 

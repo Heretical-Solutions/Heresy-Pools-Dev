@@ -1,3 +1,4 @@
+/*
 namespace HereticalSolutions.Pools.Arguments
 {
 	public class TimerArgument : IPoolDecoratorArgument
@@ -5,3 +6,4 @@ namespace HereticalSolutions.Pools.Arguments
 		public float Duration;
 	}
 }
+*/

@@ -42,13 +42,13 @@ namespace HereticalSolutions.Pools
 
 		public virtual void Push(
 			IPoolElement<T> instance,
-			bool dryRun = false)
+			bool decoratorsOnly = false)
 		{
 			OnBeforePush(instance);
 
 			innerPool.Push(
 				instance,
-				dryRun);
+				decoratorsOnly);
 
 			OnAfterPush(instance);
 		}

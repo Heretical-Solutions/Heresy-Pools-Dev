@@ -1,7 +1,3 @@
-using System;
-
-using HereticalSolutions.Timers;
-
 namespace HereticalSolutions.Pools.Factories
 {
 	public static partial class PoolsFactory

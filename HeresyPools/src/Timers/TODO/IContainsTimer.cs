@@ -1,3 +1,4 @@
+/*
 using HereticalSolutions.Timers;
 
 namespace HereticalSolutions.Pools
@@ -9,3 +10,4 @@ namespace HereticalSolutions.Pools
 		ITimerExpiredNotifier Callback { get; set; }
 	}
 }
+*/

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace HereticalSolutions.Pools.AllocationCallbacks
 {
-	public class CompositeProcessor<T>
+	public class CompositeCallback<T>
 		: INotifiable<T>,
 		  IContainsRootPool<T>
 	{
@@ -12,7 +12,7 @@ namespace HereticalSolutions.Pools.AllocationCallbacks
 
 		protected IAllocationCallback<T>[] callbacks;
 
-		public CompositeProcessor(
+		public CompositeCallback(
 			Stack<IPoolElement<T>> elementsToProcess,
 			IAllocationCallback<T>[] callbacks)
 		{

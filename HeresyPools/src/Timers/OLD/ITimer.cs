@@ -1,3 +1,4 @@
+/*
 namespace HereticalSolutions.Timers
 {
     public interface ITimer
@@ -13,3 +14,4 @@ namespace HereticalSolutions.Timers
         void Start(float duration);
     }
 }
+*/

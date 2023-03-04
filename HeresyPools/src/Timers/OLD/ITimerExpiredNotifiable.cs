@@ -1,3 +1,4 @@
+/*
 namespace HereticalSolutions.Timers
 {
 	public interface ITimerExpiredNotifiable
@@ -5,3 +6,4 @@ namespace HereticalSolutions.Timers
 		void HandleTimerExpired(ITimer timer);
 	}
 }
+*/
