@@ -1,29 +1,27 @@
 using UnityEngine;
 
 using HereticalSolutions.Collections;
-using HereticalSolutions.Collections.Managed;
 
 namespace HereticalSolutions.Pools.AllocationCallbacks
 {
-	public class GameObjectsRenamerByStringAndIndex : IAllocationCallback<GameObject>
+	public class RenameByStringAndIndexCallback : IAllocationCallback<GameObject>
 	{
-		private string name;
+		private readonly string name;
 
 		private int index = 0;
 
-		public GameObjectsRenamerByStringAndIndex(string name)
+		public RenameByStringAndIndexCallback(string name)
 		{
 			this.name = name;
 		}
 
 		public void OnAllocated(
-			INonAllocDecoratedPool<GameObject> rootPoolDecorator,
 			IPoolElement<GameObject> currentElement)
 		{
 			if (currentElement.Value == null)
 				return;
 
-			if (((IIndexed)currentElement).Index == -1)
+			if (currentElement.Metadata.Get<IIndexed>().Index == -1)
 			{
 				currentElement.Value.name = $"{name} {index.ToString()}";
 

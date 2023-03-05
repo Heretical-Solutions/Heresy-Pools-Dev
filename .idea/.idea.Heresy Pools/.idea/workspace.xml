@@ -2,13 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9250171c-16e8-4052-a28e-934ee042e41a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Runtime/Scripts/com.hereticalsolutions.heresy-pools.asmdef" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Runtime/Scripts/com.hereticalsolutions.heresy-pools.asmdef.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Heresy Pools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Heresy Pools/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Allocation callbacks/PushToDecoratedPoolCallback.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Allocation callbacks/PushToDecoratedPoolCallback.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Allocation callbacks/SetAddressCallback.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Allocation callbacks/SetAddressCallback.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Allocation callbacks/SetVariantCallback.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Allocation callbacks/SetVariantCallback.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Allocation callbacks/PushToPoolCallback.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Allocation callbacks/PushToPoolCallback.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Factories/AllocationCallbacksFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Factories/AllocationCallbacksFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Factories/ElementsFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Factories/ElementsFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Allocation callbacks/GameObjectsRenamerByStringAndIndex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Allocation callbacks/RenameByStringAndIndexCallback.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Decorators/Generic non alloc/NonAllocGameObjectPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Decorators/Generic non alloc/NonAllocGameObjectPool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Decorators/Generic non alloc/NonAllocPrefabInstancePool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Decorators/Generic non alloc/NonAllocPrefabInstancePool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Decorators/Generic/GameObjectPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Decorators/Generic/GameObjectPool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Decorators/Generic/PrefabInstancePool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Decorators/Generic/PrefabInstancePool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Factories/BuildNonAllocGameObjectPoolCommand.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Factories/PoolFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Factories/PoolsFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RuntimeSimpleGameObjectPoolSample.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RuntimeSimpleGameObjectPoolSample.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RuntimeSimpleGameObjectPoolSample.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ide.rider@3.0.16/Rider/Editor/UnitTesting/TestsCallback.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/Window/TimelineWindow_PlayableLookup.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/75633565436c42f0a6426b33f0132ade46a800/a2/bfeb6e8d/EqualityComparer`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/75633565436c42f0a6426b33f0132ade46a800/fc/b6cbf078/Dictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -18,23 +43,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Discover.Launch.Via.Unity": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Discover.Launch.Via.Unity&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\divanilov\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\divanilov\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\divanilov\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\divanilov\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\divanilov\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\divanilov\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\LoremIpsum\Engines\Unity\Editors\2021.3.16f1\Editor\Unity.exe" />
@@ -62,10 +87,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="26260">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="26260" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -87,6 +112,7 @@
       <workItem from="1677931343144" duration="12290000" />
       <workItem from="1677983825295" duration="2897000" />
       <workItem from="1677994867063" duration="91000" />
+      <workItem from="1677995157599" duration="11989000" />
     </task>
     <servers />
   </component>

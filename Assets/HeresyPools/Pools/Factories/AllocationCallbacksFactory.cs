@@ -11,9 +11,19 @@ namespace HereticalSolutions.Pools.Factories
 			return new CompositeCallback<T>(callbacks);
 		}
 		
-		public static PushToPoolCallback<T> BuildPushToPoolCallback<T>()
+		public static PushToPoolCallback<T> BuildPushToPoolCallback<T>(INonAllocPool<T> root = null)
 		{
-			return new PushToPoolCallback<T>();
+			return new PushToPoolCallback<T>(root);
+		}
+		
+		public static PushToPoolCallback<T> BuildPushToPoolCallback<T>(DeferredCallbackQueue<T> deferredCallbackQueue)
+		{
+			return new PushToPoolCallback<T>(deferredCallbackQueue);
+		}
+
+		public static DeferredCallbackQueue<T> BuildDeferredCallbackQueue<T>()
+		{
+			return new DeferredCallbackQueue<T>();
 		}
 
 		#endregion
