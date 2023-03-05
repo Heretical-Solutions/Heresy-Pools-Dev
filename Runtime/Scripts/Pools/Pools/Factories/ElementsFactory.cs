@@ -1,6 +1,8 @@
 using System;
 
+using HereticalSolutions.Collections;
 using HereticalSolutions.Collections.Allocations;
+
 using HereticalSolutions.Pools.Allocations;
 using HereticalSolutions.Pools.Elements;
 using HereticalSolutions.Pools.Metadata;
@@ -65,13 +67,13 @@ namespace HereticalSolutions.Pools.Factories
 			MetadataAllocationDescriptor[] metadataDescriptors,
 			IAllocationCallback<T> callback)
 		{
-			var metadata = BuildMetadataRepository(null);
+			var metadata = BuildMetadataRepository(metadataDescriptors);
 			
 			var result = new PoolElement<T>(
 				FuncAllocationDelegate(allocationDelegate),
 				metadata);
 
-			callback.OnAllocated(result);
+			callback?.OnAllocated(result);
 			
 			return result;
 		}
@@ -80,7 +82,7 @@ namespace HereticalSolutions.Pools.Factories
 			Func<T> allocationDelegate,
 			MetadataAllocationDescriptor[] metadataDescriptors)
 		{
-			var metadata = BuildMetadataRepository(null);
+			var metadata = BuildMetadataRepository(metadataDescriptors);
 			
 			return new PoolElement<T>(
 				FuncAllocationDelegate(allocationDelegate),
@@ -95,12 +97,16 @@ namespace HereticalSolutions.Pools.Factories
 		{
 			IRepository<Type, object> repository = RepositoriesFactory.BuildDictionaryRepository<Type, object>();
 
-			foreach (var descriptor in metadataDescriptors)
-			{
-				repository.Add(
-					descriptor.BindingType,
-					ActivatorAllocationDelegate(descriptor.ConcreteType));
-			}
+			if (metadataDescriptors != null)
+				foreach (var descriptor in metadataDescriptors)
+				{
+					if (descriptor == null)
+						continue;
+					
+					repository.Add(
+						descriptor.BindingType,
+						ActivatorAllocationDelegate(descriptor.ConcreteType));
+				}
 
 			return new MetadataRepository((IReadOnlyRepository<Type, object>)repository);
 		}
@@ -108,6 +114,15 @@ namespace HereticalSolutions.Pools.Factories
 		public static IndexedMetadata BuildIndexedMetadata()
 		{
 			return new IndexedMetadata();
+		}
+
+		public static MetadataAllocationDescriptor BuildIndexedMetadataDescriptor()
+		{
+			return new MetadataAllocationDescriptor
+			{
+				BindingType = typeof(IIndexed),
+				ConcreteType = typeof(IndexedMetadata)
+			};
 		}
 
 		#endregion
