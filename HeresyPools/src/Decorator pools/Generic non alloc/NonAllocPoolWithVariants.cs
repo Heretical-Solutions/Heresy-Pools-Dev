@@ -5,7 +5,7 @@ using HereticalSolutions.Repositories;
 using HereticalSolutions.Pools.Arguments;
 using HereticalSolutions.Pools.Behaviours;
 
-using HereticalSolutions.Random;
+using HereticalSolutions.RandomGeneration;
 
 namespace HereticalSolutions.Pools.Decorators
 {

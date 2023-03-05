@@ -1,5 +1,5 @@
 using HereticalSolutions.Pools.Decorators;
-using HereticalSolutions.Random;
+using HereticalSolutions.RandomGeneration;
 using HereticalSolutions.Repositories;
 
 namespace HereticalSolutions.Pools.Factories
