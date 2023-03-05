@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9250171c-16e8-4052-a28e-934ee042e41a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Heresy Pools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Heresy Pools/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Allocation callbacks/PushToDecoratedPoolCallback.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Allocation callbacks/PushToDecoratedPoolCallback.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Allocation callbacks/SetAddressCallback.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Allocation callbacks/SetAddressCallback.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Allocation callbacks/SetVariantCallback.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Allocation callbacks/SetVariantCallback.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Allocation callbacks/PushToPoolCallback.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Allocation callbacks/PushToPoolCallback.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Factories/AllocationCallbacksFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Factories/AllocationCallbacksFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Factories/ElementsFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Factories/ElementsFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Allocation callbacks/GameObjectsRenamerByStringAndIndex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Allocation callbacks/RenameByStringAndIndexCallback.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Decorators/Generic non alloc/NonAllocGameObjectPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Decorators/Generic non alloc/NonAllocGameObjectPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Decorators/Generic non alloc/NonAllocPrefabInstancePool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Decorators/Generic non alloc/NonAllocPrefabInstancePool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Decorators/Generic/GameObjectPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Decorators/Generic/GameObjectPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Decorators/Generic/PrefabInstancePool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Decorators/Generic/PrefabInstancePool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Factories/BuildNonAllocGameObjectPoolCommand.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Factories/PoolFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Factories/PoolsFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RuntimeSimpleGameObjectPoolSample.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RuntimeSimpleGameObjectPoolSample.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-    </list>
+    <list default="true" id="9250171c-16e8-4052-a28e-934ee042e41a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -112,7 +91,7 @@
       <workItem from="1677931343144" duration="12290000" />
       <workItem from="1677983825295" duration="2897000" />
       <workItem from="1677994867063" duration="91000" />
-      <workItem from="1677995157599" duration="11989000" />
+      <workItem from="1677995157599" duration="12750000" />
     </task>
     <servers />
   </component>
