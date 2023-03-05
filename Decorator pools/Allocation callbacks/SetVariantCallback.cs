@@ -4,6 +4,11 @@ namespace HereticalSolutions.Pools.AllocationCallbacks
     {
         public int Variant { get; set; }
 
+        public SetVariantCallback(int variant = -1)
+        {
+            Variant = variant;
+        }
+
         public void OnAllocated(IPoolElement<T> currentElement)
         {
             if (currentElement.Value == null)

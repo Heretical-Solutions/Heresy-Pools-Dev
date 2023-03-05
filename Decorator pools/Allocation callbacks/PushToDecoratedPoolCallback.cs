@@ -2,16 +2,56 @@ namespace HereticalSolutions.Pools.AllocationCallbacks
 {
 	public class PushToDecoratedPoolCallback<T> : IAllocationCallback<T>
 	{
-		public INonAllocDecoratedPool<T> Root { get; set; }
+		private INonAllocDecoratedPool<T> root; 
+		public INonAllocDecoratedPool<T> Root
+		{
+			get => root;
+			set
+			{
+				root = value;
+
+				if (deferredCallbackQueue != null)
+				{
+					deferredCallbackQueue.Process();
+
+					deferredCallbackQueue.Callback = null;
+
+					deferredCallbackQueue = null;
+				}
+			}
+		}
+
+		private DeferredCallbackQueue<T> deferredCallbackQueue;
+
+		public PushToDecoratedPoolCallback(INonAllocDecoratedPool<T> root = null)
+		{
+			this.root = root;
+
+			deferredCallbackQueue = null;
+		}
+        
+		public PushToDecoratedPoolCallback(DeferredCallbackQueue<T> deferredCallbackQueue)
+		{
+			root = null;
+            
+			this.deferredCallbackQueue = deferredCallbackQueue;
+			
+			this.deferredCallbackQueue.Callback = this;
+		}
 
 		public void OnAllocated(IPoolElement<T> currentElement)
 		{
 			if (currentElement.Value == null)
 				return;
 
-			Root.Push(
-				currentElement,
-				true);
+			if (root == null)
+			{
+				deferredCallbackQueue?.Enqueue(currentElement);
+
+				return;
+			}
+
+			root.Push(currentElement, true);
 		}
 	}
 }
