@@ -1,10 +1,10 @@
 using UnityEngine;
 
-namespace HereticalSolutions.Pools
+namespace HereticalSolutions.Pools.Decorators
 {
 	public class NonAllocPrefabInstancePool : ANonAllocDecoratorPool<GameObject>
 	{
-		protected GameObject prefab;
+		private readonly GameObject prefab;
 
 		public GameObject Prefab { get => prefab; }
 
