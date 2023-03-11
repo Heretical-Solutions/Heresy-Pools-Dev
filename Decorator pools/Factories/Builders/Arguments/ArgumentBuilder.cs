@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-using HereticalSolutions.Pools.Factories;
+using HereticalSolutions.Pools.Arguments;
 
-namespace HereticalSolutions.Pools.Arguments
+namespace HereticalSolutions.Pools.Factories
 {
 	public class ArgumentBuilder
 	{
