@@ -5,7 +5,6 @@ using HereticalSolutions.Collections.Allocations;
 
 using HereticalSolutions.Pools.Allocations;
 using HereticalSolutions.Pools.Elements;
-using HereticalSolutions.Pools.Metadata;
 
 using HereticalSolutions.Repositories;
 using HereticalSolutions.Repositories.Factories;
@@ -108,7 +107,7 @@ namespace HereticalSolutions.Pools.Factories
 						ActivatorAllocationDelegate(descriptor.ConcreteType));
 				}
 
-			return RepositoriesFactory.BuildDictionaryObjectRepository((IReadOnlyRepository<Type, object>)repository);
+			return RepositoriesFactory.BuildDictionaryObjectRepository(repository);
 		}
 
 		public static IndexedMetadata BuildIndexedMetadata()
