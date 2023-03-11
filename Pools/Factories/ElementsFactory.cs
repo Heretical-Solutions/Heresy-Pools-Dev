@@ -93,7 +93,7 @@ namespace HereticalSolutions.Pools.Factories
 		
 		#region Metadata
 
-		public static IMetadataCollection BuildMetadataRepository(MetadataAllocationDescriptor[] metadataDescriptors)
+		public static IReadOnlyObjectRepository BuildMetadataRepository(MetadataAllocationDescriptor[] metadataDescriptors)
 		{
 			IRepository<Type, object> repository = RepositoriesFactory.BuildDictionaryRepository<Type, object>();
 
@@ -108,7 +108,7 @@ namespace HereticalSolutions.Pools.Factories
 						ActivatorAllocationDelegate(descriptor.ConcreteType));
 				}
 
-			return new MetadataRepository((IReadOnlyRepository<Type, object>)repository);
+			return RepositoriesFactory.BuildDictionaryObjectRepository((IReadOnlyRepository<Type, object>)repository);
 		}
 
 		public static IndexedMetadata BuildIndexedMetadata()
