@@ -62,12 +62,12 @@ namespace HereticalSolutions.Pools.Factories
 			//Return
 			var repository = new DictionaryRepository<int, VariantContainer<GameObject>>(repository);
 
-			var builder = new NonAllocDecoratedPoolBuilder<GameObject>();
+			var chain = new NonAllocDecoratorPoolChain<GameObject>();
 
-			builder
+			chain
 				.Add(new PoolWithVariants<GameObject>(repository));
 
-			return builder.CurrentWrapper;
+			return chain.TopWrapper;
 		}
     }
 }

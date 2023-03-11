@@ -2,20 +2,22 @@ using System;
 
 using HereticalSolutions.Collections;
 using HereticalSolutions.Collections.Allocations;
-
+using HereticalSolutions.Pools.Arguments;
 using HereticalSolutions.Pools.Behaviours;
 
-namespace HereticalSolutions.Pools.GenericNonAlloc
+namespace HereticalSolutions.Pools.Decorators
 {
 	public class SupplyAndMergePool<T> 
-		: INonAllocPool<T>,
+		: INonAllocDecoratedPool<T>,
 		  IAppendable<IPoolElement<T>>,
 		  ITopUppable<IPoolElement<T>>
 	{
 		private readonly INonAllocPool<T> basePool;
 
 		private readonly INonAllocPool<T> supplyPool;
+		
 		private readonly IIndexable<IPoolElement<T>> supplyPoolAsIndexable;
+		
 		private readonly IFixedSizeCollection<IPoolElement<T>> supplyPoolAsFixedSizeCollection;
 		
 		private readonly IPushBehaviourHandler<T> pushBehaviourHandler;
@@ -41,7 +43,7 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
 
 			AppendAllocationCommand = appendAllocationCommand;
 
-			pushBehaviourHandler = new PushToINonAllocPoolBehaviour<T>(this);
+			pushBehaviourHandler = new PushToDecoratedPoolBehaviour<T>(this);
 		}
 
 		#region IAppendable
@@ -92,29 +94,69 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
 
 		#endregion
 
-		#region INonAllocPool
+		#region INonAllocDecoratedPool
 		
-		public IPoolElement<T> Pop()
+		public IPoolElement<T> Pop(IPoolDecoratorArgument[] args)
 		{
+			#region Append from argument
+			
+			if (args.TryGetArgument<AppendArgument>(out var arg))
+			{
+				var appendee = Append();
+
+				#region Update push behaviour
+
+				var appendeeElementAsPushable = (IPushable<T>)appendee; 
+            
+				appendeeElementAsPushable.UpdatePushBehaviour(pushBehaviourHandler);
+
+				#endregion
+				
+				return appendee;
+			}
+			
+			#endregion
+			
+			#region Top up and merge
+			
 			if (!basePool.HasFreeSpace)
 			{
 				TopUpAndMerge();
 			}
+			
+			#endregion
 
 			IPoolElement<T> result = basePool.Pop();
 
+			#region Top up
+
+			if (result.Value.Equals(default(T)))
+			{
+				TopUp(result);
+			}
 			
-			//Update element data
+			#endregion
+			
+			#region Update push behaviour
+			
 			var elementAsPushable = (IPushable<T>)result; 
             
 			elementAsPushable.UpdatePushBehaviour(pushBehaviourHandler);
 			
-			
+			#endregion
+
 			return result;
 		}
 
-		public void Push(IPoolElement<T> instance)
+		public void Push(
+			IPoolElement<T> instance,
+			bool decoratorsOnly = false)
 		{
+			if (decoratorsOnly)
+				return;
+
+			#region Top up and merge
+			
 			var instanceIndex = instance.Metadata.Get<IIndexed>().Index;
 
 			if (instanceIndex > -1
@@ -123,6 +165,8 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
 			{
 				TopUpAndMerge();
 			}
+			
+			#endregion
 
 			basePool.Push(instance);
 		}
