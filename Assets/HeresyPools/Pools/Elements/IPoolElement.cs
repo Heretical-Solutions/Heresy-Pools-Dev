@@ -1,3 +1,5 @@
+using HereticalSolutions.Repositories;
+
 namespace HereticalSolutions.Pools
 {
 	public interface IPoolElement<T>
@@ -6,7 +8,7 @@ namespace HereticalSolutions.Pools
 
 		EPoolElementStatus Status { get; }
 
-		IMetadataCollection Metadata { get; }
+		IReadOnlyObjectRepository Metadata { get; }
 
 		void Push();
 	}

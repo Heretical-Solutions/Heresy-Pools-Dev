@@ -2,12 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9250171c-16e8-4052-a28e-934ee042e41a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Generic non alloc/Wrapper pools.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Generic non alloc/Resizable pools.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Generic non alloc/Wrapper pools/ResizableNonAllocPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Generic non alloc/Resizable pools/ResizableNonAllocPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Generic non alloc/Wrapper pools/ResizableNonAllocPool.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Generic non alloc/Resizable pools/ResizableNonAllocPool.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Generic non alloc/Wrapper pools/SupplyAndMergePool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Generic non alloc/Resizable pools/SupplyAndMergePool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Generic non alloc/Wrapper pools/SupplyAndMergePool.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Generic non alloc/Resizable pools/SupplyAndMergePool.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Elements/IPoolElement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Elements/IPoolElement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Elements/Metadata/Collections.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Elements/Metadata/Collections/IMetadataCollection.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Elements/Metadata/Collections/IMetadataCollection.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Elements/Metadata/Collections/MetadataRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Elements/Metadata/Collections/MetadataRepository.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Elements/PoolElement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Elements/PoolElement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Factories/ElementsFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Factories/ElementsFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyRepositories/Repositories/IReadOnlyRepository.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyRepositories/Repositories/IRepository.cs.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +106,7 @@
       <workItem from="1677994867063" duration="91000" />
       <workItem from="1677995157599" duration="12750000" />
       <workItem from="1678289952455" duration="8401000" />
-      <workItem from="1678546129517" duration="313000" />
+      <workItem from="1678546129517" duration="695000" />
     </task>
     <servers />
   </component>

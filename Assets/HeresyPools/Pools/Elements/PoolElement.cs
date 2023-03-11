@@ -1,3 +1,5 @@
+using HereticalSolutions.Repositories;
+
 namespace HereticalSolutions.Pools.Elements
 {
     public class PoolElement<T>
@@ -6,7 +8,7 @@ namespace HereticalSolutions.Pools.Elements
     {
         public PoolElement(
             T defaultValue,
-            IMetadataCollection metadata)
+            IReadOnlyObjectRepository metadata)
         {
             Value = defaultValue;
             
@@ -39,9 +41,9 @@ namespace HereticalSolutions.Pools.Elements
 
         #region Metadata
         
-        private readonly IMetadataCollection metadata;
+        private readonly IReadOnlyObjectRepository metadata;
         
-        public IMetadataCollection Metadata
+        public IReadOnlyObjectRepository Metadata
         {
             get => metadata;
         }
