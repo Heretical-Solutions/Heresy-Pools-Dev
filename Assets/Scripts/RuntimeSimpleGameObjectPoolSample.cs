@@ -54,7 +54,7 @@ public class RuntimeSimpleGameObjectPoolSample : MonoBehaviour
     private IIndexable<IPoolElement<IPoolElement<GameObject>>> poppedElementsAsIndexable;
 
 
-    private WorldPositionArgument argument;
+    private WorldPositionArgument worldPositionArgument;
 
     private IPoolDecoratorArgument[] argumentsCache;
 
@@ -84,7 +84,7 @@ public class RuntimeSimpleGameObjectPoolSample : MonoBehaviour
         poppedElementsAsIndexable = (IIndexable<IPoolElement<IPoolElement<GameObject>>>)poppedElements;
         
         argumentsCache = new ArgumentBuilder()
-            .Add<WorldPositionArgument>(out argument)
+            .Add<WorldPositionArgument>(out worldPositionArgument)
             .Build();
     }
 
@@ -139,7 +139,7 @@ public class RuntimeSimpleGameObjectPoolSample : MonoBehaviour
 
     private void PopRandomElement()
     {
-	    argument.Position = new Vector3(
+	    worldPositionArgument.Position = new Vector3(
 		    UnityEngine.Random.Range(-5f, 5f),
 		    UnityEngine.Random.Range(-5f, 5f),
 		    UnityEngine.Random.Range(-5f, 5f));

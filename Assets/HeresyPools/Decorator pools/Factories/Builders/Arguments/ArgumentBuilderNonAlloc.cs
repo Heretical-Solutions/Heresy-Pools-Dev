@@ -1,4 +1,6 @@
-namespace HereticalSolutions.Pools.Arguments
+using HereticalSolutions.Pools.Arguments;
+
+namespace HereticalSolutions.Pools.Factories
 {
 	public class ArgumentBuilderNonAlloc
 	{

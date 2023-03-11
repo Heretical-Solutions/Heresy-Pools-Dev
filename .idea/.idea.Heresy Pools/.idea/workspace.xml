@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9250171c-16e8-4052-a28e-934ee042e41a" name="Changes" comment="" />
+    <list default="true" id="9250171c-16e8-4052-a28e-934ee042e41a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Heresy Pools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Heresy Pools/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Arguments/Builders.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Arguments.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Arguments/Builders/ArgumentBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Arguments/ArgumentBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Arguments/Builders/ArgumentBuilder.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Arguments/ArgumentBuilder.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Arguments/Builders/ArgumentBuilderNonAlloc.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Arguments/ArgumentBuilderNonAlloc.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Arguments/Builders/ArgumentBuilderNonAlloc.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Arguments/ArgumentBuilderNonAlloc.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/NonAllocDecoratedPoolBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorated pool builders/NonAllocDecoratedPoolBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/NonAllocDecoratedPoolBuilder.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorated pool builders/NonAllocDecoratedPoolBuilder.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Pools.Unity.Zenject/TemplatesFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Pools.Unity.Zenject/TemplatesFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RuntimeSimpleGameObjectPoolSample.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RuntimeSimpleGameObjectPoolSample.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -9,8 +22,10 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/RuntimeSimpleGameObjectPoolSample.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.svermeulen.extenject@8261b21168/Source/Binding/Binders/Factory/FactoryFromBinder/FactoryFromBinder1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ide.rider@3.0.16/Rider/Editor/UnitTesting/TestsCallback.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/Window/TimelineWindow_PlayableLookup.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Toggle/ToggleTests.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/75633565436c42f0a6426b33f0132ade46a800/a2/bfeb6e8d/EqualityComparer`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/75633565436c42f0a6426b33f0132ade46a800/fc/b6cbf078/Dictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -66,10 +81,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="26260">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="26260" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -92,6 +107,7 @@
       <workItem from="1677983825295" duration="2897000" />
       <workItem from="1677994867063" duration="91000" />
       <workItem from="1677995157599" duration="12750000" />
+      <workItem from="1678289952455" duration="8401000" />
     </task>
     <servers />
   </component>
