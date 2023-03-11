@@ -54,7 +54,7 @@ namespace HereticalSolutions.Pools.Factories
 
 	        #region Resizable pool initialization
 
-	        INonAllocPool<GameObject> nonAllocPool = PoolsFactory.BuildResizableNonAllocPoolWithAllocationCallback(
+	        INonAllocDecoratedPool<GameObject> nonAllocPool = PoolsFactory.BuildResizableNonAllocPoolWithAllocationCallback(
 		        valueAllocationDelegate,
 		        metadataDescriptors,
 		        initialAllocation,
@@ -65,15 +65,14 @@ namespace HereticalSolutions.Pools.Factories
 
 	        #region Decorator pools initialization
 
-	        var builder = new NonAllocDecoratedPoolBuilder<GameObject>();
+	        var builder = new NonAllocDecoratorPoolChain<GameObject>();
 
 	        builder
-		        .Add(new NonAllocDecoratorPool<GameObject>(nonAllocPool))
-		        .Add(new NonAllocGameObjectPool(builder.CurrentWrapper, poolParent))
-		        .Add(new NonAllocPrefabInstancePool(builder.CurrentWrapper, prefab))
-		        .Add(new NonAllocPoolWithID<GameObject>(builder.CurrentWrapper, ID));
+		        .Add(new NonAllocGameObjectPool(builder.TopWrapper, poolParent))
+		        .Add(new NonAllocPrefabInstancePool(builder.TopWrapper, prefab))
+		        .Add(new NonAllocPoolWithID<GameObject>(builder.TopWrapper, ID));
 
-	        var result = builder.CurrentWrapper;
+	        var result = builder.TopWrapper;
 
 	        #endregion
 
