@@ -1,25 +1,25 @@
 using System;
 
 using HereticalSolutions.Collections.Allocations;
+
 using HereticalSolutions.Pools.Allocations;
+using HereticalSolutions.Pools.Decorators;
 using HereticalSolutions.Pools.GenericNonAlloc;
 
 namespace HereticalSolutions.Pools.Factories
 {
 	public static partial class PoolsFactory
 	{
-		#region Supply and merge pool
+		#region Resizable non alloc pool
 
-		public static INonAllocPool<T> BuildSupplyAndMergePoolWithCallback<T>(
+		public static ResizableNonAllocPool<T> BuildResizableNonAllocPoolWithAllocationCallback<T>(
 			Func<T> valueAllocationDelegate,
 			MetadataAllocationDescriptor[] metadataDescriptors,
 			AllocationCommandDescriptor initialAllocation,
 			AllocationCommandDescriptor additionalAllocation,
 			IAllocationCallback<T> callback)
 		{
-			Func<T> nullAllocation = NullAllocationDelegate<T>;
-
-			INonAllocPool<T> supplyAndMergePool = BuildSupplyAndMergePool<T>(
+			ResizableNonAllocPool<T> resizableNonAllocPool = BuildResizableNonAllocPoolFromPackedArrayPool<T>(
 
 				BuildPoolElementAllocationCommandWithCallback<T>(
 					initialAllocation,
@@ -29,24 +29,22 @@ namespace HereticalSolutions.Pools.Factories
 
 				BuildPoolElementAllocationCommandWithCallback<T>(
 					additionalAllocation,
-					nullAllocation,
+					valueAllocationDelegate,
 					metadataDescriptors,
 					callback),
 
 				valueAllocationDelegate);
 
-			return supplyAndMergePool;
+			return resizableNonAllocPool;
 		}
 		
-		public static INonAllocPool<T> BuildSupplyAndMergePool<T>(
+		public static ResizableNonAllocPool<T> BuildResizableNonAllocPool<T>(
 			Func<T> valueAllocationDelegate,
 			MetadataAllocationDescriptor[] metadataDescriptors,
 			AllocationCommandDescriptor initialAllocation,
 			AllocationCommandDescriptor additionalAllocation)
 		{
-			Func<T> nullAllocation = NullAllocationDelegate<T>;
-
-			INonAllocPool<T> supplyAndMergePool = BuildSupplyAndMergePool<T>(
+			ResizableNonAllocPool<T> resizableNonAllocPool = BuildResizableNonAllocPoolFromPackedArrayPool<T>(
 
 				BuildPoolElementAllocationCommand<T>(
 					initialAllocation,
@@ -55,42 +53,35 @@ namespace HereticalSolutions.Pools.Factories
 
 				BuildPoolElementAllocationCommand<T>(
 					additionalAllocation,
-					nullAllocation,
+					valueAllocationDelegate,
 					metadataDescriptors),
 
 				valueAllocationDelegate);
 
-			return supplyAndMergePool;
+			return resizableNonAllocPool;
 		}
 		
-		public static SupplyAndMergePool<T> BuildSupplyAndMergePool<T>(
+		public static ResizableNonAllocPool<T> BuildResizableNonAllocPoolFromPackedArrayPool<T>(
 			AllocationCommand<IPoolElement<T>> initialAllocationCommand,
-			AllocationCommand<IPoolElement<T>> appendAllocationCommand,
+			AllocationCommand<IPoolElement<T>> resizeAllocationCommand,
 			Func<T> topUpAllocationDelegate)
 		{
-			var basePool = BuildPackedArrayPool<T>(initialAllocationCommand);
+			var pool = BuildPackedArrayPool<T>(initialAllocationCommand);
 
-			var supplyPool = BuildPackedArrayPool<T>(appendAllocationCommand);
-
-			return new SupplyAndMergePool<T>(
-				basePool,
-				supplyPool,
-				supplyPool,
-				supplyPool,
-				appendAllocationCommand,
-				MergePools,
+			return new ResizableNonAllocPool<T>(
+				pool,
+				pool,
+				ResizeNonAllocPool,
+				resizeAllocationCommand,
 				topUpAllocationDelegate);
 		}
 
-		public static void MergePools<T>(
-			INonAllocPool<T> receiverArray,
-			INonAllocPool<T> donorArray,
-			AllocationCommand<IPoolElement<T>> donorAllocationCommand)
+		public static void ResizeNonAllocPool<T>(
+			ResizableNonAllocPool<T> pool)
 		{
-			MergePackedArrayPools(
-				(PackedArrayPool<T>)receiverArray,
-				(PackedArrayPool<T>)donorArray,
-				donorAllocationCommand);
+			ResizePackedArrayPool(
+				(PackedArrayPool<T>)pool.Contents,
+				pool.ResizeAllocationCommand);
 		}
 
 		#endregion

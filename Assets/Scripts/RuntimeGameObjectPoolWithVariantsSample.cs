@@ -132,15 +132,15 @@ public class RuntimeGameObjectPoolWithVariantsSample : MonoBehaviour
 
 		//var repository = new DictionaryRepository<int, VariantContainer<GameObject>>(repository);
 
-		var builder = new NonAllocDecoratedPoolBuilder<GameObject>();
+		var chain = new NonAllocDecoratorPoolChain<GameObject>();
 
-		builder
+		chain
 			.Add(new PoolWithVariants<GameObject>(repository));
 
         foreach (var processor in processors)
-			processor.SetPool(builder.CurrentWrapper);
+			processor.SetPool(chain.TopWrapper);
 
-		return builder.CurrentWrapper;
+		return chain.TopWrapper;
 	}
 
     private static INonAllocDecoratedPool<GameObject> BuildVariantPool(
@@ -179,15 +179,15 @@ public class RuntimeGameObjectPoolWithVariantsSample : MonoBehaviour
                     variant)
             });
 
-		var builder = new NonAllocDecoratedPoolBuilder<GameObject>();
+		var chain = new NonAllocDecoratorPoolChain<GameObject>();
 
-		builder
+		chain
 			.Add(new NonAllocWrapperPool<GameObject>(packedArrayPool))
-			.Add(new NonAllocGameObjectPool(builder.CurrentWrapper, poolParent));
+			.Add(new NonAllocGameObjectPool(chain.TopWrapper, poolParent));
 
 		//processor.SetWrapper(builder.CurrentWrapper);
 
-        return builder.CurrentWrapper;
+        return chain.TopWrapper;
     }
 
     // Update is called once per frame

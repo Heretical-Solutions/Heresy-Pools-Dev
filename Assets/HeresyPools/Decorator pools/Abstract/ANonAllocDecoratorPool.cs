@@ -26,12 +26,13 @@ namespace HereticalSolutions.Pools
 
 			IPoolElement<T> result = innerPool.Pop(args);
 
+			#region Update push behaviour
 			
-			//Update element data
 			var elementAsPushable = (IPushable<T>)result; 
             
 			elementAsPushable.UpdatePushBehaviour(pushBehaviourHandler);
 			
+			#endregion
 			
 			OnAfterPop(result, args);
 

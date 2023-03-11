@@ -2,19 +2,20 @@ using System;
 
 using HereticalSolutions.Collections;
 using HereticalSolutions.Collections.Allocations;
-
+using HereticalSolutions.Pools.Arguments;
 using HereticalSolutions.Pools.Behaviours;
 
-namespace HereticalSolutions.Pools.GenericNonAlloc
+namespace HereticalSolutions.Pools.Decorators
 {
 	public class ResizableNonAllocPool<T>
-		: INonAllocPool<T>,
+		: INonAllocDecoratedPool<T>,
 		  IResizable<IPoolElement<T>>,
 		  IModifiable<INonAllocPool<T>>,
 		  ITopUppable<IPoolElement<T>>,
 		  ICountUpdateable
 	{
 		private INonAllocPool<T> contents;
+		
 		private readonly ICountUpdateable contentsAsCountUpdateable;
 
 		private readonly IPushBehaviourHandler<T> pushBehaviourHandler;
@@ -36,7 +37,7 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
 
 			ResizeAllocationCommand = resizeAllocationCommand;
 
-			pushBehaviourHandler = new PushToINonAllocPoolBehaviour<T>(this);
+			pushBehaviourHandler = new PushToDecoratedPoolBehaviour<T>(this);
 		}
 		
 		#region IModifiable
@@ -79,30 +80,47 @@ namespace HereticalSolutions.Pools.GenericNonAlloc
 
 		#endregion
 
-		#region INonAllocPool
+		#region INonAllocDecoratedPool
 
-		public IPoolElement<T> Pop()
+		public IPoolElement<T> Pop(IPoolDecoratorArgument[] args)
 		{
+			#region Resize
+			
 			if (!contents.HasFreeSpace)
 			{
 				resizeDelegate(this);
 			}
+			
+			#endregion
 
 			IPoolElement<T> result = contents.Pop();
-
 			
-			//Update element data
+			#region Top up
+
+			if (result.Value.Equals(default(T)))
+			{
+				TopUp(result);
+			}
+			
+			#endregion
+
+			#region Update push behaviour
+			
 			var elementAsPushable = (IPushable<T>)result; 
             
 			elementAsPushable.UpdatePushBehaviour(pushBehaviourHandler);
 			
+			#endregion
 			
 			return result;
 		}
 
-		public void Push(IPoolElement<T> instance)
+		public void Push(
+			IPoolElement<T> instance,
+			bool decoratorsOnly = false)
 		{
-			contents.Push(instance);
+			if (!decoratorsOnly)
+				contents.Push(instance);
 		}
 		
 		public bool HasFreeSpace { get { return contents.HasFreeSpace; } }

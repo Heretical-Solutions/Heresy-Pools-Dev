@@ -61,22 +61,20 @@ namespace HereticalSolutions.Pools.Factories
 				AdditionalAllocation = additionalAllocation,
 				Callbacks = callbacks
 	        };
-	        
-	        INonAllocPool<GameObject> nonAllocPool = BuildGameObjectPool(command);
 
 	        #endregion
 
 	        #region Decorator pools initialization
 
-	        var builder = new NonAllocDecoratedPoolBuilder<GameObject>();
+	        var builder = new NonAllocDecoratorPoolChain<GameObject>();
 
 	        builder
-		        .Add(new NonAllocDecoratorPool<GameObject>(nonAllocPool))
-		        .Add(new NonAllocGameObjectPool(builder.CurrentWrapper, poolParent))
-		        .Add(new NonAllocPrefabInstancePool(builder.CurrentWrapper, prefab))
-		        .Add(new NonAllocPoolWithID<GameObject>(builder.CurrentWrapper, id));
+		        .Add(BuildResizableGameObjectPool(command))
+		        .Add(new NonAllocGameObjectPool(builder.TopWrapper, poolParent))
+		        .Add(new NonAllocPrefabInstancePool(builder.TopWrapper, prefab))
+		        .Add(new NonAllocPoolWithID<GameObject>(builder.TopWrapper, id));
 
-	        var result = builder.CurrentWrapper;
+	        var result = builder.TopWrapper;
 
 	        #endregion
 
@@ -107,15 +105,7 @@ namespace HereticalSolutions.Pools.Factories
 	        public IAllocationCallback<GameObject>[] Callbacks;
         }
 
-        /*
-        private class BuildGameObjectPoolResult
-        {
-	        public INonAllocPool<GameObject> Result;
-	        public PushToDecoratedPoolCallback<GameObject> PushCallback;
-        }
-        */
-
-        private static INonAllocPool<GameObject> BuildGameObjectPool(BuildGameObjectPoolCommand buildCommand)
+        private static INonAllocDecoratedPool<GameObject> BuildResizableGameObjectPool(BuildGameObjectPoolCommand buildCommand)
         {
 	        #region Value allocation delegate initialization
 
@@ -149,7 +139,7 @@ namespace HereticalSolutions.Pools.Factories
 
 	        #region Resizable pool initialization
 
-	        INonAllocPool<GameObject> nonAllocPool = PoolsFactory.BuildResizableNonAllocPoolWithAllocationCallback(
+	        INonAllocDecoratedPool<GameObject> nonAllocPool = PoolsFactory.BuildResizableNonAllocPoolWithAllocationCallback(
 		        valueAllocationDelegate,
 		        metadataDescriptors,
 		        buildCommand.InitialAllocation,
