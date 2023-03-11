@@ -13,6 +13,13 @@ namespace HereticalSolutions.Repositories.Factories
 				BuildDictionaryRepository<Type, object>());
 		}
 		
+		public static DictionaryObjectRepository BuildDictionaryObjectRepository(
+			IRepository<Type, object> database)
+		{
+			return new DictionaryObjectRepository(
+				database);
+		}
+		
 		public static DictionaryObjectRepository CloneDictionaryObjectRepository(
 			IRepository<Type, object> contents)
 		{
@@ -28,6 +35,13 @@ namespace HereticalSolutions.Repositories.Factories
 		{
 			return new DictionaryRepository<TKey, TValue>(
 				new Dictionary<TKey, TValue>());
+		}
+		
+		public static DictionaryRepository<TKey, TValue> BuildDictionaryRepository<TKey, TValue>(
+			Dictionary<TKey, TValue> database)
+		{
+			return new DictionaryRepository<TKey, TValue>(
+				database);
 		}
 		
 		public static DictionaryRepository<TKey, TValue> CloneDictionaryRepository<TKey, TValue>(
