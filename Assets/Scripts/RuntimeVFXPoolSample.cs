@@ -43,6 +43,9 @@ public class RuntimeVFXPoolSample : MonoBehaviour
 
     private IPoolDecoratorArgument[] argumentsCache;
 
+
+    private int[][] addressHashesCache;
+
     void Start()
     {
 	    gameObjectPool = PoolsFactory.BuildPool(
@@ -69,6 +72,11 @@ public class RuntimeVFXPoolSample : MonoBehaviour
             .Add<WorldPositionArgument>(out worldPositionArgument)
             .Add<AddressArgument>(out addressArgument)
             .Build();
+
+        addressHashesCache = new int[poolSettings.Elements.Length][];
+
+        for (int i = 0; i < addressHashesCache.Length; i++)
+	        addressHashesCache[i] = poolSettings.Elements[i].Name.AddressToHashes();
     }
 
     // Update is called once per frame
@@ -127,9 +135,9 @@ public class RuntimeVFXPoolSample : MonoBehaviour
 		    UnityEngine.Random.Range(-5f, 5f),
 		    UnityEngine.Random.Range(-5f, 5f));
 
-	    var address = poolSettings.Elements[UnityEngine.Random.Range(0, poolSettings.Elements.Length)].Name;
+	    var address = addressHashesCache[UnityEngine.Random.Range(0, addressHashesCache.Length)];
 
-	    addressArgument.AddressHashes = address.AddressToHashes();
+	    addressArgument.AddressHashes = address;
 	    
 	    var value = gameObjectPool.Pop(argumentsCache);
 

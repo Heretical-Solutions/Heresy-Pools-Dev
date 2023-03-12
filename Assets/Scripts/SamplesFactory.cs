@@ -29,14 +29,6 @@ namespace HereticalSolutions.Pools.Factories
             
             #endregion
 
-            #region ID
-            
-            string id = settings.ID;
-            
-            RenameByStringAndIndexCallback renameCallback = PoolsFactory.BuildRenameByStringAndIndexCallback(id);
-            
-            #endregion
-
             #region Callbacks
             
             PushToDecoratedPoolCallback<GameObject> pushCallback =
@@ -69,7 +61,7 @@ namespace HereticalSolutions.Pools.Factories
                 SetAddressCallback<GameObject> setAddressCallback = PoolsFactory.BuildSetAddressCallback<GameObject>(
                     fullAddress,
                     addressHashes);
-                
+
                 #endregion
                 
                 poolWithVariantsBuilder.Initialize();
@@ -81,6 +73,8 @@ namespace HereticalSolutions.Pools.Factories
                     var currentVariant = element.Variants[i];
 
                     SetVariantCallback<GameObject> setVariantCallback = PoolsFactory.BuildSetVariantCallback<GameObject>(i);
+                    
+                    RenameByStringAndIndexCallback renameCallback = PoolsFactory.BuildRenameByStringAndIndexCallback($"{fullAddress} (Variant {i.ToString()})");
                     
                     #endregion
                     
