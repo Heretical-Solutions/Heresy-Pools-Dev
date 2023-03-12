@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+
 using HereticalSolutions.Collections.Allocations;
 
 using HereticalSolutions.Pools.AllocationCallbacks;
@@ -24,6 +24,17 @@ namespace HereticalSolutions.Pools.Factories
 	        AllocationCommandDescriptor initialAllocation,
 	        AllocationCommandDescriptor additionalAllocation)
         {
+	        ResizablePoolBuilder<GameObject> resizablePoolBuilder = new ResizablePoolBuilder<GameObject>();
+
+	        #region Value allocation delegate initialization
+
+	        Func<GameObject> valueAllocationDelegate =
+		        () => PoolsFactory.DIResolveOrInstantiateAllocationDelegate(
+			        container,
+			        prefab);
+
+	        #endregion
+	        
 	        #region Metadata initialization
 
 	        var metadataDescriptorBuilders = new Func<MetadataAllocationDescriptor>[]
@@ -49,32 +60,28 @@ namespace HereticalSolutions.Pools.Factories
 
 	        #endregion
 
-	        #region Resizable pool initialization
+	        #region Resizable pool builder initialization
 
-	        BuildGameObjectPoolCommand command = new BuildGameObjectPoolCommand
-	        {
-		        Container = container,
-				ID = id,
-		        MetadataDescriptorBuilders = metadataDescriptorBuilders,
-				Prefab = prefab,
-				InitialAllocation = initialAllocation,
-				AdditionalAllocation = additionalAllocation,
-				Callbacks = callbacks
-	        };
-
+	        resizablePoolBuilder.Initialize(
+		        valueAllocationDelegate,
+		        metadataDescriptorBuilders,
+		        initialAllocation,
+		        additionalAllocation,
+		        callbacks);
+	        
 	        #endregion
 
 	        #region Decorator pools initialization
 
-	        var builder = new NonAllocDecoratorPoolChain<GameObject>();
+	        var decoratorChain = new NonAllocDecoratorPoolChain<GameObject>();
 
-	        builder
-		        .Add(BuildResizableGameObjectPool(command))
-		        .Add(new NonAllocGameObjectPool(builder.TopWrapper, poolParent))
-		        .Add(new NonAllocPrefabInstancePool(builder.TopWrapper, prefab))
-		        .Add(new NonAllocPoolWithID<GameObject>(builder.TopWrapper, id));
+	        decoratorChain
+		        .Add(resizablePoolBuilder.Build())
+		        .Add(PoolsFactory.BuildNonAllocGameObjectPool(decoratorChain.TopWrapper, poolParent))
+		        .Add(PoolsFactory.BuildNonAllocPrefabInstancePool(decoratorChain.TopWrapper, prefab))
+		        .Add(PoolsFactory.BuildNonAllocPoolWithID<GameObject>(decoratorChain.TopWrapper, id));
 
-	        var result = builder.TopWrapper;
+	        var result = decoratorChain.TopWrapper;
 
 	        #endregion
 
@@ -85,70 +92,6 @@ namespace HereticalSolutions.Pools.Factories
 	        #endregion
 
 	        return result;
-        }
-
-        private class BuildGameObjectPoolCommand
-        {
-	        //DI
-	        public DiContainer Container;
-	        
-	        //Identity
-	        public string ID;
-	        public Func<MetadataAllocationDescriptor>[] MetadataDescriptorBuilders;
-	        
-	        //GameObject stuff
-	        public GameObject Prefab;
-	        
-	        //Allocation
-	        public AllocationCommandDescriptor InitialAllocation;
-	        public AllocationCommandDescriptor AdditionalAllocation;
-	        public IAllocationCallback<GameObject>[] Callbacks;
-        }
-
-        private static INonAllocDecoratedPool<GameObject> BuildResizableGameObjectPool(BuildGameObjectPoolCommand buildCommand)
-        {
-	        #region Value allocation delegate initialization
-
-	        Func<GameObject> valueAllocationDelegate =
-		        () => PoolsFactory.DIResolveOrInstantiateAllocationDelegate(
-			        buildCommand.Container,
-			        buildCommand.Prefab);
-
-	        #endregion
-
-	        #region Metadata initialization
-
-	        List<MetadataAllocationDescriptor> metadataDescriptorsList = new List<MetadataAllocationDescriptor>();
-
-	        foreach (var descriptorBuilder in buildCommand.MetadataDescriptorBuilders)
-	        {
-		        if (descriptorBuilder != null)
-					metadataDescriptorsList.Add(descriptorBuilder());
-	        }
-
-	        var metadataDescriptors = metadataDescriptorsList.ToArray();
-
-	        #endregion
-
-	        #region Allocation callbacks initialization
-	        
-	        IAllocationCallback<GameObject> callback = PoolsFactory.BuildCompositeCallback(
-		        buildCommand.Callbacks);
-
-	        #endregion
-
-	        #region Resizable pool initialization
-
-	        INonAllocDecoratedPool<GameObject> nonAllocPool = PoolsFactory.BuildResizableNonAllocPoolWithAllocationCallback(
-		        valueAllocationDelegate,
-		        metadataDescriptors,
-		        buildCommand.InitialAllocation,
-		        buildCommand.AdditionalAllocation,
-		        callback);
-
-	        #endregion
-	        
-	        return nonAllocPool;
         }
 
         #endregion

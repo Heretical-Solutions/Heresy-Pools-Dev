@@ -93,14 +93,14 @@ namespace HereticalSolutions.Pools.Decorators
 			IPoolElement<T> instance,
 			bool decoratorsOnly = false)
 		{
-			var elementWithAddress = (IContainsAddress)instance;
-
-			if (elementWithAddress == null)
+			if (!instance.Metadata.Has<IContainsAddress>())
 				throw new Exception("[NonAllocPoolWithAddress] INVALID INSTANCE");
 
 			INonAllocDecoratedPool<T> pool = null;
 
-			if (elementWithAddress.AddressHashes.Length == level)
+			var addressHashes = instance.Metadata.Get<IContainsAddress>().AddressHashes;
+			
+			if (addressHashes.Length == level)
 			{
 				if (!innerPoolsRepository.TryGet(0, out pool))
 					throw new Exception($"[NonAllocPoolWithAddress] NO POOL DETECTED AT ADDRESS MAX. DEPTH. LEVEL: {{ {level} }}");
@@ -112,7 +112,7 @@ namespace HereticalSolutions.Pools.Decorators
 				return;
 			}
 
-			int currentAddressHash = elementWithAddress.AddressHashes[level];
+			int currentAddressHash = addressHashes[level];
 
 			if (!innerPoolsRepository.TryGet(currentAddressHash, out pool))
 				throw new Exception($"[NonAllocPoolWithAddress] INVALID ADDRESS {{ {currentAddressHash} }}");

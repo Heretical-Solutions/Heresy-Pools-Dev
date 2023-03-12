@@ -2,52 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9250171c-16e8-4052-a28e-934ee042e41a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Decorator chains/DecoratorPoolChain.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Decorator chains/NonAllocDecoratorPoolChain.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorators/PoolWithVariantsBuilder.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/RuntimeVFXPoolSample.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Heresy Pools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Heresy Pools/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Abstract/ANonAllocDecoratorPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Abstract/ANonAllocDecoratorPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorated pool builders.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Decorator chains.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorated pool builders/DecoratedPoolBuilder.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorated pool builders/DecoratedPoolBuilder.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Decorator chains/DecoratorPoolChain.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorated pool builders/NonAllocDecoratedPoolBuilder.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorated pool builders/NonAllocDecoratedPoolBuilder.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Decorator chains/NonAllocDecoratorPoolChain.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorator builders.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorators.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorator builders/DecoratorBuilderCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorators/DecoratorBuilderCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorator builders/DecoratorBuilderCommand.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorators/DecoratorBuilderCommand.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorator builders/IDecoratorBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorators/IDecoratorBuilder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorator builders/IDecoratorBuilder.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorators/IDecoratorBuilder.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorator builders/VariantDecoratorBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorators/VariantDecoratorBuilder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorator builders/VariantDecoratorBuilder.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorators/VariantDecoratorBuilder.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Extensions/AddressHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Extensions/AddressHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorators/DecoratorBuilderCommand.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorators/DecoratorBuilderCommand.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorators/IDecoratorBuilder.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorators/IDecoratorBuilder.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorators/VariantDecoratorBuilder.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorators/VariantDecoratorBuilder.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/Builders/Decorators/PoolWithVariantsBuilder.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/PoolsFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/PoolsFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Generic non alloc/NonAllocDecoratorPool.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Generic non alloc/NonAllocDecoratorPool.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Interfaces.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Interfaces/IDecoratedPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Generic/IDecoratedPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Interfaces/IDecoratedPool.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Generic/IDecoratedPool.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Interfaces/INonAllocDecoratedPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Generic non alloc/INonAllocDecoratedPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Interfaces/INonAllocDecoratedPool.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Generic non alloc/INonAllocDecoratedPool.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Elements/Metadata.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Metadata.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Elements/Metadata/IndexedMetadata.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Metadata/IndexedMetadata.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Elements/Metadata/IndexedMetadata.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Metadata/IndexedMetadata.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Elements/Metadata/MetadataAllocationDescriptor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Metadata/MetadataAllocationDescriptor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Elements/Metadata/MetadataAllocationDescriptor.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Metadata/MetadataAllocationDescriptor.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Elements/Push behaviour.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Push behaviour.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Elements/Push behaviour/IPushBehaviourHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Push behaviour/IPushBehaviourHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Elements/Push behaviour/IPushBehaviourHandler.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Push behaviour/IPushBehaviourHandler.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Elements/Push behaviour/PushToINonAllocPoolBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Push behaviour/PushToINonAllocPoolBehaviour.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Elements/Push behaviour/PushToINonAllocPoolBehaviour.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Push behaviour/PushToINonAllocPoolBehaviour.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Factories/ResizableNonAllocPoolsFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/ResizableNonAllocPoolsFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Factories/ResizableNonAllocPoolsFactory.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/ResizableNonAllocPoolsFactory.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Factories/SupplyAndMergePoolsFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/SupplyAndMergePoolsFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Factories/SupplyAndMergePoolsFactory.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Factories/SupplyAndMergePoolsFactory.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Generic non alloc/Resizable pools.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Generic non alloc/Resizable pools/ResizableNonAllocPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Generic non alloc/ResizableNonAllocPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Generic non alloc/Resizable pools/ResizableNonAllocPool.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Generic non alloc/ResizableNonAllocPool.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Generic non alloc/Resizable pools/SupplyAndMergePool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Generic non alloc/SupplyAndMergePool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Pools/Generic non alloc/Resizable pools/SupplyAndMergePool.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Generic non alloc/SupplyAndMergePool.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Generic non alloc/NonAllocPoolWithAddress.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPools/Decorator pools/Generic non alloc/NonAllocPoolWithAddress.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Factories/TemplatesFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Factories/TemplatesFactory.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Pools.Unity.Zenject/TemplatesFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPoolsUnity/Pools.Unity.Zenject/TemplatesFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RuntimeGameObjectPoolWithVariantsSample.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RuntimeGameObjectPoolWithVariantsSample.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RuntimeGameObjectPoolWithVariantsSample.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RuntimeGameObjectPoolWithVariantsSample.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RuntimeVFXPoolSample.cs.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,8 +29,12 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/RuntimeSimpleGameObjectPoolSample.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.svermeulen.extenject@8261b21168/Source/Binding/Binders/Factory/FactoryFromBinder/FactoryFromBinder1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ide.rider@3.0.16/Rider/Editor/UnitTesting/TestsCallback.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/Shortcuts.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/Window/TimelineWindow_EditorCallbacks.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/Window/TimelineWindow_PlayableLookup.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Toggle/ToggleTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.7.8/Editor/VisualScripting.Core/Inspection/Inspector.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.7.8/Editor/VisualScripting.Core/Inspection/Primitives/DiscreteNumberInspector.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/75633565436c42f0a6426b33f0132ade46a800/a2/bfeb6e8d/EqualityComparer`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/75633565436c42f0a6426b33f0132ade46a800/fc/b6cbf078/Dictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -142,7 +117,7 @@
       <workItem from="1677994867063" duration="91000" />
       <workItem from="1677995157599" duration="12750000" />
       <workItem from="1678289952455" duration="8401000" />
-      <workItem from="1678546129517" duration="4875000" />
+      <workItem from="1678546129517" duration="21383000" />
     </task>
     <servers />
   </component>

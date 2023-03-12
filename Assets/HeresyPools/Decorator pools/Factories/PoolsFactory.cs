@@ -38,7 +38,7 @@ namespace HereticalSolutions.Pools.Factories
 			return new NonAllocPoolWithAddress<T>(repository, level);
 		}
 		
-		public static NonAllocPoolWithVariants<T> BuildNonAllocPoolWithIdVariants<T>(
+		public static NonAllocPoolWithVariants<T> BuildNonAllocPoolWithVariants<T>(
 			IRepository<int, VariantContainer<T>> repository,
 			IRandomGenerator generator)
 		{

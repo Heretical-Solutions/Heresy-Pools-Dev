@@ -3,6 +3,7 @@ using System;
 using HereticalSolutions.Collections.Allocations;
 
 using HereticalSolutions.Pools.AllocationCallbacks;
+using HereticalSolutions.Pools.Allocations;
 using HereticalSolutions.Pools.Decorators;
 
 using UnityEngine;
@@ -20,6 +21,8 @@ namespace HereticalSolutions.Pools.Factories
 	        AllocationCommandDescriptor initialAllocation,
 	        AllocationCommandDescriptor additionalAllocation)
         {
+	        ResizablePoolBuilder<GameObject> resizablePoolBuilder = new ResizablePoolBuilder<GameObject>();
+	        
 	        #region Value allocation delegate initialization
 
 	        Func<GameObject> valueAllocationDelegate =
@@ -29,9 +32,9 @@ namespace HereticalSolutions.Pools.Factories
 
 	        #region Metadata initialization
 
-	        var metadataDescriptors = new[]
+	        var metadataDescriptorBuilders = new Func<MetadataAllocationDescriptor>[]
 	        {
-		        PoolsFactory.BuildIndexedMetadataDescriptor()
+		        PoolsFactory.BuildIndexedMetadataDescriptor
 	        };
 
 	        #endregion
@@ -43,36 +46,36 @@ namespace HereticalSolutions.Pools.Factories
 		        PoolsFactory.BuildPushToDecoratedPoolCallback<GameObject>(
 			        PoolsFactory.BuildDeferredCallbackQueue<GameObject>());
 
-	        IAllocationCallback<GameObject> callback = PoolsFactory.BuildCompositeCallback(
-		        new IAllocationCallback<GameObject>[]
-		        {
-			        renameCallback,
-			        pushCallback
-		        });
+	        var callbacks = new IAllocationCallback<GameObject>[]
+	        {
+		        renameCallback,
+		        pushCallback
+	        };
 
 	        #endregion
+	        
+	        #region Resizable pool builder initialization
 
-	        #region Resizable pool initialization
-
-	        INonAllocDecoratedPool<GameObject> nonAllocPool = PoolsFactory.BuildResizableNonAllocPoolWithAllocationCallback(
+	        resizablePoolBuilder.Initialize(
 		        valueAllocationDelegate,
-		        metadataDescriptors,
+		        metadataDescriptorBuilders,
 		        initialAllocation,
 		        additionalAllocation,
-		        callback);
-
+		        callbacks);
+	        
 	        #endregion
 
 	        #region Decorator pools initialization
 
-	        var builder = new NonAllocDecoratorPoolChain<GameObject>();
+	        var decoratorChain = new NonAllocDecoratorPoolChain<GameObject>();
 
-	        builder
-		        .Add(new NonAllocGameObjectPool(builder.TopWrapper, poolParent))
-		        .Add(new NonAllocPrefabInstancePool(builder.TopWrapper, prefab))
-		        .Add(new NonAllocPoolWithID<GameObject>(builder.TopWrapper, ID));
+	        decoratorChain
+		        .Add(resizablePoolBuilder.Build())
+		        .Add(PoolsFactory.BuildNonAllocGameObjectPool(decoratorChain.TopWrapper, poolParent))
+		        .Add(PoolsFactory.BuildNonAllocPrefabInstancePool(decoratorChain.TopWrapper, prefab))
+		        .Add(PoolsFactory.BuildNonAllocPoolWithID<GameObject>(decoratorChain.TopWrapper, ID));
 
-	        var result = builder.TopWrapper;
+	        var result = decoratorChain.TopWrapper;
 
 	        #endregion
 
