@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using HereticalSolutions.Repositories.Factories;
 
 namespace HereticalSolutions.Repositories
 {
@@ -9,53 +10,52 @@ namespace HereticalSolutions.Repositories
 	/// <typeparam name="TValue">Value data type</typeparam>
 	public class DictionaryRepository<TKey, TValue> :
 		IRepository<TKey, TValue>,
-		IReadOnlyRepository<TKey, TValue>
+		IReadOnlyRepository<TKey, TValue>,
+		IClonableRepository<TKey, TValue>
 	{
 		/// <summary>
 		/// Actual storage
 		/// </summary>
-		protected Dictionary<TKey, TValue> database;
+		private readonly Dictionary<TKey, TValue> database;
 
 		public DictionaryRepository(Dictionary<TKey, TValue> database)
 		{
 			this.database = database;
 		}
 
-		/// <summary>
-		/// Does the repository have the data by the given key?
-		/// </summary>
-		/// <param name="key">Key</param>
-		/// <returns>Does it or not</returns>
+		#region IRepository
+
+		#region IReadOnlyRepository
+		
 		public bool Has(TKey key)
 		{
 			return database.ContainsKey(key);
 		}
-
-		/// <summary>
-		/// Add the given data by the given key
-		/// </summary>
-		/// <param name="key">Key</param>
-		/// <param name="value">Value</param>
+		
+		public TValue Get(TKey key)
+		{
+			return database[key];
+		}
+		
+		public bool TryGet(TKey key, out TValue value)
+		{
+			return database.TryGetValue(key, out value);
+		}
+		
+		public IEnumerable<TKey> Keys { get { return database.Keys; } }
+		
+		#endregion
+		
 		public void Add(TKey key, TValue value)
 		{
 			database.Add(key, value);
 		}
-
-		/// <summary>
-		/// Update the data by the given key
-		/// </summary>
-		/// <param name="key">Key</param>
-		/// <param name="value">Value</param>
+		
 		public void Update(TKey key, TValue value)
 		{
 			database[key] = value;
 		}
-
-		/// <summary>
-		/// Set the data by the given key
-		/// </summary>
-		/// <param name="key">Key</param>
-		/// <param name="value">Value</param>
+		
 		public void AddOrUpdate(TKey key, TValue value)
 		{
 			if (Has(key))
@@ -64,40 +64,20 @@ namespace HereticalSolutions.Repositories
 				Add(key, value);
 		}
 
-		/// <summary>
-		/// Retrieve the data by the given key
-		/// </summary>
-		/// <param name="key">Key</param>
-		/// <returns>Value</returns>
-		public TValue Get(TKey key)
-		{
-			return database[key];
-		}
-
-		/// <summary>
-		/// Retrieve the data by the given key if it is present
-		/// </summary>
-		/// <param name="key">Key</param>
-		/// <param name="value">Value</param>
-		/// <returns>Was the data present</returns>
-		public bool TryGet(TKey key, out TValue value)
-		{
-			return database.TryGetValue(key, out value);
-		}
-
-		/// <summary>
-		/// Remove the data by the given key
-		/// </summary>
-		/// <param name="key">Key</param>
 		public void Remove(TKey key)
 		{
 			database.Remove(key);
 		}
 
-		/// <summary>
-		/// List the keys present in the repository
-		/// </summary>
-		/// <value>Keys</value>
-		public IEnumerable<TKey> Keys { get { return database.Keys; } }
+		#endregion
+		
+		#region IClonableRepository
+		
+		public IRepository<TKey, TValue> Clone()
+		{
+			return RepositoriesFactory.CloneDictionaryRepository(database);
+		}
+		
+		#endregion
 	}
 }
