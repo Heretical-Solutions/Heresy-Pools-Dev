@@ -5,7 +5,5 @@ namespace HereticalSolutions.Collections
 		TCollection Contents { get; }
 		
 		void UpdateContents(TCollection newContents);
-		
-		void UpdateCount(int newCount);
 	}
 }
