@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 
 using HereticalSolutions.Collections;
 using HereticalSolutions.Collections.Allocations;
+
 using HereticalSolutions.Pools.Arguments;
 using HereticalSolutions.Pools.Behaviours;
 
@@ -130,7 +132,7 @@ namespace HereticalSolutions.Pools.Decorators
 
 			#region Top up
 
-			if (result.Value.Equals(default(T)))
+			if (EqualityComparer<T>.Default.Equals(result.Value, default(T)))
 			{
 				TopUp(result);
 			}
