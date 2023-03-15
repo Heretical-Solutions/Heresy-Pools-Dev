@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9250171c-16e8-4052-a28e-934ee042e41a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Heresy Pools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Heresy Pools/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RuntimeVFXPoolSample.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RuntimeVFXPoolSample.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SamplesFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SamplesFactory.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,6 +20,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Toggle/ToggleTests.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.7.8/Editor/VisualScripting.Core/Inspection/Inspector.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.7.8/Editor/VisualScripting.Core/Inspection/Primitives/DiscreteNumberInspector.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/ResizableNonAllocPool.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/75633565436c42f0a6426b33f0132ade46a800/a2/bfeb6e8d/EqualityComparer`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/75633565436c42f0a6426b33f0132ade46a800/fc/b6cbf078/Dictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
