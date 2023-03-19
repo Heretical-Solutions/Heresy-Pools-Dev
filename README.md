@@ -2,7 +2,7 @@
 
 Heresy Pools
 ===
-Versatile, scalable and memory efficient memory pool solution for your projects
+Versatile, scalable and memory efficient object pooling solution for your projects
 
 ## Table Of Contents
 
@@ -14,6 +14,9 @@ Versatile, scalable and memory efficient memory pool solution for your projects
   - [Why Heretical Pools?](#why-heretical-pools)
   - [Installation](#installation)
 - [Usage](#usage)
+  - [Simple object pool] (#simple-object-pool)
+  - [Resizable non-allocating object pool] (#resizable-non-allocating-object-pool)
+  - [Resizable non-allocating game object pool (Unity)] (#resizable-non-allocating-game-object-pool-unity)
 - [Documentation](#documentation)
 
 </details>
@@ -22,7 +25,7 @@ Versatile, scalable and memory efficient memory pool solution for your projects
 
 ### Introduction
 
-Heresy Pools is a 
+Looking for a highly customizable and scalable object pooling solution in C#? Try out Heresy Pools! Designed with developers in mind, the solution offers an easy-to-use API that is engine-agnostic and provides you with complete control over your object pool's behavior. Plus, the non-alloc API ensures that your memory usage is optimized for maximum efficiency.
 
 ### Why Heretical Pools?
 
@@ -37,32 +40,49 @@ Heresy Pools is a
 You can install Heresy Pools using any of the following methods
 
 1.  __From [UPM Package](https://github.com/Heretical-Solutions/Heresy-Pools/tree/UPM)__
-    Find the `manifest.json` file in the `Packages` directory in your project and edit it as follows:
-    ```
-    {
+    
+	* By modifying `manifest.json`
+	
+		Find the `manifest.json` file in the `Packages` directory in your project and edit it as follows:
+		```
+		{
 
-      "dependencies": {
+		  "dependencies": {
 
-        "com.heretical-solutions.heresy-pools": "https://github.com/Heretical-Solutions/HeresyPools.git#UPM",
+			"com.heretical-solutions.heresy-pools": "https://github.com/Heretical-Solutions/HeresyPools.git#UPM",
 
-        ...
+			...
 
-      },
+		  },
 
-    }
+		}
 
-    ```
-	Alternatively, open the Package Manager, press the "+" button, select "Add package from git URL" and paste in 'https://github.com/Heretical-Solutions/HeresyPools.git#UPM'
+		```
+		
+	* With Package Manager
+	
+		Open the Package Manager, press the "+" button in top left corner, select "Add package from git URL" option and paste `https://github.com/Heretical-Solutions/HeresyPools.git#UPM` hyperlink into the input field
+		
+	* With [Git Dependency Resolver for Unity](https://github.com/mob-sakai/GitDependencyResolverForUnity)
+	
+		WIP, branch not created yet
 
 2.  __By building a DLL from [Dev branch](https://github.com/Heretical-Solutions/Heresy-Pools/tree/Dev)__
-    * Clone the project with git
+    
+	* Clone the [project](https://github.com/Heretical-Solutions/Heresy-Pools) with Git
 	* Switch to Dev branch
 	* Open the solution file with an IDE of your preference
 	* Open the terminal
-	* Type in 'dotnet build' and hit enter (requires NET Framewok installed)
-	* The dll will be located in 'bin' folder
+	* Type in `dotnet build` and hit enter key (requires NET Framewok installed)
+	* The dll will be located in the 'bin' folder
 
 3.  __By copying source code from [Source branch](https://github.com/Heretical-Solutions/Heresy-Pools/tree/Source)__
+
+	* Clone the [project](https://github.com/Heretical-Solutions/Heresy-Pools) with Git
+	* Switch to Source branch
+	* Copy and paste the files and their contents at your discretion
+
+4.  __By opening the sample Unity project from [Unity dev branch](https://github.com/Heretical-Solutions/Heresy-Pools/tree/Dev_Unity)__
 
 
 ## Usage
