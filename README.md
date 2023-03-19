@@ -14,9 +14,10 @@ Versatile, scalable and memory efficient object pooling solution for your projec
   - [Why Heretical Pools?](#why-heretical-pools)
   - [Installation](#installation)
 - [Usage](#usage)
-  - [Simple object pool] (#simple-object-pool)
-  - [Resizable non-allocating object pool] (#resizable-non-allocating-object-pool)
-  - [Resizable non-allocating game object pool (Unity)] (#resizable-non-allocating-game-object-pool-unity)
+  - [Simple object pool](#simple-object-pool)
+  - [Resizable non-allocating object pool](#resizable-non-allocating-object-pool)
+  - [Resizable non-allocating game object pool (Unity)](#resizable-non-allocating-game-object-pool-unity)
+  - [Samples](#samples)
 - [Documentation](#documentation)
 
 </details>
@@ -87,6 +88,7 @@ You can install Heresy Pools using any of the following methods
 
 ## Usage
 
+
 ### Simple object pool
 
 ```csharp
@@ -118,6 +120,7 @@ var element = pool.Pop();
 pool.Push(element);
 
 ```
+
 
 ### Resizable non-allocating object pool
 
@@ -183,6 +186,7 @@ element.Push();
 
 ```
 
+
 ### Resizable non-allocating game object pool (Unity)
 
 Requires [Unity Source](https://github.com/Heretical-Solutions/Heresy-Pools/tree/Source_Unity) branch contents
@@ -227,10 +231,6 @@ pool.Push(element);
 //This also allows us to call Push on the element itself - it will know wnere to be pushed
 element.Push();
 ```
-
-### Adding my own decorator
-
-### Adding my own metadata
 
 ### Samples
 
